@@ -1,4 +1,4 @@
-<?php $title = "Categorías";?>
+<?php $title = "Preguntas";?>
 <?php include_once PATH_TEMPLATE.'/header.php';?>
 <div class="section">
 	<div class="content">
@@ -25,6 +25,8 @@
 							<th style="text-align: center">ID</th>
 							<th>Nombre</th>
 							<th>Descripción</th>
+							<th>Estado</th>
+							<th>Categoría</th>
 							<th style="text-align: center">Acciones</th>
 						</tr>
 					</thead>
@@ -34,6 +36,8 @@
 							<td align="center"><?php echo $dato["id"]; ?></td>
 							<td><?php echo $dato["nombre"]; ?></td>
 							<td><?php echo $dato["descripcion"]; ?></td>
+							<td><?php echo $dato["estado"]; ?></td>
+							<td><?php echo $dato["categoria_nombre"]; ?></td>							
 							<td align="center"><a href="#"
 								onclick="javascript: loadModal(<?php echo $dato["id"]; ?>);"><i
 									class="glyphicon glyphicon-edit"></i></a> &nbsp;&nbsp; <a
@@ -43,9 +47,7 @@
 								<?php endforeach;?>
 							</tbody>
 				</table>
-
 			</div>
-
 		</div>
 	</div>
 </div>
@@ -56,13 +58,11 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<a class="close" data-dismiss="modal">×</a>
-				<h3>Categoría</h3>
+				<h3>Pregunta</h3>
 			</div>
 
 			<div class="modal-body"></div>
-
-		</div>
-
+     		</div>
 	</div>
 </div>
 
@@ -78,25 +78,6 @@
 <script
 	src="<?php echo PATH_CSS . '/../plugins/validator/bootstrapValidator.min.js';?>"></script>
 <script src="<?php echo PATH_CSS . '/../js/apps.js';?>"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-$('#modalOpen').click(function(){	  
-	loadModal(0);
-});
-
-
-});
-
-function loadModal(id){
-	$('.modal-body').load('index.php?action=loadForm&id=' + id,function(result){
-	    $('#confirm-submit').modal({show:true});
-	});
-}
-
-function redirect(id){
-	var url = 'index.php?action=deleteData&id=' + id;
-	location.href = url;
-}
-</script>
+<script src="<?php echo PATH_CSS . '/../js/listados.js';?>"></script>
 </body>
 </html>

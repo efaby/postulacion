@@ -3,19 +3,48 @@
 	<div class="form-group">
 		<label class="control-label">Nombre</label> <input type='text'
 			name='nombre' class='form-control'
-			value="<?php echo $categoria['nombre']; ?>">
-
+			value="<?php echo $pregunta['nombre']; ?>">
 	</div>
 
 	<div class="form-group">
 		<label class="control-label">Descripción</label>
-		<textarea name='descripcion' class='form-control'><?php echo $categoria['descripcion']; ?></textarea>
-
+		<textarea name='descripcion' class='form-control'><?php echo $pregunta['descripcion']; ?></textarea>
 	</div>
-
+	
+	<div class="form-group">
+		<label class="control-label">Estado</label>
+		<?php
+			$estadop="";
+			if (($pregunta['estado']) == 1)
+			{
+				$estadop="checked='checked'";
+			}
+		?>
+		<input type="checkbox" name="estado" <?php echo $estadop;?> value="1" />		
+	</div>	
+	
+	<div class="form-group">
+		<label class="control-label">Categoría</label>
+		
+			<select class="form-control" name="categoria">
+				<option value="">-- Seleccione --</option>
+				<?php
+					$select = "";
+					foreach ($categoria as $valor)
+					{
+						if ($pregunta['categoria_id'] = $valor['id'])
+						{
+							$select = "selected = 'selected'";
+						}
+						echo"<option value=".$valor['id']." ".$select.">".$valor['nombre']."</option>";
+					}
+				?>
+			</select>
+		
+	</div>	
 
 	<div class="form-group">
-	<input type='hidden' name='id' class='form-control' value="<?php echo $categoria['id']; ?>">
+	<input type='hidden' name='id' class='form-control' value="<?php echo $pregunta['id']; ?>">
 		<button type="submit" class="btn btn-success">Guardar</button>
 	</div>
 
@@ -39,7 +68,7 @@ $(document).ready(function() {
 						message: 'El nombre no puede ser vacío.'
 					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9_ \.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9-_ \.]+$/,
 						message: 'Ingrese un nombre válido.'
 					}
 				}
@@ -54,7 +83,14 @@ $(document).ready(function() {
 						message: 'Ingrese una descripción válida.'
 					}
 				}
-			}			
+			},
+			categoria: {
+				validators: {
+					notEmpty: {
+						message: 'Seleccione una categoría'
+					}
+				}
+			},		
 		}
 	});
 

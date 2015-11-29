@@ -1,7 +1,7 @@
 <?php 	
 	define('HOSTNAME_DATABASE', 'localhost');
 	define('USERNAME', 'root');
-	define('PASSWORD', 'sistemas');
+	define('PASSWORD', '');
 	define('DATABASE', 'postulacion_docente');
 	define('PATH_MODELS', PATH_ROOT."/models");
 	define('PATH_CONTROLLERS', PATH_ROOT."/controllers");
