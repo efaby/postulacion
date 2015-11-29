@@ -1,0 +1,11 @@
+ErrorDocument 404 /bolsa/web/template/error404.php
+ErrorDocument 403 /bolsa/web/template/error403.php
+
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} ^/404/$
+RewriteRule ^(.*)$ /bolsa/web/template/error404.php [L]
+
+RewriteCond %{REQUEST_URI} ^/403/$
+RewriteRule ^(.*)$ /bolsa/web/template/error403.php [L]
