@@ -154,5 +154,8 @@ $(document).ready(function(){
 	}
 	/** END OWL CAROUSEL WORK DETAIL **/
 
+	if ($('#datatable-example').length > 0){
+		$('#datatable-example').dataTable();
+	}
 	
 });

@@ -2,7 +2,7 @@
 	define('HOSTNAME_DATABASE', 'localhost');
 	define('USERNAME', 'root');
 	define('PASSWORD', 'sistemas');
-	define('DATABASE', 'bolsa');
+	define('DATABASE', 'postulacion_docente');
 	define('PATH_MODELS', PATH_ROOT."/models");
 	define('PATH_CONTROLLERS', PATH_ROOT."/controllers");
 	define('PATH_VIEWS', PATH_ROOT."/web/views");
