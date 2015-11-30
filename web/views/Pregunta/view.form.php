@@ -1,4 +1,4 @@
-<form id="frmCategoria" method="post" action="index.php?action=saveData">
+<form id="frmPregunta" method="post" action="index.php?action=saveData">
 
 	<div class="form-group">
 		<label class="control-label">Nombre</label> <input type='text'
@@ -27,14 +27,20 @@
 		<label class="control-label">Categoría</label>
 		
 			<select class="form-control" name="categoria">
-				<option value="">-- Seleccione --</option>
+				<option value="" selected="selected">-- Seleccione --</option>
 				<?php
-					$select = "";
 					foreach ($categoria as $valor)
 					{
-						if ($pregunta['categoria_id'] = $valor['id'])
+						if (is_null($pregunta['categoria_id']))
 						{
-							$select = "selected = 'selected'";
+							$select = "";							
+						}
+						else
+						{
+							if ($pregunta['categoria_id'] = $valor['id']) 
+							{
+								$select = "selected = 'selected'";
+							}
 						}
 						echo"<option value=".$valor['id']." ".$select.">".$valor['nombre']."</option>";
 					}

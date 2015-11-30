@@ -1,4 +1,4 @@
-<?php $title = "Categorías";?>
+<?php $title = "Vacantes";?>
 <?php include_once PATH_TEMPLATE.'/header.php';?>
 <div class="section">
 	<div class="content">
@@ -23,8 +23,12 @@
 					<thead class="the-box dark full">
 						<tr>
 							<th style="text-align: center">ID</th>
-							<th>Nombre</th>
-							<th>Descripción</th>
+							<th>Nombre del Área</th>
+							<th>Título</th>
+							<th>Número de Vacantes</th>
+							<th>Años de Experiencia</th>
+							<th>F.Inicio Concurso</th>
+							<th>F. Fin Concurso</th>
 							<th style="text-align: center">Acciones</th>
 						</tr>
 					</thead>
@@ -32,8 +36,12 @@
 							<?php foreach ($datos as $dato): ?>
 <tr>
 							<td align="center"><?php echo $dato["id"]; ?></td>
-							<td><?php echo $dato["nombre"]; ?></td>
-							<td><?php echo $dato["descripcion"]; ?></td>
+							<td><?php echo $dato["nombre_area"]; ?></td>
+							<td><?php echo $dato["titulo"]; ?></td>
+							<td><?php echo $dato["numero_vacantes"]; ?></td>
+							<td><?php echo $dato["experiencia_requerida"]; ?></td>
+							<td><?php echo $dato["fecha_inicio"]; ?></td>
+							<td><?php echo $dato["fecha_fin"]; ?></td>
 							<td align="center"><a href="#"
 								onclick="javascript: loadModal(<?php echo $dato["id"]; ?>);"><i
 									class="glyphicon glyphicon-edit"></i></a> &nbsp;&nbsp; <a
@@ -56,7 +64,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<a class="close" data-dismiss="modal">×</a>
-				<h3>Categoría</h3>
+				<h3>Vacante</h3>
 			</div>
 
 			<div class="modal-body"></div>
