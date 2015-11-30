@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<link rel="shortcut icon" href="<?php echo PATH_IMAGES; ?>/favicon.ico">
-<meta charset="UTF-8" />
-<title>Areas Profesionales</title>
-<link rel="stylesheet" type="text/css" href="<?php echo PATH_CSS . '/style.css'; ?>" media="screen" />
-<script type="text/javascript" src="<?php echo PATH_JS . '/jquery.js'; ?>"></script>
-<script type="text/javascript" src="<?php echo PATH_JS . '/jquery.validate.min.js'; ?>"></script>
-<script type="text/javascript" src="<?php echo PATH_JS . '/area.js'; ?>"></script>
-</head>
-<body>
+<?php $title  = "Areas";?>
 <?php include_once PATH_TEMPLATE.'/header.php';?>
 <section>
 <div class="content">	
@@ -37,6 +26,16 @@
 endif; ?>></td>	
 </tr>
 
+<tr>
+	<td>Fechas:</td>
+	<td>
+	<div class="input-group input-daterange">
+    <input type="text" class="form-control" value="" name="inicio">
+    <span class="input-group-addon">to</span>
+    <input type="text" class="form-control" value="" name="fin">
+</div>
+	</td>	
+</tr>
 <tr><td colspan="2"align="center">
 <input type="hidden" name="id" value="<?php echo $area['id']; ?>">
 <input type="submit" value="Guardar" class="buttom-inside"/>
@@ -48,5 +47,17 @@ endif; ?>></td>
 </div>
 </section>
 <?php include_once PATH_TEMPLATE.'/footer.php';?>
+<script src="<?php echo PATH_CSS . '/../plugins/datepicker/bootstrap-datepicker.js';?>"></script>
+<link href="<?php echo PATH_CSS . '/../plugins/datepicker/datepicker.min.css';?>" rel="stylesheet">
+
+<script>
+			$(document).ready(function(){
+				$('.input-daterange input').each(function() {
+				    $(this).datepicker({
+						
+					    });
+				});
+			});
+</script>
 </body>
 </html>
