@@ -7,19 +7,25 @@ require_once (PATH_MODELS . "/UsuarioModel.php");
 class PostulanteController {
 	public function display() {
 		$model = new UsuarioModel ();
-		$datos = $model->getUsuarioList ();
+		//$datos = $model->getUsuarioList ();
+		$datos = array();
 		$message = "";
 		require_once "view.listado.php";
 	}
 	
 	public function loadForm() {
+		$opcion = $_GET['opcion'];
 		$model = new UsuarioModel ();
-		$usuario = $model->getUsuario ();
-		$tipos = $model->getTipoUsuario();
-		$capacidades = $model->getCapacidadEspecial();
-		$estados = $model->getEstadoCivil();
+		
+		
+	
 		$message = "";
-		require_once "view.form.php";
+		switch ($opcion){
+			case 1: require_once "view.form.titulo.php";
+			case 2: require_once "view.form.curso.php";
+			case 3: require_once "view.form.historial.php";
+		}
+		
 	}
 
 	public function saveData() {

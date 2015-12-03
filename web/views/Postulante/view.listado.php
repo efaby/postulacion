@@ -23,7 +23,7 @@
 									class="fa fa-graduation-cap"></i> Instruccion Formal</a></li>
 							<li><a href="#wizard-1-step3" data-toggle="tab"><i
 									class="fa fa-briefcase"></i> Capacitación</a></li>
-							<li><a href="#wizard-1-step3" data-toggle="tab"><i
+							<li><a href="#wizard-1-step4" data-toggle="tab"><i
 									class="fa fa-pencil-square-o"></i> Experiencia</a></li>
 						</ul>
 					</div>
@@ -63,14 +63,11 @@
 
 								</div>
 								<!-- /.panel-body -->
-								<div class="panel-footer text-right">
-									<a class="btn btn-warning NextStep">Next step <i
-										class="fa fa-angle-right"></i></a>
-								</div>
+								
 							</div>
 							<div class="tab-pane fade" id="wizard-1-step2">
 								<div class="panel-body">
-									<h4>Example step 2</h4>
+									<h4>Registros de Títulos</h4>
 									<p>
 										<button class="btn btn-large btn-info" id="modalOpen">
 											<i class="glyphicon glyphicon-plus"></i> &nbsp; Add Records
@@ -82,10 +79,12 @@
 										<thead class="the-box dark full">
 											<tr>
 												<th style="text-align: center">ID</th>
-												<th>Número Identificación</th>
-												<th>Nombre</th>
-												<th>Email</th>
-												<th>Tipo Usuario</th>
+												<th>Título</th>
+												<th>Institución</th>
+												<th>Nivel de Educación</th>
+												<th>Registro SENESCYT</th>
+												<th>País</th>
+												<th>Archivo</th>
 												<th style="text-align: center">Acciones</th>
 											</tr>
 										</thead>
@@ -93,10 +92,12 @@
 							<?php foreach ($datos as $dato): ?>
 <tr>
 												<td align="center"><?php echo $dato["id"]; ?></td>
-												<td><?php echo $dato["numero_identificacion"]; ?></td>
-												<td><?php echo $dato["nombres"]." ".$dato["apellidos"]; ?></td>
-												<td><?php echo $dato["email"]; ?></td>
-												<td><?php echo $dato["tipo_usuario"]; ?></td>
+												<td><?php echo $dato["nombre"]; ?></td>
+												<td><?php echo $dato["institucion"]; ?></td>
+												<td><?php echo $dato["nivel"]; ?></td>
+												<td><?php echo $dato["registro_senecyt"]; ?></td>
+												<td><?php echo $dato["pais"]; ?></td>
+												<td>Descargar</td>
 												<td align="center"><a href="#"
 													onclick="javascript: loadModal(<?php echo $dato["id"]; ?>);"><i
 														class="glyphicon glyphicon-edit"></i></a> &nbsp;&nbsp; <a
@@ -109,53 +110,97 @@
 									</table>
 								</div>
 								<!-- /.panel-body -->
-								<div class="panel-footer">
-									<div class="row">
-										<div class="col-sm-6">
-											<a class="btn btn-warning PrevStep"><i
-												class="fa fa-angle-left"></i> Prev step</a>
-										</div>
-										<!-- /.col-sm-6 -->
-										<div class="col-sm-6 text-right">
-											<a class="btn btn-warning NextStep">Next step <i
-												class="fa fa-angle-right"></i></a>
-										</div>
-										<!-- /.col-sm-6 -->
-									</div>
-									<!-- /.row -->
-								</div>
-								<!-- /.panel-footer -->
+								
 							</div>
 							<div class="tab-pane fade" id="wizard-1-step3">
 								<div class="panel-body">
-									<h4>Example step 3</h4>
-									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-										sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-										magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-										quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-										ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-										dolor in hendrerit in vulputate velit esse molestie consequat,
-										vel illum dolore eu feugiat nulla facilisis at vero eros et
-										accumsan et iusto odio dignissim qui blandit praesent luptatum
-										zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+									<h4>Registros de Cursos</h4>
+									<p>
+										<button class="btn btn-large btn-info" id="modalOpen1">
+											<i class="glyphicon glyphicon-plus"></i> &nbsp; Add Records
+										</button>
+										
+									</p>
+
+									<table class="table table-striped table-hover"
+										id="datatable-example">
+										<thead class="the-box dark full">
+											<tr>
+												<th style="text-align: center">ID</th>
+												<th>Nombre</th>
+												<th>Horas</th>
+												<th>Año</th>	
+												<th>Archivo</th>											
+												<th style="text-align: center">Acciones</th>
+											</tr>
+										</thead>
+										<tbody>
+							<?php foreach ($datos as $dato): ?>
+<tr>
+												<td align="center"><?php echo $dato["id"]; ?></td>
+												<td><?php echo $dato["nombre"]; ?></td>
+												<td><?php echo $dato["horas"]; ?></td>
+												<td><?php echo $dato["anio"]; ?></td>
+												<td>Descargar</td>												
+												<td align="center"><a href="#"
+													onclick="javascript: loadModal(<?php echo $dato["id"]; ?>);"><i
+														class="glyphicon glyphicon-edit"></i></a> &nbsp;&nbsp; <a
+													href="#"
+													onclick="javascript:if(confirm('Est\xE1 seguro que desea eliminar el elemento seleccionado?')){redirect(<?php echo $dato['id'];?>);}"><i
+														class="glyphicon glyphicon-remove-circle"></i></a></td>
+											</tr>
+								<?php endforeach;?>
+							</tbody>
+									</table>
 								</div>
 								<!-- /.panel-body -->
-								<div class="panel-footer">
-									<div class="row">
-										<div class="col-sm-6">
-											<a class="btn btn-warning PrevStep"><i
-												class="fa fa-angle-left"></i> Prev step</a>
-										</div>
-										<!-- /.col-sm-6 -->
-										<div class="col-sm-6 text-right">
-											<a class="btn btn-warning"><i class="fa fa-check"></i> Finish</a>
-										</div>
-										<!-- /.col-sm-6 -->
-									</div>
-									<!-- /.row -->
-								</div>
-								<!-- /.panel-footer -->
+								
 							</div>
+														<div class="tab-pane fade" id="wizard-1-step4">
+								<div class="panel-body">
+									<h4>Registros de Historial Laboral</h4>
+									<p>
+										<button class="btn btn-large btn-info" id="modalOpen2">
+											<i class="glyphicon glyphicon-plus"></i> &nbsp; Add Records
+										</button>
+										
+									</p>
+
+									<table class="table table-striped table-hover"
+										id="datatable-example">
+										<thead class="the-box dark full">
+											<tr>
+												<th style="text-align: center">ID</th>
+												<th>Institución</th>
+												<th>Area</th>
+												<th>Cargo</th>	
+												<th>Ciudad</th>
+												<th>Archivo</th>											
+												<th style="text-align: center">Acciones</th>
+											</tr>
+										</thead>
+										<tbody>
+							<?php foreach ($datos as $dato): ?>
+<tr>
+												<td align="center"><?php echo $dato["id"]; ?></td>
+												<td><?php echo $dato["institucion"]; ?></td>
+												<td><?php echo $dato["area"]; ?></td>
+												<td><?php echo $dato["cargo"]; ?></td>
+												<td><?php echo $dato["ciudad"]; ?></td>
+												<td>Descargar</td>												
+												<td align="center"><a href="#"
+													onclick="javascript: loadModal(<?php echo $dato["id"]; ?>);"><i
+														class="glyphicon glyphicon-edit"></i></a> &nbsp;&nbsp; <a
+													href="#"
+													onclick="javascript:if(confirm('Est\xE1 seguro que desea eliminar el elemento seleccionado?')){redirect(<?php echo $dato['id'];?>);}"><i
+														class="glyphicon glyphicon-remove-circle"></i></a></td>
+											</tr>
+								<?php endforeach;?>
+							</tbody>
+									</table>
+								</div>
+								<!-- /.panel-body -->
+								</div>
 						</div>
 						<!-- /.tab-content -->
 					</div>
@@ -179,7 +224,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<a class="close" data-dismiss="modal">×</a>
-				<h3>Usuario</h3>
+				<h3></h3>
 			</div>
 
 			<div class="modal-body"></div>
@@ -203,7 +248,7 @@
 <script
 	src="<?php echo PATH_CSS . '/../plugins/validator/bootstrapValidator.min.js';?>"></script>
 <script src="<?php echo PATH_CSS . '/../js/apps.js';?>"></script>
-<script src="<?php echo PATH_CSS . '/../js/listados.js';?>"></script>
+<script src="<?php echo PATH_CSS . '/../js/listadosMultiple.js';?>"></script>
 <script src="<?php echo PATH_CSS . '/../js/fileinput.js';?>"></script>
 
 <style>
