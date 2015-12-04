@@ -1,12 +1,12 @@
 <?php
 require_once (PATH_PAGINATOR . "/paginator.php");
-require_once (PATH_MODELS . "/UsuarioModel.php");
+require_once (PATH_MODELS . "/PostulanteModel.php");
 /**
  * Controlador de Usuarios
  */
 class PostulanteController {
 	public function display() {
-		$model = new UsuarioModel ();
+		$model = new PostulanteModel ();
 		//$datos = $model->getUsuarioList ();
 		$datos = array();
 		$message = "";
@@ -15,15 +15,21 @@ class PostulanteController {
 	
 	public function loadForm() {
 		$opcion = $_GET['opcion'];
-		$model = new UsuarioModel ();
-		
-		
-	
+		$model = new PostulanteModel ();
 		$message = "";
 		switch ($opcion){
-			case 1: require_once "view.form.titulo.php";
-			case 2: require_once "view.form.curso.php";
-			case 3: require_once "view.form.historial.php";
+			case 1: $titulo = $model->getTitulo();
+				$paises = $model->getPaises();
+				$niveles = $model->getNiveles();
+				$categorias = $model->getCategorias();
+				require_once "view.form.titulo.php";
+				break;
+			case 2: 
+				require_once "view.form.curso.php";
+				break;
+			case 3: 
+				require_once "view.form.historial.php";
+				break;
 		}
 		
 	}
