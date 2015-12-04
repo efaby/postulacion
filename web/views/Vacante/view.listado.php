@@ -13,7 +13,7 @@
 		
 			<div class="the-box">
 				<p>
-					<button class="btn btn-large btn-info" id="modalOpen">
+					<button class="btn btn-large btn-info" onclick="javascript:location.href='index.php?action=insertData'">
 						<i class="glyphicon glyphicon-plus"></i> &nbsp; Add Records
 					</button>
 				</p>
@@ -58,23 +58,6 @@
 	</div>
 </div>
 
-<div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width: 400px;">
-		<div class="modal-content">
-			<div class="modal-header">
-				<a class="close" data-dismiss="modal">×</a>
-				<h3>Vacante</h3>
-			</div>
-
-			<div class="modal-body"></div>
-
-		</div>
-
-	</div>
-</div>
-
-
 <?php include_once PATH_TEMPLATE.'/footer.php';?>
 <link
 	href="<?php echo PATH_CSS . '/../plugins/datatable/css/bootstrap.datatable.min.css';?>"
@@ -85,6 +68,9 @@
 	src="<?php echo PATH_CSS . '/../plugins/datatable/js/bootstrap.datatable.js';?>"></script>
 <script
 	src="<?php echo PATH_CSS . '/../plugins/validator/bootstrapValidator.min.js';?>"></script>
+
+<script src="<?php echo PATH_CSS . '/../plugins/datepicker/bootstrap-datepicker.js';?>"></script>
+<link href="<?php echo PATH_CSS . '/../plugins/datepicker/datepicker.min.css';?>" rel="stylesheet">	
 <script src="<?php echo PATH_CSS . '/../js/apps.js';?>"></script>
 <script src="<?php echo PATH_CSS . '/../js/listados.js';?>"></script>
 </body>

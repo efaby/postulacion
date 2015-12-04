@@ -1,7 +1,7 @@
 <form id="frmUsuario" method="post" action="index.php?action=saveData">
 
 	<div class="form-group col-sm-12">
-		<label class="control-label">Nímero Identificación</label> <input type='text'
+		<label class="control-label">Número de Identificación</label> <input type='text'
 			name='numero_identificacion' class='form-control'
 			value="<?php echo $usuario['numero_identificacion']; ?>">
 
