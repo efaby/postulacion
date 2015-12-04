@@ -32,22 +32,17 @@ class PostulanteModel {
 	
 	public function getPaises(){
 		$model = new model();
-		$sql = "select * from pais";
-		$result = $model->runSql($sql);
-		return $model->getRows($result);
+		return $model->getCatalog("pais");		
 	}
 	
 	public function getNiveles(){
 		$model = new model();
-		$sql = "select * from nivel_educacion";
-		$result = $model->runSql($sql);
-		return $model->getRows($result);
+		return $model->getCatalog("nivel_educacion");
 	}
+	
 	public function getCategorias(){
 		$model = new model();
-		$sql = "select * from categoria_titulo";
-		$result = $model->runSql($sql);
-		return $model->getRows($result);
+		return $model->getCatalog("categoria_titulo");
 	}
 	
 	/*

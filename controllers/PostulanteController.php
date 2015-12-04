@@ -37,6 +37,33 @@ class PostulanteController {
 		
 	}
 
+public function loadProvincia(){
+		$opcion = $_POST ['opcion'];
+		$model = new PostulanteModel ();
+		$provincias = $model->getProvincias($opcion);
+		$html .='<option value="" >Seleccione</option>';
+			foreach ($provincias as $dato) { 
+				$html .='<option value="'.$dato["id"].'" >'.$dato["nombre"].'</option>';
+					}		
+		$html .='</select>';
+		
+		echo $html;
+	}
+	
+	public function loadCiudad(){
+		$opcion = $_POST ['opcion'];
+		$model = new PostulanteModel ();
+		$ciudades = $model->getCiudades($opcion);		
+		$html .='<option value="" >Seleccione</option>';
+		foreach ($ciudades as $dato) {
+			$html .='<option value="'.$dato["id"].'" >'.$dato["nombre"].'</option>';
+		}
+		$html .='</select>';		
+		echo $html;
+	}
+	
+	
+	
 	public function saveData() {
 		
 		print("llego");

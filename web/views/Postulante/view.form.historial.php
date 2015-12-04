@@ -45,7 +45,7 @@
 	
 	<div class="form-group  col-sm-4">
 		<label class="control-label">Pais</label>
-		<select class='form-control' name="pais">
+		<select class='form-control' name="pais" id="pais">
 			<option value="" >Seleccione</option>
 		<?php foreach ($paises as $dato) { ?>
 			<option value="<?php echo $dato['id'];?>"  <?php if($historial['pais']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
@@ -53,26 +53,22 @@
 		</select>
 
 	</div>
-	<div class="form-group  col-sm-4">
-		<label class="control-label">Provincia</label>
-		<select class='form-control' name="provincia">
-			<option value="" >Seleccione</option>
-		<?php foreach ($provincias as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($historial['provinicia']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
 
-	</div>
-	<div class="form-group  col-sm-4">
-		<label class="control-label">Ciudad</label>
-		<select class='form-control' name="ciudad">
+		<div class="form-group  col-sm-4"> 
+			<label class="control-label">Provincia</label>
+			<select class='form-control' name="provincia" id="cbProvincia">		
+			<option value="" >Seleccione</option>	
+			</select>
+		</div>
+		<div class="form-group  col-sm-4" >
+			<label class="control-label">Ciudad</label>
+			<select class='form-control' name="ciudad" id="ciudadId">
 			<option value="" >Seleccione</option>
-		<?php foreach ($ciuades as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($historial['ciudad']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
+				
+			</select>
+	
+		</div>
 
-	</div>
 	<div class="form-group col-sm-12">
 		<label class="control-label">Respado Digital</label> 
 		<input type='file' name='url' id="url" class="file">
@@ -195,6 +191,28 @@ $(document).ready(function() {
 	});
 
 });
+
+$(document).ready(function(){
+	   $("#pais").change(function () {
+	           $("#pais option:selected").each(function () {
+	            opcion=$(this).val();
+	            $.post("index.php?action=loadProvincia", { opcion: opcion }, function(data){
+	            $("#cbProvincia").html(data);
+	            });            
+	        });
+	   });
+
+	   $("#cbProvincia").change(function () {
+	           $("#cbProvincia option:selected").each(function () {
+	            opcion=$(this).val();
+	            $.post("index.php?action=loadCiudad", { opcion: opcion }, function(data){
+	            $("#ciudadId").html(data);
+	            });            
+	        });
+	   })
+	   
+	});
+
 </script>
 <style>
 .col-sm-6, .col-sm-12 {
