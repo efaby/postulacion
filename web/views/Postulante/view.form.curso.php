@@ -1,83 +1,30 @@
 <form id="frmUsuario" method="post" action="index.php?action=saveData">
 
 	<div class="form-group col-sm-12">
-		<label class="control-label">Nímero Identificación</label> <input type='text'
+		<label class="control-label">Nombre Curso</label> <input type='text'
 			name='numero_identificacion' class='form-control'
-			value="<?php echo $usuario['numero_identificacion']; ?>">
+			value="<?php echo $usuario['nombre']; ?>">
 
 	</div>
 	<div class="form-group col-sm-6">
-		<label class="control-label">Nombres</label> <input type='text'
-			name='nombres' class='form-control'
-			value="<?php echo $usuario['nombres']; ?>">
+		<label class="control-label">Horas</label> <input type='text'
+			name='horas' class='form-control'
+			value="<?php echo $usuario['horas']; ?>">
 
 	</div>
 	<div class="form-group col-sm-6">
-		<label class="control-label">Apellidos</label> <input type='text'
-			name='apellidos' class='form-control'
-			value="<?php echo $usuario['apellidos']; ?>">
+		<label class="control-label">Año</label> <input type='text'
+			name='anio' class='form-control'
+			value="<?php echo $usuario['anio']; ?>">
 
 	</div>
+	
+
+	
+	
 	<div class="form-group col-sm-12">
-		<label class="control-label">Email</label>
-		<input type='text'
-			name='email' class='form-control'
-			value="<?php echo $usuario['email']; ?>">
-
-	</div>
-
-	<div class="form-group col-sm-6">
-		<label class="control-label">Género</label>
-		<select class='form-control' name="genero">
-			<option value="" >Seleccione</option>
-			<option value="f"  <?php if($usuario['genero']=='f'):echo "selected"; endif;?>>Femenino</option>
-			<option value="m" <?php if($usuario['genero']=='m'):echo "selected"; endif;?>>Masculino</option>
-		</select>
-
-	</div>
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Tipo Usuario</label>
-		<select class='form-control' name="tipo_usuario_id">
-			<option value="" >Seleccione</option>
-		<?php foreach ($tipos as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($usuario['tipo_usuario_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
-
-	</div>
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Capacidad Especial</label>
-		<select class='form-control' name="capacidad_especial_id">
-			<option value="" >Seleccione</option>
-		<?php foreach ($capacidades as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($usuario['capacidad_especial_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
-
-	</div>
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Estado Civil</label>
-		<select class='form-control' name="estado_civil_id">
-			<option value="" >Seleccione</option>
-		<?php foreach ($estados as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($usuario['estado_civil_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
-
-	</div>
-	<div class="form-group col-sm-6">
-		<label class="control-label">Contraseña</label>
-		<input type="password"
-			name='password' class='form-control'
-			value="<?php echo $usuario['password']; ?>">
-
-	</div>
-	<div class="form-group col-sm-6">
-		<label class="control-label">Repetir Contraseña</label>
-		<input type="password"
-			name='password1' class='form-control'
-			value="<?php echo $usuario['password1']; ?>">
-
+		<label class="control-label">Respado Digital</label> 
+		<input type='file' name='url' id="url" class="file">
 	</div>
 	<div class="form-group">
 	<input type='hidden' name='id' class='form-control' value="<?php echo $usuario['id']; ?>">
@@ -199,6 +146,7 @@ $(document).ready(function() {
 	});
 
 });
+
 </script>
 <style>
 .col-sm-6, .col-sm-12 {

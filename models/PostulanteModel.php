@@ -9,10 +9,50 @@ require_once(PATH_MODELS."/model.php");
 class PostulanteModel {
 	
 	private $patron = "_-_-";
+	
 
 	/**
-	 * Obtiene Usuarios
+	 * Gestion de Titulos
 	 */
+	public function getTitulo()
+	{
+		$titulo = $_GET['id'];
+		$model =  new model();
+		if($titulo > 0){
+			$sql = "select * from titulo where id = ".$usuario; // poner inner joins
+			$result = $model->runSql($sql);
+			$resultArray = $model->getRows($result);
+			$resultArray = $resultArray[0];
+				
+		} else {
+			$resultArray = Array ( 'id' => '' ,'nombre' => '','nombres' => '','institucion' => '','registro_senecyt' => '','nivel' => 0,'pais' => '', 'url' => '','categoria'=>0);
+		}
+		$resultArray['password'] = $resultArray['password1'] = $this->patron;
+		return $resultArray;
+	}
+	
+	public function getPaises(){
+		$model = new model();
+		$sql = "select * from pais";
+		$result = $model->runSql($sql);
+		return $model->getRows($result);
+	}
+	
+	public function getNiveles(){
+		$model = new model();
+		$sql = "select * from nivel_educacion";
+		$result = $model->runSql($sql);
+		return $model->getRows($result);
+	}
+	public function getCategorias(){
+		$model = new model();
+		$sql = "select * from categoria_titulo";
+		$result = $model->runSql($sql);
+		return $model->getRows($result);
+	}
+	
+	
+	
 	public function getUsuarioList(){
 		$model = new model();		
 		$sql = "select u.id, u.numero_identificacion, u.nombres, u.apellidos, u.email, t.nombre as tipo_usuario from usuario as u inner join tipo_usuario as t on  u.tipo_usuario_id = t.id";		

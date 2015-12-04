@@ -1,25 +1,37 @@
 <?php
 require_once (PATH_PAGINATOR . "/paginator.php");
-require_once (PATH_MODELS . "/UsuarioModel.php");
+require_once (PATH_MODELS . "/PostulanteModel.php");
 /**
  * Controlador de Usuarios
  */
 class PostulanteController {
 	public function display() {
-		$model = new UsuarioModel ();
-		$datos = $model->getUsuarioList ();
+		$model = new PostulanteModel ();
+		//$datos = $model->getUsuarioList ();
+		$datos = array();
 		$message = "";
 		require_once "view.listado.php";
 	}
 	
 	public function loadForm() {
-		$model = new UsuarioModel ();
-		$usuario = $model->getUsuario ();
-		$tipos = $model->getTipoUsuario();
-		$capacidades = $model->getCapacidadEspecial();
-		$estados = $model->getEstadoCivil();
+		$opcion = $_GET['opcion'];
+		$model = new PostulanteModel ();
 		$message = "";
-		require_once "view.form.php";
+		switch ($opcion){
+			case 1: $titulo = $model->getTitulo();
+				$paises = $model->getPaises();
+				$niveles = $model->getNiveles();
+				$categorias = $model->getCategorias();
+				require_once "view.form.titulo.php";
+				break;
+			case 2: 
+				require_once "view.form.curso.php";
+				break;
+			case 3: 
+				require_once "view.form.historial.php";
+				break;
+		}
+		
 	}
 
 	public function saveData() {
