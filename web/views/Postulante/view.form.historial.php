@@ -1,29 +1,29 @@
-<form id="frmUsuario" method="post" action="index.php?action=saveData">
+<form id="frmHistorial" method="post" action="index.php?action=saveData">
 
 	<div class="form-group col-sm-12">
 		<label class="control-label">Institución</label> <input type='text'
 			name='institucion' class='form-control'
-			value="<?php echo $usuario['institucion']; ?>">
+			value="<?php echo $historial['institucion']; ?>">
 
 	</div>
 	<div class="form-group col-sm-4">
 		<label class="control-label">Area</label> <input type='text'
 			name='area' class='form-control'
-			value="<?php echo $usuario['area']; ?>">
+			value="<?php echo $historial['area']; ?>">
 
 	</div>
 	<div class="form-group col-sm-4">
 		<label class="control-label">Cargo</label> <input type='text'
 			name='cargo' class='form-control'
-			value="<?php echo $usuario['cargo']; ?>">
+			value="<?php echo $historial['cargo']; ?>">
 
 	</div>
 	<div class="form-group col-sm-4">
 		<label class="control-label">Relación Docencia</label>
 		<select class='form-control' name="relacion_docencia">
 			<option value="" >Seleccione</option>
-			<option value="1"  <?php if($usuario['genero']=='1'):echo "selected"; endif;?>>Si</option>
-			<option value="0" <?php if($usuario['genero']=='0'):echo "selected"; endif;?>>No</option>
+			<option value="1"  <?php if($historial['genero']=='1'):echo "selected"; endif;?>>Si</option>
+			<option value="0" <?php if($historial['genero']=='0'):echo "selected"; endif;?>>No</option>
 		</select>
 
 	</div>
@@ -31,14 +31,14 @@
 		<label class="control-label">Telefono</label>
 		<input type='text'
 			name='telefono' class='form-control'
-			value="<?php echo $usuario['telefono']; ?>">
+			value="<?php echo $historial['telefono']; ?>">
 
 	</div>
 	<div class="form-group col-sm-6">
 		<label class="control-label">Dirección</label>
 		<input type='text'
 			name='direccion' class='form-control'
-			value="<?php echo $usuario['direccion']; ?>">
+			value="<?php echo $historial['direccion']; ?>">
 
 	</div>
 
@@ -47,8 +47,8 @@
 		<label class="control-label">Pais</label>
 		<select class='form-control' name="pais">
 			<option value="" >Seleccione</option>
-		<?php foreach ($tipos as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($usuario['tipo_usuario_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+		<?php foreach ($paises as $dato) { ?>
+			<option value="<?php echo $dato['id'];?>"  <?php if($historial['pais']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
 		<?php }?>
 		</select>
 
@@ -57,8 +57,8 @@
 		<label class="control-label">Provincia</label>
 		<select class='form-control' name="provincia">
 			<option value="" >Seleccione</option>
-		<?php foreach ($capacidades as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($usuario['capacidad_especial_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+		<?php foreach ($provincias as $dato) { ?>
+			<option value="<?php echo $dato['id'];?>"  <?php if($historial['provinicia']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
 		<?php }?>
 		</select>
 
@@ -67,8 +67,8 @@
 		<label class="control-label">Ciudad</label>
 		<select class='form-control' name="ciudad">
 			<option value="" >Seleccione</option>
-		<?php foreach ($estados as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($usuario['estado_civil_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+		<?php foreach ($ciuades as $dato) { ?>
+			<option value="<?php echo $dato['id'];?>"  <?php if($historial['ciudad']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
 		<?php }?>
 		</select>
 
@@ -78,7 +78,7 @@
 		<input type='file' name='url' id="url" class="file">
 	</div>
 	<div class="form-group">
-	<input type='hidden' name='id' class='form-control' value="<?php echo $usuario['id']; ?>">
+	<input type='hidden' name='id' class='form-control' value="<?php echo $historial['id']; ?>">
 		<button type="submit" class="btn btn-success">Guardar</button>
 	</div>
 
@@ -87,7 +87,7 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-    $('#frmUsuario').bootstrapValidator({
+    $('#frmHistorial').bootstrapValidator({
     	message: 'This value is not valid',
 		feedbackIcons: {
 			valid: 'glyphicon glyphicon-ok',
@@ -95,104 +95,102 @@ $(document).ready(function() {
 			validating: 'glyphicon glyphicon-refresh'
 		},
 		fields: {			
-			numero_identificacion: {
-				message: 'El Número de Identificación no es válido',
+			institucion: {
+				message: 'El Nombre de la Institución no es válido',
 				validators: {
 							notEmpty: {
-								message: 'El Número de Identificación no puede ser vacío.'
+								message: 'El Nombre de la Institución no puede ser vacío.'
 							},					
 							regexp: {
-								regexp: /^(?:\+)?\d{10,13}$/,
-								message: 'Ingrese un Número de Identificación válido.'
+								regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+								message: 'Ingrese un Nombre de la Institución válido.'
 							}
 						}
 					},
-			nombres: {
-				message: 'Los Nombres no es válido',
+			area: {
+						message: 'El Nombre del Área no es válido',
+						validators: {
+									notEmpty: {
+										message: 'El Nombre del Nombre del Área no puede ser vacío.'
+									},					
+									regexp: {
+										regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+										message: 'Ingrese un Nombre del Área válido.'
+									}
+								}
+							},
+			cargo: {
+						message: 'El Nombre del cargo no es válido',
+						validators: {
+								notEmpty: {
+								message: 'El Nombre del Nombre del Cargo no puede ser vacío.'
+							},					
+							regexp: {
+									regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+									message: 'Ingrese un Nombre del Nombre del Cargo válido.'
+								}
+							}
+						},
+			relacion_docencia: {
 				validators: {
 					notEmpty: {
-						message: 'El Nombre no puede ser vacío.'
-					},					
-					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
-						message: 'Ingrese un Nombre válido.'
+						message: 'Seleccione la Relación con la Docencia'
 					}
 				}
 			},
-			apellidos: {
-				message: 'El Apellido no es válido',
+			pais: {
 				validators: {
 					notEmpty: {
-						message: 'El Apellido no puede ser vacío.'
-					},					
-					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
-						message: 'Ingrese un Apellido válido.'
+						message: 'Seleccione un Tipo de País.'
 					}
 				}
 			},
-			genero: {
+			provincia: {
 				validators: {
 					notEmpty: {
-						message: 'Seleccione un Género'
-					}
-				}
-			},
-			tipo_usuario: {
-				validators: {
-					notEmpty: {
-						message: 'Seleccione un Tipo de Usuario'
-					}
-				}
-			},
-			capacidad: {
-				validators: {
-					notEmpty: {
-						message: 'Seleccione un Capacidad Especial'
+						message: 'Seleccione una Provincia'
 					}
 				}
 			},	
-			estado: {
+			ciudad: {
 				validators: {
 					notEmpty: {
-						message: 'Seleccione un Estado Civil'
+						message: 'Seleccione una Ciudad'
 					}
 				}
 			},	
-			password: {
-				message: 'La Contraseña no es válida',
+			
+			direccion: {
+				message: 'La Dirección no es válida.',
 				validators: {
-					notEmpty: {
-						message: 'La Contraseña no puede ser vacía.'
+						notEmpty: {
+						message: 'La Dirección no puede ser vacía.'
 					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9-_ \.]+$/,
-						message: 'Ingrese una Contraseña válida.'
+							regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+							message: 'La Dirección no válida.'
+						}
 					}
-				}
-			},
-			password1: {
-				validators: {
-					notEmpty: {
-						message: 'La contraseña no puede ser vacia.'
+				},
+			telefono: {
+					message: 'El Teléfono no es válido.',
+					validators: {
+							notEmpty: {
+							message: 'El Teléfono no puede ser vacío.'
+						},					
+						regexp: {
+								regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+								message: 'El Teléfono no es válido.'
+							}
+						}
 					},
-					identical: {
-						field: 'password',
-						message: 'La contraseña debe ser la misma'
-					}
-				}
-			},
-			email: {
-				message: 'El eEmail no es válido',
+			url: {
 				validators: {
-					notEmpty: {
-						message: 'El Email no puede ser vacío'
-					},
-					emailAddress: {
-						message: 'Ingrese un Email válido.'
+						notEmpty: {
+						message: 'Seleccione un Archivo.'
 					}
 				}
-			}	
+			}
 		}
 	});
 

@@ -27,7 +27,6 @@ class PostulanteModel {
 		} else {
 			$resultArray = Array ( 'id' => '' ,'nombre' => '','nombres' => '','institucion' => '','registro_senecyt' => '','nivel' => 0,'pais' => '', 'url' => '','categoria'=>0);
 		}
-		$resultArray['password'] = $resultArray['password1'] = $this->patron;
 		return $resultArray;
 	}
 	
@@ -50,6 +49,60 @@ class PostulanteModel {
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
 	}
+	
+	/*
+	 * GEstion Curso
+	 */
+	
+	public function getCurso()
+	{
+		$curso = $_GET['id'];
+		$model =  new model();
+		if($titulo > 0){
+			$sql = "select * from curso where id = ".$curso; // poner inner joins
+			$result = $model->runSql($sql);
+			$resultArray = $model->getRows($result);
+			$resultArray = $resultArray[0];	
+		} else {
+			$resultArray = Array ( 'id' => '' ,'nombre' => '','anio' => '','horas' => '','url' => '','categoria'=>0);
+		}
+		return $resultArray;
+	}
+	
+	/**
+	 * Gestion Historial
+	 */
+	public function getHistorial()
+	{
+		$historial = $_GET['id'];
+		$model =  new model();
+		if($titulo > 0){
+			$sql = "select * from titulo where id = ".$usuario; // poner inner joins
+			$result = $model->runSql($sql);
+			$resultArray = $model->getRows($result);
+			$resultArray = $resultArray[0];
+	
+		} else {
+			$resultArray = Array ( 'id' => '' ,'institucion' => '','area' => '','cargo' => '','relacion_docencia' => '','telefono' => '','pais' => 0, 'url' => '','provincia'=>0,'ciudad'=>0,'direccion'=>'');
+		}
+		return $resultArray;
+	}
+	
+	public function getProvincias($pais_id){
+		$model = new model();
+		$sql = "select * from provincia where pais_id = ".$pais_id;
+		$result = $model->runSql($sql);
+		return $model->getRows($result);
+	}
+	
+	public function getCiudades($provincia_id){
+		$model = new model();
+		$sql = "select * from ciudad where provincia_id = ".$provincia_id;
+		$result = $model->runSql($sql);
+		return $model->getRows($result);
+	}
+	
+	
 	
 	
 	

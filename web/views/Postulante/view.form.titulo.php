@@ -1,4 +1,4 @@
-<form id="frmUsuario" method="post" action="index.php?action=saveData">
+<form id="frmTitulo" method="post" action="index.php?action=saveData">
 
 	<div class="form-group col-sm-12">
 		<label class="control-label">Institución</label> <input type='text'
@@ -64,7 +64,7 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-    $('#frmUsuario').bootstrapValidator({
+    $('#frmTitulo').bootstrapValidator({
     	message: 'This value is not valid',
 		feedbackIcons: {
 			valid: 'glyphicon glyphicon-ok',
@@ -79,7 +79,7 @@ $(document).ready(function() {
 								message: 'El Nombre del Título no puede ser vacío.'
 							},					
 							regexp: {
-								regexp: /^(?:\+)?\d{10,13}$/,
+								regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
 								message: 'Ingrese un Nombre del Título válido.'
 							}
 						}

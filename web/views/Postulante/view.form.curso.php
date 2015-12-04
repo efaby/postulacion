@@ -1,33 +1,34 @@
-<form id="frmUsuario" method="post" action="index.php?action=saveData">
+<form id="frmCurso" method="post" action="index.php?action=saveData">
 
 	<div class="form-group col-sm-12">
 		<label class="control-label">Nombre Curso</label> <input type='text'
-			name='numero_identificacion' class='form-control'
-			value="<?php echo $usuario['nombre']; ?>">
+			name='nombre' class='form-control'
+			value="<?php echo $curso['nombre']; ?>">
 
 	</div>
 	<div class="form-group col-sm-6">
-		<label class="control-label">Horas</label> <input type='text'
+		<label class="control-label">Número Horas</label> <input type='text'
 			name='horas' class='form-control'
-			value="<?php echo $usuario['horas']; ?>">
+			value="<?php echo $curso['horas']; ?>">
 
 	</div>
 	<div class="form-group col-sm-6">
 		<label class="control-label">Año</label> <input type='text'
 			name='anio' class='form-control'
-			value="<?php echo $usuario['anio']; ?>">
+			value="<?php echo $curso['anio']; ?>">
 
 	</div>
-	
 
-	
-	
+
+
+
 	<div class="form-group col-sm-12">
-		<label class="control-label">Respado Digital</label> 
-		<input type='file' name='url' id="url" class="file">
+		<label class="control-label">Respado Digital</label> <input
+			type='file' name='url' id="url" class="file">
 	</div>
 	<div class="form-group">
-	<input type='hidden' name='id' class='form-control' value="<?php echo $usuario['id']; ?>">
+		<input type='hidden' name='id' class='form-control'
+			value="<?php echo $curso['id']; ?>">
 		<button type="submit" class="btn btn-success">Guardar</button>
 	</div>
 
@@ -36,7 +37,7 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-    $('#frmUsuario').bootstrapValidator({
+    $('#frmCurso').bootstrapValidator({
     	message: 'This value is not valid',
 		feedbackIcons: {
 			valid: 'glyphicon glyphicon-ok',
@@ -44,104 +45,49 @@ $(document).ready(function() {
 			validating: 'glyphicon glyphicon-refresh'
 		},
 		fields: {			
-			numero_identificacion: {
-				message: 'El Número de Identificación no es válido',
+			nombre: {
+				message: 'El Nombre del Curso no es válido',
 				validators: {
 							notEmpty: {
-								message: 'El Número de Identificación no puede ser vacío.'
+								message: 'El Nombre del Curso no puede ser vacío.'
 							},					
 							regexp: {
-								regexp: /^(?:\+)?\d{10,13}$/,
-								message: 'Ingrese un Número de Identificación válido.'
+								regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+								message: 'Ingrese un Nombre del Curso válido.'
 							}
 						}
 					},
-			nombres: {
-				message: 'Los Nombres no es válido',
-				validators: {
-					notEmpty: {
-						message: 'El Nombre no puede ser vacío.'
-					},					
-					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
-						message: 'Ingrese un Nombre válido.'
-					}
-				}
-			},
-			apellidos: {
-				message: 'El Apellido no es válido',
-				validators: {
-					notEmpty: {
-						message: 'El Apellido no puede ser vacío.'
-					},					
-					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
-						message: 'Ingrese un Apellido válido.'
-					}
-				}
-			},
-			genero: {
-				validators: {
-					notEmpty: {
-						message: 'Seleccione un Género'
-					}
-				}
-			},
-			tipo_usuario: {
-				validators: {
-					notEmpty: {
-						message: 'Seleccione un Tipo de Usuario'
-					}
-				}
-			},
-			capacidad: {
-				validators: {
-					notEmpty: {
-						message: 'Seleccione un Capacidad Especial'
-					}
-				}
-			},	
-			estado: {
-				validators: {
-					notEmpty: {
-						message: 'Seleccione un Estado Civil'
-					}
-				}
-			},	
-			password: {
-				message: 'La Contraseña no es válida',
-				validators: {
-					notEmpty: {
-						message: 'La Contraseña no puede ser vacía.'
-					},					
-					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9-_ \.]+$/,
-						message: 'Ingrese una Contraseña válida.'
-					}
-				}
-			},
-			password1: {
-				validators: {
-					notEmpty: {
-						message: 'La contraseña no puede ser vacia.'
+			horas: {
+						message: 'El Número de Horas no es válido',
+						validators: {
+							notEmpty: {
+								message: 'El Número de Horas no puede ser vacío.'
+							},					
+							regexp: {
+								regexp: /^[0-9- ]+$/,
+								message: 'Ingrese el Número de Horas válido.'
+							}
+						}
 					},
-					identical: {
-						field: 'password',
-						message: 'La contraseña debe ser la misma'
-					}
-				}
-			},
-			email: {
-				message: 'El eEmail no es válido',
-				validators: {
-					notEmpty: {
-						message: 'El Email no puede ser vacío'
-					},
-					emailAddress: {
-						message: 'Ingrese un Email válido.'
-					}
-				}
-			}	
+			anio: {
+						message: 'El Año no es válido',
+						validators: {
+							notEmpty: {
+								message: 'El Año no puede ser vacío.'
+							},					
+							regexp: {
+								regexp: /^[0-9- ]+$/,
+								message: 'Ingrese el Año válido.'
+							}
+						}
+					},	
+					url: {
+						validators: {
+							notEmpty: {
+								message: 'Seleccione un Archivo.'
+							}
+						}
+					}		
 		}
 	});
 
