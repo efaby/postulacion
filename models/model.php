@@ -58,11 +58,22 @@ class model
 		return $this->getRows($result);
 	}
 	
-	public function getAreasActives(){
-		$model =  new model();
-		$sql = "select * from area where is_active = 1 ";
-		$result = $model->runSql($sql);
-		return $model->getRows($result);
+	public function saveData($objeto){
+		$id = $objeto["id"];
+		unset($objeto["id"]);
+		$sql = "";
+		$values = "";
+		$sql1 = "";
+		foreach ($objeto as $key => $value){
+			if($id > 0){
+				
+			}
+		}
+		
+		
+		if($id > 0){
+			
+		}
 	}
 	
 }

@@ -7,7 +7,7 @@ require_once (PATH_MODELS . "/PostulanteModel.php");
 class PostulanteController {
 	public function display() {
 		$model = new PostulanteModel ();
-		//$datos = $model->getUsuarioList ();
+		//$datos = $model->getUsuarioList (); // cargar datos de pestañas
 		$datos = array();
 		$message = "";
 		require_once "view.listado.php";
@@ -17,23 +17,53 @@ class PostulanteController {
 		$opcion = $_GET['opcion'];
 		$model = new PostulanteModel ();
 		$message = "";
+		$paises = $model->getPaises();
 		switch ($opcion){
 			case 1: $titulo = $model->getTitulo();
-				$paises = $model->getPaises();
+				
 				$niveles = $model->getNiveles();
 				$categorias = $model->getCategorias();
 				require_once "view.form.titulo.php";
 				break;
-			case 2: 
+			case 2: $curso = $model->getCurso();
 				require_once "view.form.curso.php";
 				break;
-			case 3: 
+			case 3: $historial = $model->getHistorial();
+				$provinicias = $model->getProvincias(0);
+				$ciudades = $model->getCiudades(0);
 				require_once "view.form.historial.php";
 				break;
 		}
 		
 	}
 
+public function loadProvincia(){
+		$opcion = $_POST ['opcion'];
+		$model = new PostulanteModel ();
+		$provincias = $model->getProvincias($opcion);
+		$html .='<option value="" >Seleccione</option>';
+			foreach ($provincias as $dato) { 
+				$html .='<option value="'.$dato["id"].'" >'.$dato["nombre"].'</option>';
+					}		
+		$html .='</select>';
+		
+		echo $html;
+	}
+	
+	public function loadCiudad(){
+		$opcion = $_POST ['opcion'];
+		$model = new PostulanteModel ();
+		$ciudades = $model->getCiudades($opcion);		
+		$html .='<option value="" >Seleccione</option>';
+		foreach ($ciudades as $dato) {
+			$html .='<option value="'.$dato["id"].'" >'.$dato["nombre"].'</option>';
+		}
+		$html .='</select>';		
+		echo $html;
+	}
+	
+	
+	
 	public function saveData() {
 		
 		print("llego");
