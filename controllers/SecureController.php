@@ -260,7 +260,7 @@ class SecureController {
 					      <td>Estimado '.$user["names"].',</td>
 					    </tr>
 					    <tr>
-					      <td> Para resetear su contrase&ntilde;a por favor ingrese <a href="http://empleos.sangabrielriobamba.edu.ec/web/views/Secure/index.php?action=resetPassword&tc='.$token.'">aqui</a>
+					      <td> Para resetear su contrase&ntilde;a por favor ingrese <a href="http://dominio/web/views/Secure/index.php?action=resetPassword&tc='.$token.'">aqui</a>
 					      	<br><br>
 					      	La Administraci&oacute;n.
 					      </td>
@@ -271,7 +271,7 @@ class SecureController {
 		$headers  = 'MIME-Version: 1.0' . "\r\n";
 		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 	
-		$headers .= 'From: Bolsa de Empleo Instituto San Gabriel <'.$email_from.">\r\n".
+		$headers .= 'From: Bolsa de Empleo Dominio <'.$email_from.">\r\n".
 				'Reply-To: '.$email_from."\r\n" .
 				'X-Mailer: PHP/' . phpversion();
 		@mail($email_to, $email_subject, $message, $headers);

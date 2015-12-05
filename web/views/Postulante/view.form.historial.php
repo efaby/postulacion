@@ -1,4 +1,4 @@
-<form id="frmHistorial" method="post" action="index.php?action=saveData">
+<form id="frmHistorial" method="post" action="index.php?action=saveData" enctype="multipart/form-data">
 
 	<div class="form-group col-sm-12">
 		<label class="control-label">Institución</label> <input type='text'
@@ -6,75 +6,93 @@
 			value="<?php echo $historial['institucion']; ?>">
 
 	</div>
-	<div class="form-group col-sm-4">
-		<label class="control-label">Area</label> <input type='text'
-			name='area' class='form-control'
-			value="<?php echo $historial['area']; ?>">
-
-	</div>
-	<div class="form-group col-sm-4">
-		<label class="control-label">Cargo</label> <input type='text'
-			name='cargo' class='form-control'
-			value="<?php echo $historial['cargo']; ?>">
-
-	</div>
-	<div class="form-group col-sm-4">
-		<label class="control-label">Relación Docencia</label>
-		<select class='form-control' name="relacion_docencia">
-			<option value="" >Seleccione</option>
-			<option value="1"  <?php if($historial['genero']=='1'):echo "selected"; endif;?>>Si</option>
-			<option value="0" <?php if($historial['genero']=='0'):echo "selected"; endif;?>>No</option>
-		</select>
-
-	</div>
-	<div class="form-group col-sm-6">
-		<label class="control-label">Telefono</label>
-		<input type='text'
-			name='telefono' class='form-control'
-			value="<?php echo $historial['telefono']; ?>">
-
-	</div>
-	<div class="form-group col-sm-6">
-		<label class="control-label">Dirección</label>
-		<input type='text'
-			name='direccion' class='form-control'
-			value="<?php echo $historial['direccion']; ?>">
-
-	</div>
-
+	<div class="form-group col-sm-12 rows">
+		<div class="form-group col-sm-4">
+			<label class="control-label">Area</label> <input type='text'
+				name='area' class='form-control'
+				value="<?php echo $historial['area']; ?>">
 	
-	<div class="form-group  col-sm-4">
-		<label class="control-label">Pais</label>
-		<select class='form-control' name="pais" id="pais">
-			<option value="" >Seleccione</option>
-		<?php foreach ($paises as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($historial['pais']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
-
-	</div>
-
-		<div class="form-group  col-sm-4"> 
-			<label class="control-label">Provincia</label>
-			<select class='form-control' name="provincia" id="cbProvincia">		
-			<option value="" >Seleccione</option>	
-			</select>
 		</div>
-		<div class="form-group  col-sm-4" >
-			<label class="control-label">Ciudad</label>
-			<select class='form-control' name="ciudad" id="ciudadId">
-			<option value="" >Seleccione</option>
-				
+		<div class="form-group col-sm-4">
+			<label class="control-label">Cargo</label> <input type='text'
+				name='cargo' class='form-control'
+				value="<?php echo $historial['cargo']; ?>">
+	
+		</div>
+		<div class="form-group col-sm-4">
+			<label class="control-label">Relación Docencia</label>
+			<select class='form-control' name="relacion_docencia">
+				<option value="" >Seleccione</option>
+				<option value="1"  <?php if($historial['relacion_docencia']=='1'):echo "selected"; endif;?>>Si</option>
+				<option value="2" <?php if($historial['relacion_docencia']=='2'):echo "selected"; endif;?>>No</option>
 			</select>
 	
 		</div>
+	</div>
+	<div class="form-group col-sm-12 rows">
+		<div class="form-group col-sm-6">
+			<label class="control-label">Telefono</label>
+			<input type='text'
+				name='telefono' class='form-control'
+				value="<?php echo $historial['telefono']; ?>">
+	
+		</div>
+		<div class="form-group col-sm-6">
+			<label class="control-label">Dirección</label>
+			<input type='text'
+				name='direccion' class='form-control'
+				value="<?php echo $historial['direccion']; ?>">
+	
+		</div>
 
+	</div>
+	<div class="form-group col-sm-12 rows">
+		<div class="form-group  col-sm-4">
+			<label class="control-label">Pais</label>
+			<select class='form-control' name="pais_id" id="pais_id">
+				<option value="" >Seleccione</option>
+			<?php foreach ($paises as $dato) { ?>
+				<option value="<?php echo $dato['id'];?>"  <?php if($historial['pais_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+			<?php }?>
+			</select>
+	
+		</div>
+	
+			<div class="form-group  col-sm-4"> 
+				<label class="control-label">Provincia</label>
+				<select class='form-control' name="provincia_id" id="provincia_id">		
+				<option value="" >Seleccione</option>	
+				<?php foreach ($provincias as $dato) { ?>
+					<option value="<?php echo $dato['id'];?>"  <?php if($historial['provincia_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+				<?php }?>
+				</select>
+			</div>
+			<div class="form-group  col-sm-4" >
+				<label class="control-label">Ciudad</label>
+				<select class='form-control' name="ciudad_id" id="ciudad_id">
+				<option value="" >Seleccione</option>
+				<?php foreach ($ciudades as $dato) { ?>
+					<option value="<?php echo $dato['id'];?>"  <?php if($historial['ciudad_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+				<?php }?>
+				</select>
+		
+			</div>
+	</div>
 	<div class="form-group col-sm-12">
 		<label class="control-label">Respado Digital</label> 
-		<input type='file' name='url' id="url" class="file">
+		
+		<?php if($historial['url']!= ''):?>
+			<input type='file' name='url1' id="url1" class="file">		
+			<a href="index.php?action=downloadFile&nameFile=<?php echo $historial["url"];?>">Descargar</a>
+			<input type="hidden" name="fileName" value="<?php echo $historial["url"];?>">
+		<?php else :?>
+			<input type='file' name='url' id="url" class="file">	
+		<?php endif;?>
 	</div>
 	<div class="form-group">
 	<input type='hidden' name='id' class='form-control' value="<?php echo $historial['id']; ?>">
+	<input type='hidden' name='opcion' class='form-control'
+			value="3">
 		<button type="submit" class="btn btn-success">Guardar</button>
 	</div>
 
@@ -134,21 +152,21 @@ $(document).ready(function() {
 					}
 				}
 			},
-			pais: {
+			pais_id: {
 				validators: {
 					notEmpty: {
 						message: 'Seleccione un Tipo de País.'
 					}
 				}
 			},
-			provincia: {
+			provincia_id: {
 				validators: {
 					notEmpty: {
 						message: 'Seleccione una Provincia'
 					}
 				}
 			},	
-			ciudad: {
+			ciudad_id: {
 				validators: {
 					notEmpty: {
 						message: 'Seleccione una Ciudad'
@@ -174,39 +192,52 @@ $(document).ready(function() {
 							notEmpty: {
 							message: 'El Teléfono no puede ser vacío.'
 						},					
-						regexp: {
+					regexp: {
 								regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
 								message: 'El Teléfono no es válido.'
 							}
 						}
 					},
-			url: {
-				validators: {
-						notEmpty: {
-						message: 'Seleccione un Archivo.'
-					}
-				}
-			}
+		
+					url: {
+						validators: {
+							notEmpty: {
+								message: 'Seleccione un Archivo.'
+							},
+							file: {
+			                    extension: 'pdf,docx,doc',
+			                    message: 'Seleccione un archivo válido. (pdf, doc, docx)'
+			                }
+						}
+					},
+					url1: {
+						validators: {							
+							file: {
+			                    extension: 'pdf,docx,doc',
+			                    message: 'Seleccione un archivo válido. (pdf, doc, docx)'
+			                }
+						}
+					}		
 		}
 	});
 
 });
 
 $(document).ready(function(){
-	   $("#pais").change(function () {
-	           $("#pais option:selected").each(function () {
+	   $("#pais_id").change(function () {
+	           $("#pais_id option:selected").each(function () {
 	            opcion=$(this).val();
 	            $.post("index.php?action=loadProvincia", { opcion: opcion }, function(data){
-	            $("#cbProvincia").html(data);
+	            $("#provincia_id").html(data);
 	            });            
 	        });
 	   });
 
-	   $("#cbProvincia").change(function () {
-	           $("#cbProvincia option:selected").each(function () {
+	   $("#provincia_id").change(function () {
+	           $("#provincia_id option:selected").each(function () {
 	            opcion=$(this).val();
 	            $.post("index.php?action=loadCiudad", { opcion: opcion }, function(data){
-	            $("#ciudadId").html(data);
+	            $("#ciudad_id").html(data);
 	            });            
 	        });
 	   })
@@ -215,7 +246,10 @@ $(document).ready(function(){
 
 </script>
 <style>
-.col-sm-6, .col-sm-12 {
-	padding-right: 0px;
+.col-sm-6, .col-sm-4 {
+	padding-left: 0px;
 }
+.rows{
+	padding-right: 0px;
+	}
 </style>

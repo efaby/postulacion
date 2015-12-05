@@ -58,22 +58,27 @@ class model
 		return $this->getRows($result);
 	}
 	
-	public function saveData($objeto){
+	public function saveData($objeto,$table){
 		$id = $objeto["id"];
 		unset($objeto["id"]);
-		$sql = "";
+		
 		$values = "";
-		$sql1 = "";
+		$keys = "";
 		foreach ($objeto as $key => $value){
-			if($id > 0){
-				
+			if($id == 0){
+				$values .= ($values == '')?"'".$value."'":" ,'".$value."'";
+				$keys .= ($keys == '')?$key:' ,'.$key;
+			} else {
+				$values .= ($values == '')? $key ." = '".$value."'":" ,".$key ." = '".$value."'";				
 			}
-		}
+		}		
 		
-		
-		if($id > 0){
-			
+		if($id == 0){
+			$sql = ' Insert into '.$table. ' ('.$keys.') values ('.$values.')';
+		} else {
+			$sql = 'Update '.$table. ' set '.$values.' where id = '.$id;
 		}
+		return $this->runSql($sql,true);
 	}
 	
 }

@@ -1,4 +1,4 @@
-<form id="frmTitulo" method="post" action="index.php?action=saveData">
+<form id="frmTitulo" method="post" action="index.php?action=saveData" enctype="multipart/form-data">
 
 	<div class="form-group col-sm-12">
 		<label class="control-label">Institución</label> <input type='text'
@@ -13,49 +13,62 @@
 			value="<?php echo $titulo['nombre']; ?>">
 
 	</div>	
-	<div class="form-group col-sm-6">
-		<label class="control-label">Registro Senescyt</label> <input type='text'
-			name='registro_senecyt' class='form-control'
-			value="<?php echo $titulo['registro_senecyt']; ?>">
-
+	<div class="form-group col-sm-12 rows">
+		<div class="form-group col-sm-6">
+			<label class="control-label">Registro Senescyt</label> <input type='text'
+				name='registro_senecyt' class='form-control'
+				value="<?php echo $titulo['registro_senecyt']; ?>">
+	
+		</div>
+		<div class="form-group col-sm-6">
+			<label class="control-label">Nivel de Educación</label>
+			<select class='form-control' name="nivel_educacion_id">
+				<option value="" >Seleccione</option>
+			<?php foreach ($niveles as $dato) { ?>
+				<option value="<?php echo $dato['id'];?>"  <?php if($titulo['nivel_educacion_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+			<?php }?>
+			</select>
+	
+		</div>
 	</div>
-	<div class="form-group col-sm-6">
-		<label class="control-label">Nivel de Educación</label>
-		<select class='form-control' name="nivel">
-			<option value="" >Seleccione</option>
-		<?php foreach ($niveles as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($titulo['nivel']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
-
-	</div>
-	<div class="form-group col-sm-6">
-		<label class="control-label">Categoría</label>
-		<select class='form-control' name="categoria">
-			<option value="" >Seleccione</option>
-		<?php foreach ($categorias as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($titulo['categoria']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
-
-	</div>
-	<div class="form-group  col-sm-6">
-		<label class="control-label">País</label>
-		<select class='form-control' name="pais">
-			<option value="" >Seleccione</option>
-		<?php foreach ($paises as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($titulo['pais']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
-
+	<div class="form-group col-sm-12 rows">
+		<div class="form-group col-sm-6">
+			<label class="control-label">Categoría</label>
+			<select class='form-control' name="categoria_titulo_id">
+				<option value="" >Seleccione</option>
+			<?php foreach ($categorias as $dato) { ?>
+				<option value="<?php echo $dato['id'];?>"  <?php if($titulo['categoria_titulo_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+			<?php }?>
+			</select>
+	
+		</div>
+		<div class="form-group  col-sm-6">
+			<label class="control-label">País</label>
+			<select class='form-control' name="id_pais">
+				<option value="" >Seleccione</option>
+			<?php foreach ($paises as $dato) { ?>
+				<option value="<?php echo $dato['id'];?>"  <?php if($titulo['id_pais']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+			<?php }?>
+			</select>
+	
+		</div>
+	</div>	
+	<div class="form-group col-sm-12">
+		<label class="control-label">Respado Digital</label> 
+		
+		<?php if($titulo['url']!= ''):?>
+			<input type='file' name='url1' id="url1" class="file">		
+			<a href="index.php?action=downloadFile&nameFile=<?php echo $titulo["url"];?>">Descargar</a>
+			<input type="hidden" name="fileName" value="<?php echo $titulo["url"];?>">
+		<?php else :?>
+			<input type='file' name='url' id="url" class="file">	
+		<?php endif;?>
 	</div>
 	
-	<div class="form-group col-sm-12">
-		<label class="control-label">Respado Digital</label>
-		<input type='file' name='url' id="url" class="file">
-	</div>
 	<div class="form-group">
 	<input type='hidden' name='id' class='form-control' value="<?php echo $titulo['id']; ?>">
+	<input type='hidden' name='opcion' class='form-control'
+			value="1">
 		<button type="submit" class="btn btn-success">Guardar</button>
 	</div>
 
@@ -108,21 +121,21 @@ $(document).ready(function() {
 					}
 				}
 			},
-			nivel: {
+			nivel_educacion_id: {
 				validators: {
 					notEmpty: {
 						message: 'Seleccione un Nivel de Educación.'
 					}
 				}
 			},
-			categoria: {
+			categoria_titulo_id: {
 				validators: {
 					notEmpty: {
 						message: 'Seleccione un Categoría.'
 					}
 				}
 			},
-			pais: {
+			id_pais: {
 				validators: {
 					notEmpty: {
 						message: 'Seleccione un País.'
@@ -133,9 +146,21 @@ $(document).ready(function() {
 				validators: {
 					notEmpty: {
 						message: 'Seleccione un Archivo.'
-					}
+					},
+					file: {
+	                    extension: 'pdf,docx,doc',
+	                    message: 'Seleccione un archivo válido. (pdf, doc, docx)'
+	                }
 				}
-			}
+			},
+			url1: {
+				validators: {							
+					file: {
+	                    extension: 'pdf,docx,doc',
+	                    message: 'Seleccione un archivo válido. (pdf, doc, docx)'
+	                }
+				}
+			}	
 		}
 	});
 
@@ -143,7 +168,10 @@ $(document).ready(function() {
 
 </script>
 <style>
-.col-sm-6, .col-sm-12 {
-	padding-right: 0px;
+.col-sm-6, .col-sm-4 {
+	padding-left: 0px;
 }
+.rows{
+	padding-right: 0px;
+	}
 </style>
