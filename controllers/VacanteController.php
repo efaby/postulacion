@@ -19,6 +19,13 @@ class VacanteController {
 		require_once "view.form.php";
 	}
 	
+	public function editData(){
+		$model = new VacanteModel();
+		$vacante = $model->getVacante();
+		$message = "";
+		require_once "view.form.php";
+	}
+	
 	public function loadForm() {
 		$model = new VacanteModel ();
 		$vacante = $model->getVacante ();

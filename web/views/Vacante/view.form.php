@@ -246,8 +246,7 @@ $(document).ready(function() {
 								 message: 'La fecha de inicio de calificación es requerida y no puede ser vacía'
 							 },
 							 date:{	 
-								 	minDate: 'fecha_fin_calificacion',									
-				                    format: 'YYYY-MM-DD',
+								 	format: 'YYYY-MM-DD',
 				                    message: 'La fecha de inicio del calificación no es válida.'
 				                    
 							 }							 
@@ -260,7 +259,6 @@ $(document).ready(function() {
 								 message: 'La fecha de fin de calificación es requerida y no puede ser vacía'
 							 },
 							 date: {
-								 maxDate: 'fecha_inicio_calificacion',
 								 format: 'YYYY-MM-DD',
 				                 message: 'La fecha de fin de calificación no es válida.'
 							 }

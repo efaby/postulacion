@@ -85,14 +85,14 @@ $(function () {
       pickTime: false, 
       format: "YYYY-MM-DD", 
       defaultDate: sd, 
-      maxDate: ed 
+     // maxDate: ed 
     });
   
     $('#fecha_fin').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
       defaultDate: ed, 
-      minDate: sd 
+     // minDate: sd 
     });
 
     //passing 1.jquery form object, 2.start date dom Id, 3.end date dom Id
@@ -193,14 +193,14 @@ $(function () {
       pickTime: false, 
       format: "YYYY-MM-DD", 
       defaultDate: sd, 
-      maxDate: ed 
+      //maxDate: ed 
     });
   
     $('#fecha_fin_postulacion').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
       defaultDate: ed, 
-      minDate: sd 
+      //minDate: sd 
     });
 
     //passing 1.jquery form object, 2.start date dom Id, 3.end date dom Id
@@ -279,14 +279,14 @@ $(function () {
       pickTime: false, 
       format: "YYYY-MM-DD", 
       defaultDate: sd, 
-      maxDate: ed 
+     // maxDate: ed 
     });
   
     $('#fecha_fin_test').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
       defaultDate: ed, 
-      minDate: sd 
+      //minDate: sd 
     });
 
     //passing 1.jquery form object, 2.start date dom Id, 3.end date dom Id
@@ -320,14 +320,14 @@ $(function () {
       pickTime: false, 
       format: "YYYY-MM-DD", 
       defaultDate: sd, 
-      maxDate: ed 
+      //maxDate: ed 
     });
   
     $('#fecha_fin_clase').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
       defaultDate: ed, 
-      minDate: sd 
+      //minDate: sd 
     });
 
     //passing 1.jquery form object, 2.start date dom Id, 3.end date dom Id
@@ -361,14 +361,14 @@ $(function () {
       pickTime: false, 
       format: "YYYY-MM-DD", 
       defaultDate: sd, 
-      maxDate: ed 
+      //maxDate: ed 
     });
   
     $('#fecha_fin_entrevista').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
       defaultDate: ed, 
-      minDate: sd 
+      //minDate: sd 
     });
 
     //passing 1.jquery form object, 2.start date dom Id, 3.end date dom Id

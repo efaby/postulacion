@@ -34,7 +34,7 @@
 					</thead>
 					<tbody>
 							<?php foreach ($datos as $dato): ?>
-<tr>
+						<tr>
 							<td align="center"><?php echo $dato["id"]; ?></td>
 							<td><?php echo $dato["nombre_area"]; ?></td>
 							<td><?php echo $dato["titulo"]; ?></td>
@@ -43,7 +43,7 @@
 							<td><?php echo $dato["fecha_inicio"]; ?></td>
 							<td><?php echo $dato["fecha_fin"]; ?></td>
 							<td align="center"><a href="#"
-								onclick="javascript: loadModal(<?php echo $dato["id"]; ?>);"><i
+								onclick="javascript: location.href='index.php?action=editData&id=<?php echo $dato['id'];?>';"><i
 									class="glyphicon glyphicon-edit"></i></a> &nbsp;&nbsp; <a
 								href="#" onclick="javascript:if(confirm('Est\xE1 seguro que desea eliminar el elemento seleccionado?')){redirect(<?php echo $dato['id'];?>);}"><i
 									class="glyphicon glyphicon-remove-circle"></i></a></td>
