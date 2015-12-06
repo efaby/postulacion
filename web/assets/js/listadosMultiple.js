@@ -9,7 +9,7 @@ $('#modalOpen').click(function(){
 	});
 	$('#modalOpen2').click(function(){	  
 		$('.modal-dialog').css('width','800');
-		loadModal(0,'Historial Laboral',3);
+		loadModal(0,'Registro Historial Laboral',3);
 	});
 	});
 
@@ -20,7 +20,7 @@ function loadModal(id, title, opcion){
 	});
 }
 
-function redirect(id){
-	var url = 'index.php?action=deleteData&id=' + id;
+function redirect(id,opcion){
+	var url = 'index.php?action=deleteData&id=' + id + '&opcion=' + opcion;
 	location.href = url;
 }

@@ -8,24 +8,60 @@ require_once(PATH_MODELS."/model.php");
  */
 class PostulanteModel {
 	
-	private $patron = "_-_-";
+	/*
+	 * GEstion de Usuario
+	 */
 	
+	public function getUsuario($usuario)
+	{
+		$model =  new model();		
+		$sql = "select * from usuario where id = ".$usuario; // poner inner joins
+		$result = $model->runSql($sql);
+		$resultArray = $model->getRows($result);
+		$resultArray = $resultArray[0];			
+		return $resultArray;
+	}
 
+	public function updateFiles($field, $nombre,$usuario){
+		$sql = "Update usuario set ".$field." = '".$nombre."' where id = ".$usuario;
+		$model =  new model();
+		$result = $model->runSql($sql);
+	}
+	
+	public function getCapacidades(){
+		$model = new model();
+		return $model->getCatalog("capacidad_especial");
+	}
+	
+	public function getEstados(){
+		$model = new model();
+		return $model->getCatalog("estado_civil");
+	}
+	
 	/**
 	 * Gestion de Titulos
 	 */
+	public function getTitulos(){
+		$model = new model();
+		$sql = "select t.institucion, t.url, t.nombre, t.id, t.registro_senecyt, ne.nombre as nivel, p.nombre as pais 
+				from titulo as t inner join nivel_educacion as ne on t.nivel_educacion_id = ne.id 
+				inner join pais as p on t.id_pais = p.id";
+		$result = $model->runSql($sql);
+		return $model->getRows($result);
+	}
+	
 	public function getTitulo()
 	{
-		$titulo = $_GET['id'];
+		$titulo = isset($_GET['id'])?$_GET['id']:0;
 		$model =  new model();
 		if($titulo > 0){
-			$sql = "select * from titulo where id = ".$usuario; // poner inner joins
+			$sql = "select * from titulo where id = ".$titulo; // poner inner joins
 			$result = $model->runSql($sql);
 			$resultArray = $model->getRows($result);
 			$resultArray = $resultArray[0];
 				
 		} else {
-			$resultArray = Array ( 'id' => '' ,'nombre' => '','nombres' => '','institucion' => '','registro_senecyt' => '','nivel' => 0,'pais' => '', 'url' => '','categoria'=>0);
+			$resultArray = Array ( 'id' => 0 ,'nombre' => '','institucion' => '','registro_senecyt' => '','nivel_educacion_id' => 0,'id_pais' => 0, 'url' => '','categoria_titulo_id'=>0);
 		}
 		return $resultArray;
 	}
@@ -49,17 +85,25 @@ class PostulanteModel {
 	 * GEstion Curso
 	 */
 	
+	public function getCursos(){
+		$model = new model();
+		$sql = "select * from curso";
+		$result = $model->runSql($sql);
+		return $model->getRows($result);
+	}
+	
+	
 	public function getCurso()
 	{
-		$curso = $_GET['id'];
+		$curso = isset($_GET['id'])?$_GET['id']:0;
 		$model =  new model();
-		if($titulo > 0){
+		if($curso > 0){
 			$sql = "select * from curso where id = ".$curso; // poner inner joins
 			$result = $model->runSql($sql);
 			$resultArray = $model->getRows($result);
 			$resultArray = $resultArray[0];	
 		} else {
-			$resultArray = Array ( 'id' => '' ,'nombre' => '','anio' => '','horas' => '','url' => '','categoria'=>0);
+			$resultArray = Array ( 'id' => 0 ,'nombre' => '','anio' => '','horas' => '','url' => '','categoria'=>0);
 		}
 		return $resultArray;
 	}
@@ -67,18 +111,30 @@ class PostulanteModel {
 	/**
 	 * Gestion Historial
 	 */
+	
+	public function getHistoriales(){
+		$model = new model();
+		$sql = "select h.id, h.institucion, h.url, h.area, h.cargo, c.nombre as ciudad
+				from historial as h inner join ciudad as c on h.ciudad_id = c.id";
+		$result = $model->runSql($sql);
+		return $model->getRows($result);
+	}
+	
 	public function getHistorial()
 	{
-		$historial = $_GET['id'];
+		$historial = isset($_GET['id'])?$_GET['id']:0;
 		$model =  new model();
-		if($titulo > 0){
-			$sql = "select * from titulo where id = ".$usuario; // poner inner joins
+		if($historial > 0){
+			$sql = "select h.*, p.pais_id as pais_id , p.id as provincia_id  from historial as h 
+					inner join ciudad as c on h.ciudad_id = c.id
+					inner join provincia as p on c.provincia_id = p.id
+					where h.id = ".$historial; 
 			$result = $model->runSql($sql);
 			$resultArray = $model->getRows($result);
 			$resultArray = $resultArray[0];
 	
 		} else {
-			$resultArray = Array ( 'id' => '' ,'institucion' => '','area' => '','cargo' => '','relacion_docencia' => '','telefono' => '','pais' => 0, 'url' => '','provincia'=>0,'ciudad'=>0,'direccion'=>'');
+			$resultArray = Array ( 'id' => 0 ,'institucion' => '','area' => '','cargo' => '','relacion_docencia' => '','telefono' => '','pais_id' => 0, 'url' => '','provincia_id'=>0,'ciudad_id'=>0,'direccion'=>'');
 		}
 		return $resultArray;
 	}
@@ -97,78 +153,25 @@ class PostulanteModel {
 		return $model->getRows($result);
 	}
 	
-	
-	
-	
-	
-	public function getUsuarioList(){
-		$model = new model();		
-		$sql = "select u.id, u.numero_identificacion, u.nombres, u.apellidos, u.email, t.nombre as tipo_usuario from usuario as u inner join tipo_usuario as t on  u.tipo_usuario_id = t.id";		
-		$result = $model->runSql($sql);
-		return $model->getRows($result);
-	}	
-	
-	public function getUsuario()
-	{
-		$usuario = $_GET['id'];
-		$model =  new model();
-		if($usuario > 0){
-			$sql = "select * from usuario where id = ".$usuario;
-			$result = $model->runSql($sql);
-			$resultArray = $model->getRows($result);
-			$resultArray = $resultArray[0];
-			
-		} else {
-			$resultArray = Array ( 'id' => '' ,'numero_identificacion' => '','nombres' => '','apellidos' => '','email' => '','genero' => '','password' => '', 'tipo_usuario_id' => '0','capacidad_especial_id' => '0', 'estado_civil_id' => '0','password1' => '');	
-		}
-		$resultArray['password'] = $resultArray['password1'] = $this->patron;
-		return $resultArray;
+	public function saveData($objeto, $table){
+		$model = new model();
+		return $model->saveData($objeto, $table);
 	}
 	
-	public function saveUsuario($usuario)
-	{
-		
-		$password =  md5($usuario['password']);
-		if($usuario['id'] > 0){
-			$sql = "update usuario set numero_identificacion = '".$usuario['numero_identificacion']."', nombres = '".$usuario['nombres']."', apellidos = '".$usuario['apellidos']."', email = '".$usuario['email']."', genero = '".$usuario['genero']."', estado_civil_id = ".$usuario['estado_civil_id'].", tipo_usuario_id = ".$usuario['tipo_usuario_id'].", capacidad_especial_id = ".$usuario['capacidad_especial_id'] ." , username = '".$usuario['numero_identificacion']."'";
-			if($usuario['password'] != $this->patron){
-				$sql .= " password  = '".$password."'";
-			}
-			$sql .= " where id = ".$usuario['id'];
-		} else {
-			$sql = "insert into usuario(numero_identificacion, nombres, apellidos,email,genero,estado_civil_id,tipo_usuario_id,capacidad_especial_id, password,username) 
-					values ('".$usuario['numero_identificacion']."','".$usuario['nombres']."','".$usuario['apellidos']."','".$usuario['email']."','".$usuario['genero']."',".$usuario['estado_civil_id'].",".$usuario['tipo_usuario_id'].",".$usuario['capacidad_especial_id'].",'".$password."','".$usuario['numero_identificacion']."')";
-		}
-
-		$model =  new model();
-		$result = $model->runSql($sql);
-	}
-
-	public function deleteUsuario(){
-		$Usuario = $_GET['id'];
-		$sql = "delete from usuario where id = ".$Usuario;
+	public function deleteItem($table){
+		$item = $_GET['id'];
+		$sql = "delete from ".$table." where id = ".$item;
 		$model =  new model();
 		$result = $model->runSql($sql);
 	}
 	
-	public function getTipoUsuario(){
+	public function getUrl($table){
+		$item = $_GET['id'];
 		$model = new model();
-		$sql = "select * from tipo_usuario";
+		$sql = "select url from $table where id = ".$item;
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
 	}
 	
-	public function getCapacidadEspecial(){
-		$model = new model();
-		$sql = "select * from capacidad_especial";
-		$result = $model->runSql($sql);
-		return $model->getRows($result);
-	}
 	
-	public function getEstadoCivil(){
-		$model = new model();
-		$sql = "select * from estado_civil";
-		$result = $model->runSql($sql);
-		return $model->getRows($result);
-	}
 }

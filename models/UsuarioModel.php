@@ -38,22 +38,10 @@ class UsuarioModel {
 	}
 	
 	public function saveUsuario($usuario)
-	{
-		
+	{		
 		$password =  md5($usuario['password']);
-		if($usuario['id'] > 0){
-			$sql = "update usuario set numero_identificacion = '".$usuario['numero_identificacion']."', nombres = '".$usuario['nombres']."', apellidos = '".$usuario['apellidos']."', email = '".$usuario['email']."', genero = '".$usuario['genero']."', estado_civil_id = ".$usuario['estado_civil_id'].", tipo_usuario_id = ".$usuario['tipo_usuario_id'].", capacidad_especial_id = ".$usuario['capacidad_especial_id'] ." , username = '".$usuario['numero_identificacion']."'";
-			if($usuario['password'] != $this->patron){
-				$sql .= " password  = '".$password."'";
-			}
-			$sql .= " where id = ".$usuario['id'];
-		} else {
-			$sql = "insert into usuario(numero_identificacion, nombres, apellidos,email,genero,estado_civil_id,tipo_usuario_id,capacidad_especial_id, password,username) 
-					values ('".$usuario['numero_identificacion']."','".$usuario['nombres']."','".$usuario['apellidos']."','".$usuario['email']."','".$usuario['genero']."',".$usuario['estado_civil_id'].",".$usuario['tipo_usuario_id'].",".$usuario['capacidad_especial_id'].",'".$password."','".$usuario['numero_identificacion']."')";
-		}
-
-		$model =  new model();
-		$result = $model->runSql($sql);
+		$model = new model();
+		return $model->saveData($usuario, 'usuario');	
 	}
 
 	public function deleteUsuario(){

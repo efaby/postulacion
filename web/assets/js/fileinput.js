@@ -2669,7 +2669,7 @@
         msgFilePreviewAborted: 'File preview aborted for "{name}".',
         msgFilePreviewError: 'An error occurred while reading the file "{name}".',
         msgInvalidFileType: 'Invalid type for file "{name}". Only "{types}" files are supported.',
-        msgInvalidFileExtension: 'Invalid extension for file "{name}". Only "{extensions}" files are supported.',
+        msgInvalidFileExtension: 'Extenion inválida "{name}". Se permite solo archivos con extensión "{extensions}".',
         msgUploadAborted: 'The file upload was aborted',
         msgValidationError: 'File Upload Error',
         msgLoading: 'Loading file {index} of {files} &hellip;',

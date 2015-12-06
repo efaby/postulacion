@@ -1,11 +1,11 @@
-<form id="frmCurso" method="post" action="index.php?action=saveData">
+<form id="frmCurso" method="post" action="index.php?action=saveData" enctype="multipart/form-data">
 
 	<div class="form-group col-sm-12">
 		<label class="control-label">Nombre Curso</label> <input type='text'
 			name='nombre' class='form-control'
 			value="<?php echo $curso['nombre']; ?>">
-
 	</div>
+	<div class="form-group col-sm-12 rows">
 	<div class="form-group col-sm-6">
 		<label class="control-label">Número Horas</label> <input type='text'
 			name='horas' class='form-control'
@@ -16,19 +16,24 @@
 		<label class="control-label">Año</label> <input type='text'
 			name='anio' class='form-control'
 			value="<?php echo $curso['anio']; ?>">
-
 	</div>
-
-
-
-
+	</div>
 	<div class="form-group col-sm-12">
-		<label class="control-label">Respado Digital</label> <input
-			type='file' name='url' id="url" class="file">
+		<label class="control-label">Respado Digital</label> 
+		
+		<?php if($curso['url']!= ''):?>
+			<input type='file' name='url1' id="url1" class="file">		
+			<a href="index.php?action=downloadFile&nameFile=<?php echo $curso["url"];?>">Descargar</a>
+			<input type="hidden" name="fileName" value="<?php echo $curso["url"];?>">
+		<?php else :?>
+			<input type='file' name='url' id="url" class="file">	
+		<?php endif;?>
 	</div>
 	<div class="form-group">
 		<input type='hidden' name='id' class='form-control'
 			value="<?php echo $curso['id']; ?>">
+		<input type='hidden' name='opcion' class='form-control'
+			value="2">
 		<button type="submit" class="btn btn-success">Guardar</button>
 	</div>
 
@@ -85,7 +90,19 @@ $(document).ready(function() {
 						validators: {
 							notEmpty: {
 								message: 'Seleccione un Archivo.'
-							}
+							},
+							file: {
+			                    extension: 'pdf,docx,doc',
+			                    message: 'Seleccione un archivo válido. (pdf, doc, docx)'
+			                }
+						}
+					},
+					url1: {
+						validators: {							
+							file: {
+			                    extension: 'pdf,docx,doc',
+			                    message: 'Seleccione un archivo válido. (pdf, doc, docx)'
+			                }
 						}
 					}		
 		}
@@ -95,7 +112,10 @@ $(document).ready(function() {
 
 </script>
 <style>
-.col-sm-6, .col-sm-12 {
-	padding-right: 0px;
+.col-sm-6, .col-sm-4 {
+	padding-left: 0px;
 }
+.rows{
+	padding-right: 0px;
+	}
 </style>

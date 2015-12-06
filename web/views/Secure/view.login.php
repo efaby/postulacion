@@ -90,7 +90,7 @@
 					<button
 						class="btn btn-lg btn-warning btn-learn-more btn-border-only"
 						data-toggle="modal" data-target="#confirm-submit">Iniciar Sesión</button>
-					<a href="<?php echo $urlWeb."views/Register/index.php";?>"
+					<a href="<?php echo $urlWeb."views/Registro/index.php";?>"
 						class="btn btn-lg btn-success btn-learn-more">Registrarse</a>
 				</div>
 				<!-- /.container -->
