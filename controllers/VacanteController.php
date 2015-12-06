@@ -1,5 +1,4 @@
 <?php
-require_once (PATH_PAGINATOR . "/paginator.php");
 require_once (PATH_MODELS . "/VacanteModel.php");
 /**
  * Controlador de Usuarios

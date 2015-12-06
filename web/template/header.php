@@ -68,7 +68,9 @@
 					<li class="parent">
 						<a href="../Categoria/index.php">Categorias</a>						
 					</li>
-					
+					<li class="parent">
+						<a href="../Vacante/index.php">Vacantes</a>						
+					</li>
 					
 				</ul>
 				<!-- End nav menu -->

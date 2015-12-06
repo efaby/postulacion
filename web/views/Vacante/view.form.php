@@ -1,4 +1,4 @@
-<<?php $title = "Vacantes";?>
+<<?php $title = "Vacante";?>
 <?php include_once PATH_TEMPLATE.'/header.php';?>
 <div class="section">
 	<div class="content">
