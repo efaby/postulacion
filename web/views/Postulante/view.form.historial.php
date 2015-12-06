@@ -193,7 +193,7 @@ $(document).ready(function() {
 							message: 'El Teléfono no puede ser vacío.'
 						},					
 					regexp: {
-								regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+								regexp: /^(?:\+)?\d{9}$/,
 								message: 'El Teléfono no es válido.'
 							}
 						}

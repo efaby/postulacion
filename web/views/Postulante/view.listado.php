@@ -105,8 +105,8 @@
 								</div>
 								<!-- /.panel-body -->
 								<div id="formulario">
-									<form id="frmUsuario" method="post"
-										action="index.php?action=saveData">
+									<form id="frmUsuario" method="post" 
+										action="index.php?action=saveUser">
 										<div class="form-group col-sm-12 rows">
 										<div class="form-group col-sm-6">
 											<label class="control-label">Número de Identificación</label>
@@ -149,8 +149,58 @@
 											</select>
 
 										</div>
-										
 										<div class="form-group  col-sm-6">
+											<label class="control-label">Estado Civil</label> <select
+												class='form-control' name="estado_civil_id">
+												<option value="">Seleccione</option>
+		<?php foreach ($estados as $dato) { ?>
+			<option value="<?php echo $dato['id'];?>"
+													<?php if($usuario['estado_civil_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+		<?php }?>
+		</select>
+
+										</div>
+									</div>
+									
+								<div class="form-group col-sm-12 rows">
+										<div class="form-group  col-sm-6">
+										
+											<label class="control-label">Lugar de Nacimiento</label> 
+											<input type='text'
+												name='lugar_nacimiento' class='form-control'
+												value="<?php echo $usuario['lugar_nacimiento']; ?>">
+										</div>
+										<div class="form-group  col-sm-6">
+										
+											<label class="control-label">Fecha de Nacimiento</label> 
+											<input type='text' id='fecha_nacimiento'
+												name='fecha_nacimiento' class='form-control'
+												value="<?php echo $usuario['fecha_nacimiento']; ?>">
+										</div>
+										</div>
+										<div class="form-group col-sm-12">
+											<label class="control-label">Dirección</label> <input type='text'
+												name='direccion' class='form-control'
+												value="<?php echo $usuario['direccion']; ?>">
+
+										</div>
+									<div class="form-group col-sm-12 rows">
+										<div class="form-group col-sm-6">
+											<label class="control-label">Telefono</label> <input
+												type='text' name='telefono' class='form-control'
+												value="<?php echo $usuario['telefono']; ?>">
+
+										</div>
+										<div class="form-group col-sm-6">
+											<label class="control-label">Celular</label> <input
+												type='text' name='celular' class='form-control'
+												value="<?php echo $usuario['celular']; ?>">
+
+										</div>
+										</div>
+										<div class="form-group col-sm-12 rows">
+										<div class="form-group  col-sm-6">
+										
 											<label class="control-label">Capacidad Especial</label> <select
 												class='form-control' name="capacidad_especial_id">
 												<option value="">Seleccione</option>
@@ -161,17 +211,26 @@
 		</select>
 
 										</div>
+										<div class="form-group  col-sm-6">
+										
+											<label class="control-label">Descripcion Discapacidad</label> 
+											<input type='text'
+												name='descripcion_discapacidad' class='form-control'
+												value="<?php echo $usuario['descripcion_discapacidad']; ?>">
+										</div>
+										
 										</div>
 										<div class="form-group col-sm-12 rows">
-										<div class="form-group  col-sm-6">
-											<label class="control-label">Estado Civil</label> <select
-												class='form-control' name="estado_civil_id">
-												<option value="">Seleccione</option>
-		<?php foreach ($estados as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"
-													<?php if($usuario['estado_civil_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
+										<div class="form-group col-sm-6">
+											<label class="control-label">Religion</label> <input
+												type='text' name='religion' class='form-control'
+												value="<?php echo $usuario['religion']; ?>">
+
+										</div>
+										<div class="form-group col-sm-6">
+											<label class="control-label">Idiomas</label> <input
+												type='text' name='idiomas' class='form-control'
+												value="<?php echo $usuario['idiomas']; ?>">
 
 										</div>
 										</div>
@@ -379,6 +438,13 @@
 <script src="<?php echo PATH_CSS . '/../js/listadosMultiple.js';?>"></script>
 <script src="<?php echo PATH_CSS . '/../js/fileinput.js';?>"></script>
 
+<link rel="stylesheet" href="<?php echo PATH_CSS . '/../css/bootstrapValidator.min.css';?>">
+<link rel="stylesheet" href="<?php echo PATH_CSS . '/../css/bootstrap-datetimepicker.min.css';?>">
+
+<script src="<?php echo PATH_CSS . '/../js/bootstrapValidator.min.js';?>"></script>
+<script src="<?php echo PATH_CSS . '/../js/moment.min.js';?>"></script>
+<script src="<?php echo PATH_CSS . '/../js/bootstrap-datetimepicker.min.js';?>"></script>  
+
 <style>
 .kv-avatar .file-preview-frame,.kv-avatar .file-preview-frame:hover {
 	margin: 0;
@@ -418,10 +484,195 @@ $("#url_foto").fileinput({
     allowedFileExtensions: ["jpg", "png", "gif"]
 });
 
+$(function () {
+  
+    $('#fecha_nacimiento').datetimepicker({ 
+      pickTime: false, 
+      format: "YYYY-MM-DD", 
+      viewMode: 'years'
+    });
+});
+
+$(document).ready(function() {
+    $('#frmUsuario').bootstrapValidator({
+    	message: 'This value is not valid',
+		feedbackIcons: {
+			valid: 'glyphicon glyphicon-ok',
+			invalid: 'glyphicon glyphicon-remove',
+			validating: 'glyphicon glyphicon-refresh'
+		},
+		fields: {			
+			numero_identificacion: {
+				message: 'El Número de Identificación no es válido',
+				validators: {
+							notEmpty: {
+								message: 'El Número de Identificación no puede ser vacío.'
+							},					
+							regexp: {
+								regexp: /^(?:\+)?\d{10,13}$/,
+								message: 'Ingrese un Número de Identificación válido.'
+							}
+						}
+					},
+			nombres: {
+				message: 'Los Nombres no es válido',
+				validators: {
+					notEmpty: {
+						message: 'El Nombre no puede ser vacío.'
+					},					
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+						message: 'Ingrese un Nombre válido.'
+					}
+				}
+			},
+			apellidos: {
+				message: 'El Apellido no es válido',
+				validators: {
+					notEmpty: {
+						message: 'El Apellido no puede ser vacío.'
+					},					
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+						message: 'Ingrese un Apellido válido.'
+					}
+				}
+			},
+			genero: {
+				validators: {
+					notEmpty: {
+						message: 'Seleccione un Género'
+					}
+				}
+			},			
+			capacidad_especial_id: {
+				validators: {
+					notEmpty: {
+						message: 'Seleccione un Capacidad Especial'
+					}
+				}
+			},	
+			estado_civil_id: {
+				validators: {
+					notEmpty: {
+						message: 'Seleccione un Estado Civil'
+					}
+				}
+			},	
+			
+			email: {
+				message: 'El eEmail no es válido',
+				validators: {
+					notEmpty: {
+						message: 'El Email no puede ser vacío'
+					},
+					emailAddress: {
+						message: 'Ingrese un Email válido.'
+					}
+				}
+			},
+			lugar_nacimiento: {
+				message: 'El Lugar de Nacimiento no es válido',
+				validators: {	
+					notEmpty: {
+						message: 'El Lugar de Nacimiento no puede ser vacío.'
+					},				
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+						message: 'Ingrese el Lugar de Nacimiento válido.'
+					}
+				}
+			},
+			direccion: {
+				message: 'La Dirección no es válida',
+				validators: {	
+					notEmpty: {
+						message: 'La Dirección no puede ser vacía.'
+					},			
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9 \.-]+$/,
+						message: 'Ingrese una Direccion válida.'
+					}
+				}
+			},
+			religion: {
+				message: 'La Religión no es válida',
+				validators: {	
+					notEmpty: {
+						message: 'La Religión no puede ser vacía.'
+					},			
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+						message: 'Ingrese una Religión válido.'
+					}
+				}
+			},
+			idiomas: {
+				message: 'Los Idiomas no son válidos',
+				validators: {	
+					notEmpty: {
+						message: 'Los Idiomas no puede ser vacío.'
+					},			
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ, \.]+$/,
+						message: 'Ingrese Idiomas válidos.'
+					}
+				}
+			},
+			descripcion_discapacidad: {
+				message: 'La Descripción de Discapacidad no es válida',
+				validators: 	{			
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+						message: 'Ingrese una Descripción de Discapacidad válida.'
+					}
+				}
+			},
+			fecha_nacimiento: {
+				 validators: {
+					 notEmpty: {
+						 message: 'La Fecha de Nacimiento es requerida y no puede ser vacía'
+					 },
+					 date:{	 									
+		                    format: 'YYYY-MM-DD',
+		                    message: 'La Fecha de Nacimiento no es válida.'
+		                    
+					 }							 
+				 }
+			 },
+			 telefono: {
+					message: 'El Teléfono no es válido',
+					validators: {
+						notEmpty: {
+							message: 'El Teléfono no puede ser vacío.'
+						},					
+						regexp: {
+							regexp: /^(?:\+)?\d{9}$/,
+							message: 'Ingrese un Teléfono válido.'
+						}
+					}
+				},
+				celular: {
+					message: 'El Celular no es válido',
+					validators: {
+						notEmpty: {
+							message: 'El Celular no puede ser vacío.'
+						},					
+						regexp: {
+							regexp: /^(?:\+)?\d{10}$/,
+							message: 'Ingrese un Celular válido.'
+						}
+					}
+				},
+		}
+	});
+
+});
 
 
 
 </script>
+
 
 <style>
 .col-sm-6, .col-sm-4 {

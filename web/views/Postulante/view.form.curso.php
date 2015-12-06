@@ -5,6 +5,7 @@
 			name='nombre' class='form-control'
 			value="<?php echo $curso['nombre']; ?>">
 	</div>
+	<div class="form-group col-sm-12 rows">
 	<div class="form-group col-sm-6">
 		<label class="control-label">Número Horas</label> <input type='text'
 			name='horas' class='form-control'
@@ -15,6 +16,7 @@
 		<label class="control-label">Año</label> <input type='text'
 			name='anio' class='form-control'
 			value="<?php echo $curso['anio']; ?>">
+	</div>
 	</div>
 	<div class="form-group col-sm-12">
 		<label class="control-label">Respado Digital</label> 
@@ -110,7 +112,10 @@ $(document).ready(function() {
 
 </script>
 <style>
-.col-sm-6, .col-sm-12 {
-	padding-right: 0px;
+.col-sm-6, .col-sm-4 {
+	padding-left: 0px;
 }
+.rows{
+	padding-right: 0px;
+	}
 </style>

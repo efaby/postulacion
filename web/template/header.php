@@ -57,18 +57,18 @@
 						<a href="../Secure/index.php?action=welcome">Inicio</a>						
 					</li>
 					<li class="parent">
-						<a href="#fakelink">Pages</a>						
+						<a href="../Postulante/index.php">Hoja de Vida</a>					
 					</li>
 					<li class="parent">
-						<a href="shortcodes.html">Shortcodes</a>
+						<a href="../Usuario/index.php">Usuarios</a>	
 					</li>
 					<li class="parent">
-						<a href="#fakelink">Portfolio</a>						
+						<a href="../Pregunta/index.php">Preguntas</a>						
 					</li>
 					<li class="parent">
-						<a href="#fakelink">Blog</a>						
+						<a href="../Categoria/index.php">Categorias</a>						
 					</li>
-					<li class="parent"><a href="contact.html">Contact</a></li>
+					
 					
 				</ul>
 				<!-- End nav menu -->

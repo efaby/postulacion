@@ -172,5 +172,35 @@ class PostulanteController {
 		}
 		header ( "Location: index.php" );
 	}
-
+	
+	public function saveUser(){
+		$usuario['id'] = $_POST ['id'];
+		$usuario['nombres'] = $_POST ['nombres'];
+		$usuario['apellidos'] = $_POST ['apellidos'];
+		$usuario['numero_identificacion'] = $_POST ['numero_identificacion'];
+		$usuario['genero'] = $_POST ['genero'];
+		$usuario['capacidad_especial_id'] = $_POST ['capacidad_especial_id'];
+		$usuario['estado_civil_id'] = $_POST ['estado_civil_id'];
+		$usuario['email'] = $_POST ['email'];
+		$usuario['lugar_nacimiento'] = $_POST ['lugar_nacimiento'];
+		$usuario['direccion'] = $_POST ['direccion'];
+		$usuario['religion'] = $_POST ['religion'];
+		$usuario['idiomas'] = $_POST ['idiomas'];
+		$usuario['descripcion_discapacidad'] = $_POST ['descripcion_discapacidad'];
+		$usuario['fecha_nacimiento'] = $_POST ['fecha_nacimiento'];
+		$usuario['telefono'] = $_POST ['telefono'];
+		$usuario['celular'] = $_POST ['celular'];
+		
+		$model = new PostulanteModel();
+		try {
+			$usuario['id'] = $model->saveData($usuario, 'usuario');
+			$_SESSION ['message'] = "Datos almacenados correctamente.";
+			$_SESSION ['opcion'] = 0;
+		} catch ( Exception $e ) {
+			$_SESSION ['message'] = $e->getMessage ();
+		}
+		header ( "Location: index.php" );
+		
+		
+	}
 }
