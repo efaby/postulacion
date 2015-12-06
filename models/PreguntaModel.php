@@ -13,7 +13,7 @@ class PreguntaModel {
 	 */
 	public function getPreguntaList(){
 		$model = new model();		
-		$sql = "select pregunta.id, pregunta.nombre, pregunta. descripcion, pregunta.estado, pregunta.calificacion, pregunta.orden,categoria.nombre as categoria_nombre from pregunta inner join categoria on pregunta.categoria_id = categoria.id order by categoria.id";		
+		$sql = "select pregunta.id, pregunta.nombre, pregunta. descripcion, pregunta.estado, pregunta.orden,categoria.nombre as categoria_nombre from pregunta inner join categoria on pregunta.categoria_id = categoria.id order by categoria.id";		
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
 	}	
@@ -28,7 +28,7 @@ class PreguntaModel {
 			$resultArray = $model->getRows($result);
 			$resultArray = $resultArray[0];
 		} else {
-			$resultArray = Array ( 'id' => '' ,'nombre' => '','descripcion' => '', 'estado' => '', 'categoria' => '', 'calificacion' => '', 'orden' => '');	
+			$resultArray = Array ( 'id' => '' ,'nombre' => '','descripcion' => '', 'estado' => '', 'categoria' => '', 'orden' => '');	
 		}
 		return $resultArray;
 	}
@@ -36,7 +36,7 @@ class PreguntaModel {
 	public function savePregunta($pregunta)
 	{
 		$model = new model();
-		return $model->saveData($usuario, 'usuario');
+		return $model->saveData($pregunta, 'pregunta');
 	}
 
 	public function deletePregunta(){

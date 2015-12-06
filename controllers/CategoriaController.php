@@ -22,6 +22,7 @@ class CategoriaController {
 		$categoria ['id'] = $_POST ['id'];
 		$categoria ['nombre'] = $_POST ['nombre'];
 		$categoria ['descripcion'] = $_POST ['descripcion'];
+		$categoria ['orden'] = $_POST ['orden'];
 		
 		$model = new CategoriaModel ();
 		try {

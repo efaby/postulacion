@@ -12,7 +12,15 @@
 		<textarea name='descripcion' class='form-control'><?php echo $categoria['descripcion']; ?></textarea>
 
 	</div>
+	
+	<div class="form-group">
+		<label class="control-label">Orden</label>
+		<input type='text'
+			name='orden' class='form-control'
+			value="<?php echo $categoria['orden']; ?>">
 
+
+	</div>
 
 	<div class="form-group">
 	<input type='hidden' name='id' class='form-control' value="<?php echo $categoria['id']; ?>">
@@ -54,7 +62,18 @@ $(document).ready(function() {
 						message: 'Ingrese una descripción válida.'
 					}
 				}
-			}			
+			},
+			orden: {
+				validators: {
+					notEmpty: {
+						message: 'El orden no puede ser vacía.'
+					},					
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9_ ,-\.]+$/,
+						message: 'Ingrese un orden válido.'
+					}
+				}
+			}					
 		}
 	});
 

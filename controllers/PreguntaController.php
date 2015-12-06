@@ -28,7 +28,8 @@ class PreguntaController {
 		{	
 			$pregunta ['estado'] = $_POST ['estado'];
 		}
-		$pregunta ['categoria'] = $_POST ['categoria'];
+		$pregunta ['categoria_id'] = $_POST ['categoria'];
+		$pregunta ['orden'] = $_POST ['orden'];
 		$model = new PreguntaModel ();
 		try {
 			$datos = $model->savePregunta ( $pregunta );

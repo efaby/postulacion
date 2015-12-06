@@ -27,7 +27,6 @@
 							<th>Descripción</th>
 							<th>Estado</th>
 							<th>Categoría</th>
-							<th>Calificación</th>
 							<th>Orden</th>
 							<th style="text-align: center">Acciones</th>
 						</tr>
@@ -40,7 +39,6 @@
 							<td><?php echo $dato["descripcion"]; ?></td>
 							<td><?php echo $dato["estado"]; ?></td>
 							<td><?php echo $dato["categoria_nombre"]; ?></td>	
-							<td><?php echo $dato["calificacion"]; ?></td>
 							<td><?php echo $dato["orden"]; ?></td>								
 							<td align="center"><a href="#"
 								onclick="javascript: loadModal(<?php echo $dato["id"]; ?>);"><i

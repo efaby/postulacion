@@ -28,7 +28,7 @@ class CategoriaModel {
 			$resultArray = $model->getRows($result);
 			$resultArray = $resultArray[0];
 		} else {
-			$resultArray = Array ( 'id' => '' ,'nombre' => '','descripcion' => '');	
+			$resultArray = Array ( 'id' => '' ,'nombre' => '','descripcion' => '', 'orden' =>'');	
 		}
 		return $resultArray;
 	}
@@ -36,9 +36,9 @@ class CategoriaModel {
 	public function saveCategoria($categoria)
 	{
 		if($categoria['id'] > 0){
-			$sql = "update categoria set nombre = '".$categoria['nombre']."', descripcion = '".$categoria['descripcion']."' where id = ".$categoria['id'];
+			$sql = "update categoria set nombre = '".$categoria['nombre']."', descripcion = '".$categoria['descripcion']."', orden = ".$categoria['orden']." where id = ".$categoria['id'];			
 		} else {
-			$sql = "insert into categoria(nombre, descripcion) values ('".$categoria['nombre']."','".$categoria['description']."')";
+			$sql = "insert into categoria(nombre, descripcion, orden) values ('".$categoria['nombre']."','".$categoria['description']."',".$categoria['orden'].")";			
 		}
 		$model =  new model();
 		$result = $model->runSql($sql);
