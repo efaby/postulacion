@@ -37,7 +37,7 @@
 							<td align="center"><?php echo $dato["id"]; ?></td>
 							<td><?php echo $dato["nombre"]; ?></td>
 							<td><?php echo $dato["descripcion"]; ?></td>
-							<td><?php echo $dato["estado"]; ?></td>
+							<td align="center"><?php echo ($dato["estado"]==1)?'<i class="glyphicon glyphicon-ok"></i>':'<i class="glyphicon glyphicon-remove"></i>'; ?></td>
 							<td><?php echo $dato["categoria_nombre"]; ?></td>	
 							<td><?php echo $dato["orden"]; ?></td>								
 							<td align="center"><a href="#"
