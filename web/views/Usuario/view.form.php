@@ -116,7 +116,7 @@ $(document).ready(function() {
 						message: 'El Nombre no puede ser vacío.'
 					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
 						message: 'Ingrese un Nombre válido.'
 					}
 				}
@@ -128,7 +128,7 @@ $(document).ready(function() {
 						message: 'El Apellido no puede ser vacío.'
 					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
 						message: 'Ingrese un Apellido válido.'
 					}
 				}
@@ -168,7 +168,7 @@ $(document).ready(function() {
 						message: 'La Contraseña no puede ser vacía.'
 					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9-_ \.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9-_ \.]+$/,
 						message: 'Ingrese una Contraseña válida.'
 					}
 				}

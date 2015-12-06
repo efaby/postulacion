@@ -116,7 +116,7 @@ $(document).ready(function() {
 								message: 'El Nombre de la Institución no puede ser vacío.'
 							},					
 							regexp: {
-								regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+								regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
 								message: 'Ingrese un Nombre de la Institución válido.'
 							}
 						}
@@ -128,7 +128,7 @@ $(document).ready(function() {
 										message: 'El Nombre del Nombre del Área no puede ser vacío.'
 									},					
 									regexp: {
-										regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+										regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
 										message: 'Ingrese un Nombre del Área válido.'
 									}
 								}
@@ -140,7 +140,7 @@ $(document).ready(function() {
 								message: 'El Nombre del Nombre del Cargo no puede ser vacío.'
 							},					
 							regexp: {
-									regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+									regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
 									message: 'Ingrese un Nombre del Nombre del Cargo válido.'
 								}
 							}
@@ -181,7 +181,7 @@ $(document).ready(function() {
 						message: 'La Dirección no puede ser vacía.'
 					},					
 					regexp: {
-							regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+							regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
 							message: 'La Dirección no válida.'
 						}
 					}

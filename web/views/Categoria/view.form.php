@@ -47,7 +47,7 @@ $(document).ready(function() {
 						message: 'El nombre no puede ser vacío.'
 					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9_ \.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9_ \.]+$/,
 						message: 'Ingrese un nombre válido.'
 					}
 				}
@@ -58,7 +58,7 @@ $(document).ready(function() {
 						message: 'La Descripción no puede ser vacía.'
 					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9_ ,-\.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9_ ,-\.]+$/,
 						message: 'Ingrese una descripción válida.'
 					}
 				}
@@ -69,7 +69,7 @@ $(document).ready(function() {
 						message: 'El orden no puede ser vacía.'
 					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9_ ,-\.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9_ ,-\.]+$/,
 						message: 'Ingrese un orden válido.'
 					}
 				}

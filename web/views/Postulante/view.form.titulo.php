@@ -92,7 +92,7 @@ $(document).ready(function() {
 								message: 'El Nombre del Título no puede ser vacío.'
 							},					
 							regexp: {
-								regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+								regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
 								message: 'Ingrese un Nombre del Título válido.'
 							}
 						}
@@ -104,7 +104,7 @@ $(document).ready(function() {
 						message: 'El Nombre de la Institución no puede ser vacío.'
 					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
 						message: 'Ingrese un Nombre de la Institución válido.'
 					}
 				}

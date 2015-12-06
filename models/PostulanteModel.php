@@ -41,11 +41,11 @@ class PostulanteModel {
 	/**
 	 * Gestion de Titulos
 	 */
-	public function getTitulos(){
+	public function getTitulos($id){
 		$model = new model();
 		$sql = "select t.institucion, t.url, t.nombre, t.id, t.registro_senecyt, ne.nombre as nivel, p.nombre as pais 
 				from titulo as t inner join nivel_educacion as ne on t.nivel_educacion_id = ne.id 
-				inner join pais as p on t.id_pais = p.id";
+				inner join pais as p on t.id_pais = p.id where postulante_id = ".$id;
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
 	}
@@ -85,9 +85,9 @@ class PostulanteModel {
 	 * GEstion Curso
 	 */
 	
-	public function getCursos(){
+	public function getCursos($id){
 		$model = new model();
-		$sql = "select * from curso";
+		$sql = "select * from curso where postulante_id = ".$id;
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
 	}
@@ -112,10 +112,11 @@ class PostulanteModel {
 	 * Gestion Historial
 	 */
 	
-	public function getHistoriales(){
+	public function getHistoriales($id){
 		$model = new model();
 		$sql = "select h.id, h.institucion, h.url, h.area, h.cargo, c.nombre as ciudad
-				from historial as h inner join ciudad as c on h.ciudad_id = c.id";
+				from historial as h inner join ciudad as c on h.ciudad_id = c.id
+				where postulante_id = ".$id;
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
 	}

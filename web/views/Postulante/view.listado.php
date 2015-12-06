@@ -306,7 +306,7 @@
 									</p>
 
 									<table class="table table-striped table-hover"
-										id="datatable-example">
+										id="datatable-example1">
 										<thead class="the-box dark full">
 											<tr>
 												<th style="text-align: center">ID</th>
@@ -353,7 +353,7 @@
 									</p>
 
 									<table class="table table-striped table-hover"
-										id="datatable-example">
+										id="datatable-example2">
 										<thead class="the-box dark full">
 											<tr>
 												<th style="text-align: center">ID</th>
@@ -521,7 +521,7 @@ $(document).ready(function() {
 						message: 'El Nombre no puede ser vacío.'
 					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
 						message: 'Ingrese un Nombre válido.'
 					}
 				}
@@ -533,7 +533,7 @@ $(document).ready(function() {
 						message: 'El Apellido no puede ser vacío.'
 					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
 						message: 'Ingrese un Apellido válido.'
 					}
 				}
@@ -578,7 +578,7 @@ $(document).ready(function() {
 						message: 'El Lugar de Nacimiento no puede ser vacío.'
 					},				
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
 						message: 'Ingrese el Lugar de Nacimiento válido.'
 					}
 				}
@@ -590,7 +590,7 @@ $(document).ready(function() {
 						message: 'La Dirección no puede ser vacía.'
 					},			
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9 \.-]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 \.-]+$/,
 						message: 'Ingrese una Direccion válida.'
 					}
 				}
@@ -602,7 +602,7 @@ $(document).ready(function() {
 						message: 'La Religión no puede ser vacía.'
 					},			
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
 						message: 'Ingrese una Religión válido.'
 					}
 				}
@@ -614,7 +614,7 @@ $(document).ready(function() {
 						message: 'Los Idiomas no puede ser vacío.'
 					},			
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ, \.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ, \.]+$/,
 						message: 'Ingrese Idiomas válidos.'
 					}
 				}
@@ -623,7 +623,7 @@ $(document).ready(function() {
 				message: 'La Descripción de Discapacidad no es válida',
 				validators: 	{			
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
 						message: 'Ingrese una Descripción de Discapacidad válida.'
 					}
 				}
@@ -669,8 +669,13 @@ $(document).ready(function() {
 
 });
 
+if ($('#datatable-example1').length > 0){
+	$('#datatable-example1').dataTable();
+}
 
-
+if ($('#datatable-example2').length > 0){
+	$('#datatable-example2').dataTable();
+}
 </script>
 
 
@@ -682,8 +687,12 @@ $(document).ready(function() {
 	padding-right: 0px;
 	}
 	.rowBottom{
+		
 		padding-left: 15px;
 	}
+.dataTables_wrapper .row{
+	padding-left: 15px;
+}
 </style>
 </body>
 </html>

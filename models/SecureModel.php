@@ -19,14 +19,13 @@ class SecureModel {
 	
 	public function validationUser($login, $password){
 		$model = new model();
-		$url = null;
-		$user = null;
-		$sql = "select id, names, lastnames, user_type_id
-				from user
-				where identity_card= '".$login."' and password = '".md5($password)."' and is_active = 1";
+		$sql = "select id, nombres, apellidos, tipo_usuario_id
+				from usuario
+				where username= '".$login."' and password = '".md5($password)."'";
+		
 		$result = $model->runSql($sql);
 		$result = $model->getRows($result);
-		return $result[0];		
+		return (count($result)>0)?$result[0]:0;		
 	}
 	
 	public function getUsersList($offset, $limit){

@@ -8,11 +8,11 @@ require_once (PATH_HELPERS. "/File.php");
 class PostulanteController {
 	public function display() {
 		$model = new PostulanteModel ();
-		$usuario = $model->getUsuario(4);
+		$usuario = $model->getUsuario($_SESSION['SESSION_USER']['id']);
 		$usuario['url_foto_view'] = ($usuario['url_foto']=='')?'default_avatar_male.jpg':$usuario['url_foto'];
-		$cursos = $model->getCursos();
-		$titulos = $model->getTitulos();
-		$historiales = $model->getHistoriales();
+		$cursos = $model->getCursos($_SESSION['SESSION_USER']['id']);
+		$titulos = $model->getTitulos($_SESSION['SESSION_USER']['id']);
+		$historiales = $model->getHistoriales($_SESSION['SESSION_USER']['id']);
 		$estados = $model->getEstados();
 		$capacidades = $model->getCapacidades();
 		$datos = array();
@@ -92,7 +92,7 @@ class PostulanteController {
 					$objeto ['id_pais'] = $_POST ['id_pais'];
 					$table = "titulo";
 				break;
-			case 2: $$objeto ['nombre'] = $_POST ['nombre'];
+			case 2: $objeto ['nombre'] = $_POST ['nombre'];
 					$objeto ['horas'] = $_POST ['horas'];
 					$objeto ['anio'] = $_POST ['anio'];	
 					$table = "curso";					
@@ -108,7 +108,7 @@ class PostulanteController {
 				break;
 		}
 		$objeto ['url'] = $this->uploadFile($table);
-		$objeto ['postulante_id'] = 4; // poner usuario de sesion
+		$objeto ['postulante_id'] = $_SESSION['SESSION_USER']['id']; // poner usuario de sesion
 		try {
 			$objeto ['id'] = $model->saveData($objeto, $table);
 			$_SESSION ['message'] = "Datos almacenados correctamente.";
@@ -162,7 +162,7 @@ class PostulanteController {
 		$upload = new File();
 		$nombre = $upload->uploadFilePersonal($prefijo,$field);
 
-		$usuario = 4; // poner usuario de sesion
+		$usuario = $_SESSION['SESSION_USER']['id']; // poner usuario de sesion
 		try {
 			$objeto ['id'] = $model->updateFiles($field, $nombre,$usuario);
 			$_SESSION ['message'] = "Datos almacenados correctamente.";

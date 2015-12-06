@@ -57,7 +57,7 @@ $(document).ready(function() {
 								message: 'El Nombre del Curso no puede ser vacío.'
 							},					
 							regexp: {
-								regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+								regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
 								message: 'Ingrese un Nombre del Curso válido.'
 							}
 						}

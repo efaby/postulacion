@@ -1,5 +1,78 @@
-<?php $title = "Registro Usuarios";?>
-<?php include_once PATH_TEMPLATE.'/header.php';?>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Sentir, Responsive admin and dashboard UI kits template">
+		<meta name="keywords" content="admin,bootstrap,template,responsive admin,dashboard template,web apps template">
+		<meta name="author" content="Ari Rusmanto, Isoh Design Studio, Warung Themes">
+		<title>Registro Postulante</title>
+ 
+		<!-- BOOTSTRAP CSS (REQUIRED ALL PAGE)-->
+		<link href="<?php echo PATH_CSS . '/bootstrap.min.css';?>" rel="stylesheet">
+		
+		<!-- PLUGINS CSS-->
+		<link href="<?php echo PATH_CSS . '/../plugins/magnific-popup/magnific-popup.css';?>" rel="stylesheet">
+		<link href="<?php echo PATH_CSS . '/../plugins/owl-carousel/owl.carousel.css';?>" rel="stylesheet">
+		<link href="<?php echo PATH_CSS . '/../plugins/owl-carousel/owl.theme.css';?>" rel="stylesheet">
+		<link href="<?php echo PATH_CSS . '/../plugins/owl-carousel/owl.transitions.css';?>" rel="stylesheet">
+		
+		
+		<!-- MAIN CSS (REQUIRED ALL PAGE)-->
+		<link href="<?php echo PATH_CSS . '/../plugins/font-awesome/css/font-awesome.min.css';?>" rel="stylesheet">
+		<link href="<?php echo PATH_CSS . '/style.css';?>" rel="stylesheet">
+		<link href="<?php echo PATH_CSS . '/style-responsive.css';?>" rel="stylesheet">
+ 
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+ 
+	<body class="tooltips">
+		
+		<!--
+		===========================================================
+		BEGIN PAGE
+		===========================================================
+		-->
+			
+		<!-- BEGIN BERADCRUMB AND PAGE TITLE -->
+		<div class="page-title-wrap">
+			<div class="container">				
+			<h2 class="page-title">Registro Postulante</h2>
+			</div><!-- /.container -->
+			
+			<div class="border-bottom">
+				<div class="container">
+					<div class="border-bottom-color bg-info"></div>
+				</div><!-- /.container -->
+			</div><!-- /.border-bottom -->
+		</div><!-- /.page-title-wrap -->
+		<!-- END BERADCRUMB AND PAGE TITLE -->
+
+<!-- BEGIN TOP NAVBAR -->
+	<div class="top-navbar dark-color">
+		<div class="container">
+
+			<!-- Begin logo -->
+			<div class="logo">
+				<a href="index.html"><img src="assets/img/logo.png" alt="Logo"></a>
+			</div>
+			<!-- /.logo -->
+			<!-- End logo -->
+			<!-- Begin nav menu -->
+			<div class="title-menu">
+				<h1>Unidad Educativa "Santa Mariana de Jesús"</h1>
+			</div>
+			<!-- End nav menu -->
+		</div>
+		<!-- /.container -->
+	</div>
+	<!-- /.top-navbar -->
+	<!-- END TOP NAVBAR -->
+
 <div class="section">
 	<div class="content">
 		<div class="container">
@@ -93,13 +166,6 @@
 </div>
 </div>
 <?php include_once PATH_TEMPLATE.'/footer.php';?>
-<link
-	href="<?php echo PATH_CSS . '/../plugins/datatable/css/bootstrap.datatable.min.css';?>"
-	rel="stylesheet">
-<script
-	src="<?php echo PATH_CSS . '/../plugins/datatable/js/jquery.dataTables.min.js';?>"></script>
-<script
-	src="<?php echo PATH_CSS . '/../plugins/datatable/js/bootstrap.datatable.js';?>"></script>
 <script
 	src="<?php echo PATH_CSS . '/../plugins/validator/bootstrapValidator.min.js';?>"></script>
 <script src="<?php echo PATH_CSS . '/../js/apps.js';?>"></script>
@@ -134,7 +200,7 @@ $(document).ready(function() {
 						message: 'El Nombre no puede ser vacío.'
 					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
 						message: 'Ingrese un Nombre válido.'
 					}
 				}
@@ -146,7 +212,7 @@ $(document).ready(function() {
 						message: 'El Apellido no puede ser vacío.'
 					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ \.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
 						message: 'Ingrese un Apellido válido.'
 					}
 				}
@@ -179,7 +245,7 @@ $(document).ready(function() {
 						message: 'La Contraseña no puede ser vacía.'
 					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9-_ \.]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9-_ \.]+$/,
 						message: 'Ingrese una Contraseña válida.'
 					}
 				}

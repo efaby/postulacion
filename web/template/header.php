@@ -50,15 +50,21 @@
 				<!-- End logo -->
 				
 				
-				
 				<!-- Begin nav menu -->
 				<ul class="menus">
 					<li class="parent">
 						<a href="../Secure/index.php?action=welcome">Inicio</a>						
 					</li>
-					<li class="parent">
-						<a href="../Postulante/index.php">Hoja de Vida</a>					
-					</li>
+					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==3):?>
+						<li class="parent"><a href="../Postulante/index.php">Hoja de Vida</a></li>
+					<?php endif;?>
+					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==3):?>
+						<li class="parent"><a href="../Postulante/index.php">Postulaciones</a></li>
+					<?php endif;?>
+					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==3):?>
+						<li class="parent"><a href="../Postulante/index.php">Buscar Ofertas</a></li>
+					<?php endif;?>
+					<!--  
 					<li class="parent">
 						<a href="../Usuario/index.php">Usuarios</a>	
 					</li>
@@ -71,6 +77,8 @@
 					<li class="parent">
 						<a href="../Vacante/index.php">Vacantes</a>						
 					</li>
+					-->
+					<li class="parent"><a href="../Secure/index.php?action=closeSession">Salir</a></li>
 					
 				</ul>
 				<!-- End nav menu -->
@@ -94,58 +102,3 @@
 		</div><!-- /.page-title-wrap -->
 		<!-- END BERADCRUMB AND PAGE TITLE -->
 		
-	
-
-<!--  
-<header><meta http-equiv="Content-Type" content="text/html; charset=euc-jp">
-	<div class="header" id="header_page">
-		<div class="wrapp">
-			<div class="logo">
-				<a href="../Secure/index.php?action=welcome" style="text-decoration:none;">
-				<img style="height: 80px; margin: 5px 10px 0px;" alt="logo" src="../../images/escudo.png">
-				<img src="../../images/logo.png" alt="logo"></a>
-			</div>
-			<div class="menu">
-			<?php if(isset($_SESSION['SESSION_USER'])):?>
-			<?php $url = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"web/views/")+10);
-				if(isset($_GET['action'])){
-					$redirect = $_GET['action'];
-					$url .= "?action=".$redirect;
-				}
-			?>
-				<ul>				
-					<li><a href="../Secure/index.php?action=welcome" <?php if('Secure/index.php?action=welcome' == $url):?> class="linked" <?php endif;?>>Inicio</a></li>	
-				<?php if($_SESSION['SESSION_USER']['user_type_id']==1):?>
-					<li><a href="../Register/index.php?action=editData" <?php if('Register/index.php?action=editData' == $url):?> class="linked" <?php endif;?>>Perfil</a></li>
-				<?php endif;?>			
-				<?php if($_SESSION['SESSION_USER']['user_type_id']==1):?>	
-					<li><a href="../Upload/index.php" <?php if('Upload/index.php' == $url):?> class="linked" <?php endif;?>>Hoja de Vida</a></li>
-					<?php endif;?>
-				<?php if($_SESSION['SESSION_USER']['user_type_id']==1):?>
-					<li><a href="../Message/index.php" <?php if('Message/index.php' == $url):?> class="linked" <?php endif;?>>Mensajes</a></li>
-					<?php endif;?>
-				<?php if($_SESSION['SESSION_USER']['user_type_id']==2):?>
-					<li><a href="../Register/index.php?action=editDataCompany" <?php if('Register/index.php?action=editDataCompany' == $url):?> class="linked" <?php endif;?>>Perfil</a></li>
-				<?php endif;?>
-				<?php if($_SESSION['SESSION_USER']['user_type_id']==2):?>
-					<li><a href="../Search/index.php" <?php if('Search/index.php' == $url):?> class="linked" <?php endif;?>>Buscar Profesional</a></li>
-				<?php endif;?>
-				<?php if($_SESSION['SESSION_USER']['user_type_id']==3):?>
-					<li><a href="../Area/index.php" <?php if('Area/index.php' == $url):?> class="linked" <?php endif;?>>Administrar Areas</a></li>
-				<?php endif;?>
-				<?php if($_SESSION['SESSION_USER']['user_type_id']==3):?>
-					<li><a href="../Secure/index.php?action=displayList" <?php if('Secure/index.php?action=displayList' == $url):?> class="linked" <?php endif;?>>Administrar Usuarios</a></li>
-				<?php endif;?>
-				<?php if($_SESSION['SESSION_USER']['user_type_id']==3):?>
-					<li><a href="../Report/index.php" <?php if('Report/index.php' == $url):?> class="linked" <?php endif;?>>Reporte</a></li>
-				<?php endif;?>
-					<li><a href="../Secure/index.php?action=changePassword" <?php if('Secure/index.php?action=changePassword' == $url):?> class="linked" <?php endif;?>>Cambiar Contraseña</a></li>
-					<li><a href="../Secure/index.php?action=closeSession">Salir</a></li>	
-				</ul>
-			<?php endif;?>
-			</div>
-		</div>
-		</div>
-	</header>
-	
-	-->

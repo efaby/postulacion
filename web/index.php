@@ -3,7 +3,15 @@ define("PATH_ROOT", $_SERVER['DOCUMENT_ROOT']."/postulacion");
 require_once(PATH_ROOT . "/config/config.inc");
 $redirect = "display";
 session_start();
-$url = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"web/views/")+10);
+
+$patron = "web/";
+$limit = 4;
+if(mb_stristr($_SERVER["SCRIPT_NAME"],"/views/")){
+	$patron = "web/views/";
+	$limit = 10;
+}
+$url = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],$patron)+$limit);
+
 $urls = unserialize(PUBLIC_URLS);
 
 if(isset($_GET['action'])){
@@ -15,18 +23,15 @@ if(isset($_GET['action'])){
 		$url = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"web/")+3);
 	}	
 }
-/*
+
 if (isset($_SESSION['SESSION_USER'])){
 
 	if((!in_array($url, $_SESSION['SESSION_USER']['urls']))){
 		$app = 'Secure';
 		$redirect = "error403";
-	} else {
-	
-	
-	
+	} else {	
 		if($url == '/index.php'){
-			header("location: /web/views/Secure/index.php?action=welcome");
+			header("location: /postulacion/web/views/Secure/index.php?action=welcome"); // postulacion
 			exit();
 		}
 	}	
@@ -38,7 +43,6 @@ if (isset($_SESSION['SESSION_USER'])){
 	}
 } 
 
-*/
 
 if(!isset($app)){
 	$app = 'Secure';

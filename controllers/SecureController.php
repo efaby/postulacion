@@ -15,55 +15,24 @@ class SecureController {
 	
 	public function validationUser()
 	{
-		$flag = false;
 		$model = new SecureModel();
-		
-		$login = $model->clean($_POST['login']);
-		$password = $model->clean($_POST['password']);
-
-		if($login == '')
+		$login = $model->clean($_POST['username']);
+		$password = $model->clean($_POST['password']);		
+		$result= $model->validationUser($login, $password);
+		$response['band'] = 0;
+		if($result)
 		{
-			$message[] = 'Por favor ingrese un usuario.';
-			$flag = true;
+			session_regenerate_id();
+			$result['urls'] = $model->getUrlsAccess($result["tipo_usuario_id"]);
+			$_SESSION['SESSION_USER'] = $result;			
+			session_write_close();
+			$urlWeb = $this->getPrefixUrl();
+			$response['data'] = $urlWeb."views/Secure/index.php?action=welcome";			
 		} else {
-			$reg_exp_login = "/^[0-9]+$/";
-			if (!preg_match($reg_exp_login, $login))
-			{
-				$message[] = 'Por favor ingrese sólo números.';
-				$flag = true;
-			}
-		}		
-		if($password == '')
-		{
-			$message[] = 'Por favor ingrese una contraseña.';			
-			$flag = true;
-		} else {
-			$reg_exp_password = "/^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s\.\_\-\$\#\&\*\+\=\?\¿]+$/";
-			if (!preg_match($reg_exp_password, $password)){
-				$message[] = 'Por favor ingrese un contraseña coherente.';
-				$flag = true;
-			}
-		}		
-		
-		
-		if(!$flag){
-			$result= $model->validationUser($login, $password);
-			if($result)
-			{
-				session_regenerate_id();
-				$result['urls'] = $model->getUrlsAccess($result["user_type_id"]);
-				$_SESSION['SESSION_USER'] = $result;			
-				session_write_close();
-				$urlWeb = $this->getPrefixUrl();
-				header("location: ".$urlWeb."views/Secure/index.php?action=welcome");
-				exit();
-			} else {
-				$message[] = 'Credenciales Inválidas.';
-			}			
-		}		
-		$_SESSION['message'] = $message;
-		session_write_close();
-		header("location: index.php");
+				$response['data'] = 'Credenciales Inválidas.';
+				$response['band'] = 1;
+		}	
+		echo json_encode($response);		
 		exit();				
 	}
 	

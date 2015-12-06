@@ -103,39 +103,6 @@
 	<!-- END HEADER FULL IMAGE SLIDE -->
 
 
-	<div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog" style="width: 300px;">
-			<div class="modal-content">
-				<div class="modal-header">
-					<a class="close" data-dismiss="modal">×</a>
-					<h3>Inicio de Sesión</h3>
-				</div>
-
-				<div class="modal-body">
-					<form role="form">
-						<div class="form-group">
-							<label>Usuario:</label> <input type="username"
-								placeholder="Ingrese su Usuario" class="form-control">
-						</div>
-						<div class="form-group">
-							<label>Contraseña:</label> <input type="password"
-								placeholder="Ingrese su Contraseña" class="form-control">
-						</div>
-						
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button class="btn btn-success" type="submit">
-							<i class="fa fa-sign-in"></i> Login
-						</button>
-					<a href="#" class="btn" data-dismiss="modal">Close</a>
-				</div>
-			</div>
-
-		</div>
-	</div>
-
 
 	<div class="footer">
 		<div class="container">
@@ -194,6 +161,9 @@
 		src="<?php echo $urlWeb . 'assets/plugins/owl-carousel/owl.carousel.min.js'; ?>"></script>
 	<script
 		src="<?php echo $urlWeb . 'assets/plugins/mixitup/jquery.mixitup.js'; ?>"></script>
+	<script
+	src="<?php echo $urlWeb . 'assets/plugins/validator/bootstrapValidator.min.js';?>"></script>
+	<script src="<?php echo $urlWeb . 'assets/js/apps.js';?>"></script>
 	<script>
 			$("#full-img-slide").backstretch([
 			  "<?php echo $urlWeb . 'assets/img/imagen2.jpg'; ?>",
@@ -222,9 +192,108 @@
 						return window.pageYOffset || document.documentElement.scrollTop;
 					}
 				});
+
 				
-			})
+				
+				
+			});
+
+			
 		</script>
 	<script src="<?php echo $urlWeb . 'assets/js/apps.js'; ?>"></script>
+	
+		<div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width: 300px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<a class="close" data-dismiss="modal">×</a>
+					<h3>Inicio de Sesión</h3>
+				</div>
+
+				<div class="modal-body">
+				<div class="alert alert-danger fade in alert-dismissable" style="display: none; padding: 6px;" id="mensajeContenedor">
+								  <span id="mensajeLogin"></span>
+								</div>
+					<form action="index.php?action=validationUser" id="frmLogin" method="post">
+						<div class="form-group">
+							<label>Usuario:</label> <input type="text" name="username"
+								placeholder="Ingrese su Usuario" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Contraseña:</label> <input type="password" name="password"
+								placeholder="Ingrese su Contraseña" class="form-control">
+						</div>
+						<button class="btn btn-success" type="submit" id="btnSubmit">
+							<i class="fa fa-sign-in"></i> Iniciar Sesión
+						</button>			
+				
+					</form>
+				</div>				
+					
+			</div>
+
+		</div>
+	</div>
+							<script type="text/javascript">
+						$(document).ready(function(){
+							$('#frmLogin').bootstrapValidator({
+						    	message: 'This value is not valid',
+								feedbackIcons: {
+									valid: 'glyphicon glyphicon-ok',
+									invalid: 'glyphicon glyphicon-remove',
+									validating: 'glyphicon glyphicon-refresh'
+								},
+								fields: {			
+									username: {
+										message: 'El Usuario no es válido',
+										validators: {
+													notEmpty: {
+														message: 'El Usuario no puede ser vacío.'
+													},					
+													regexp: {
+														regexp: /^(?:\+)?\d{10,13}$/,
+														message: 'Ingrese un Usuario válido.'
+													}
+												}
+											},	
+									password: {
+										message: 'La Contraseña no es válida',
+										validators: {
+											notEmpty: {
+												message: 'La Contraseña no puede ser vacía.'
+											},					
+											regexp: {
+												regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9-_ \.]+$/,
+												message: 'Ingrese una Contraseña válida.'
+											}
+										}
+									},
+													
+									
+								},
+								 submitHandler: function(validator, form, submitButton) {
+									 $.post(form.attr('action'), form.serialize(), function(result) {
+										 var obj = JSON.parse(JSON.stringify(result));
+										 if( obj.band === 1 ){											
+											 $("#mensajeLogin").html(obj.data);
+									     	 $("#mensajeContenedor").css('display','block');	
+										 } else {
+											 window.location = obj.data;
+										      return false;
+										 }
+									 }, 'json');					   
+								 }
+							});
+
+						$('.modal').on('hidden.bs.modal', function(){ 
+							$(this).find('form')[0].reset(); //para borrar todos los datos que tenga los input, textareas, select.
+							$("label.error").remove();  //lo utilice para borrar la etiqueta de error del jquery validate
+							$("#mensajeContenedor").css('display','none');				
+						});
+
+						
+						});		
+						</script>	
 </body>
 </html>
