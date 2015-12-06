@@ -10,7 +10,18 @@
 		<label class="control-label">Descripción</label>
 		<textarea name='descripcion' class='form-control'><?php echo $pregunta['descripcion']; ?></textarea>
 	</div>
-	
+	<div class="form-group">
+		<label class="control-label">Calificación</label>
+		<input type='text'
+			name='calificacion' class='form-control'
+			value="<?php echo $pregunta['calificacion']; ?>">
+	</div>
+	<div class="form-group">
+		<label class="control-label">Orden</label>
+		<input type='text'
+			name='orden' class='form-control'
+			value="<?php echo $pregunta['orden']; ?>">
+	</div>
 	<div class="form-group">
 		<label class="control-label">Estado</label>
 		<?php
@@ -59,7 +70,7 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-    $('#frmCategoria').bootstrapValidator({
+    $('#frmPregunta').bootstrapValidator({
     	message: 'This value is not valid',
 		feedbackIcons: {
 			valid: 'glyphicon glyphicon-ok',
@@ -87,6 +98,28 @@ $(document).ready(function() {
 					regexp: {
 						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9_ ,-\.]+$/,
 						message: 'Ingrese una descripción válida.'
+					}
+				}
+			},
+			orden: {
+				validators: {
+					notEmpty: {
+						message: 'El orden no puede ser vacía.'
+					},					
+					regexp: {
+						regexp: /^[0-9]+$/,
+						message: 'Ingrese un orden válido.'
+					}
+				}
+			},
+			calificacion: {
+				validators: {
+					notEmpty: {
+						message: 'La calificación no puede ser vacía.'
+					},					
+					regexp: {
+						regexp: /^[0-9]+$/,						
+						message: 'Ingrese una calificación válida.'
 					}
 				}
 			},
