@@ -5,7 +5,7 @@
 <div class="content">
 <div class="container">
 
-<div class="title-home">Bienvenido <?php echo "Usuario ".$_SESSION['SESSION_USER']['names'];?></div>
+<div class="title-home">Bienvenido <?php echo "Usuario ".$_SESSION['SESSION_USER']['nombres'];?></div>
 
 
 </div>

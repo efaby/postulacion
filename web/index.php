@@ -38,7 +38,7 @@ if (isset($_SESSION['SESSION_USER'])){
 } else {
 
 	if(!in_array($url, $urls)){
-		header("location: /web/index.php");
+		header("location: /postulacion/web/index.php");
 		exit();
 	}
 } 
