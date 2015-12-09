@@ -30,18 +30,6 @@ class PostulacionModel {
 		return $model->getRows($result);
 	}
 	
-	public function savePregunta($pregunta)
-	{
-		$model = new model();
-		return $model->saveData($pregunta, 'pregunta');
-	}
-
-	public function deletePregunta(){
-		$pregunta = $_GET['id'];
-		$sql = "delete from pregunta where id = ".$pregunta;
-		$model =  new model();
-		$result = $model->runSql($sql);
-	}
 	
 	
 }

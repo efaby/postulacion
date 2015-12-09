@@ -50,4 +50,13 @@ class VacanteModel {
 		$model =  new model();
 		$result = $model->runSql($sql);
 	}	
+	
+	/////// vacantes para aplicar
+	
+	public function getVacantesList($opcion){
+		$model = new model();
+		$sql = "select * from vacante where now() between fecha_inicio".$opcion." and fecha_fin".$opcion;
+		$result = $model->runSql($sql);
+		return $model->getRows($result);
+	}
 }

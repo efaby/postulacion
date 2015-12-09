@@ -72,4 +72,14 @@ class VacanteController {
 		}
 		header ( "Location: index.php" );
 	}
+	
+	//////////// vacantes 
+	
+	public function vacantes() {
+		$model = new VacanteModel ();
+		$datos = $model->getVacantesList ('_postulacion');
+		$meses = array("Ene","Feb","Mar","Abr","May","Ju","Jul","Ago","Sep","Oct","Nov","Dic");
+		$message = "";
+		require_once "view.listadovacante.php";
+	}
 }

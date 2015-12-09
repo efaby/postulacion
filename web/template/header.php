@@ -62,7 +62,7 @@
 						<li class="parent"><a href="../Postulacion/index.php">Postulaciones</a></li>
 					<?php endif;?>
 					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==3):?>
-						<li class="parent"><a href="../Postulante/index.php">Buscar Ofertas</a></li>
+						<li class="parent"><a href="../Vacante/index.php?action=vacantes">Buscar Ofertas</a></li>
 					<?php endif;?>
 					<!--  
 					<li class="parent">
