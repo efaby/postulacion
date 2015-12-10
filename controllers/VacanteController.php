@@ -82,4 +82,24 @@ class VacanteController {
 		$message = "";
 		require_once "view.listadovacante.php";
 	}
+	
+	public function loadFormVacante() {
+		$model = new VacanteModel ();
+		$vacante = $model->getVacante ();
+		$meses = array("Ene","Feb","Mar","Abr","May","Ju","Jul","Ago","Sep","Oct","Nov","Dic");
+		require_once "view.formvacante.php";
+	}
+	
+	public function savePostulacion(){
+		$model = new VacanteModel();
+		try {
+			$datos = $model->savePostulacion();
+			// enviar correo electronico
+			$_SESSION ['message'] = "Su postualcion ha ejecutado con éxito.";
+		} catch ( Exception $e ) {
+			$_SESSION ['message'] = $e->getMessage ();
+		}
+		header ( "Location: index.php?action=vacantes" );
+	}
+	
 }

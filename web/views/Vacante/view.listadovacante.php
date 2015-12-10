@@ -42,7 +42,7 @@
 							<td style="text-align: center"><?php $fechas = explode('-', $dato["fecha_inicio_postulacion"]); echo $fechas[2] ." - ". $meses[$fechas[1] - 1] ." - " .$fechas[0]; ?> / <?php $fechas = explode('-', $dato["fecha_fin_postulacion"]); echo $fechas[2] ." - ". $meses[$fechas[1] - 1] ." - " .$fechas[0]; ?></td>														
 							<td align="center">							
 							<a href="#"
-								onclick="javascript: loadModal(<?php echo $dato["id"]; ?>,'<?php $title = str_replace(' ', '/-/', $dato["titulo"]); echo $title; ?>');"><span class="label label-primary">Aplicar</span></a> </td>
+								onclick="javascript: loadModal(<?php echo $dato["id"]; ?>);"><span class="label label-primary">Aplicar</span></a> </td>
 						</tr>
 								<?php endforeach;?>
 							</tbody>
@@ -58,7 +58,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<a class="close" data-dismiss="modal">×</a>
-				<h3>Etapas de Postulación</h3>
+				<h3>Vacante</h3>
 			</div>
 			<div class="modal-body"></div>
      		</div>
@@ -78,8 +78,8 @@
 	src="<?php echo PATH_CSS . '/../plugins/validator/bootstrapValidator.min.js';?>"></script>
 <script src="<?php echo PATH_CSS . '/../js/apps.js';?>"></script>
 <script type="text/javascript">
-function loadModal(id,title){
-	$('.modal-body').load('index.php?action=loadForm&id=' + id + '&title=' + title,function(result){
+function loadModal(id){
+	$('.modal-body').load('index.php?action=loadFormVacante&id=' + id ,function(result){
 	    $('#confirm-submit').modal({show:true});
 	});
 }
