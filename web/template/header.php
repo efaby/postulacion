@@ -64,20 +64,9 @@
 					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==3):?>
 						<li class="parent"><a href="../Vacante/index.php?action=vacantes">Buscar Ofertas</a></li>
 					<?php endif;?>
-					<!--  
-					<li class="parent">
-						<a href="../Usuario/index.php">Usuarios</a>	
-					</li>
-					<li class="parent">
-						<a href="../Pregunta/index.php">Preguntas</a>						
-					</li>
-					<li class="parent">
-						<a href="../Categoria/index.php">Categorias</a>						
-					</li>
-					<li class="parent">
-						<a href="../Vacante/index.php">Vacantes</a>						
-					</li>
-					-->
+					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==2):?>
+						<li class="parent"><a href="../Postulacion/index.php?action=loadPostulante">Evaluar Postulaciones</a></li>
+					<?php endif;?>
 					<li class="parent"><a href="../Secure/index.php?action=closeSession">Salir</a></li>
 					
 				</ul>
