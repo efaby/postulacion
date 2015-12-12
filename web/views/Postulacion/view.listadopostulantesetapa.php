@@ -12,7 +12,7 @@
 		<?php endif;?>	
 			<div class="the-box">
 				<div class="form-group col-sm-12 rows">
-				<form action="index.php?action=loadPostulante" method="post">
+				<form action="index.php?action=loadPostulante" method="post" id="frmBuscar">
 					<div class="form-group  col-sm-4 rows">
 						<label class="control-label">Etapa : </label> <select
 							class='form-control' name="etapa_id" id="etapa_id">
@@ -43,21 +43,29 @@
 					id="datatable-example">
 					<thead class="the-box dark full">
 						<tr>
-							<th>Vacante</th>
-							<th>Area</th>
-							<th>Fecha Aplicación</th>
+							<th>Cedula Identidad</th>
+							<th>Nombre Postulante</th>
+							<th>Calificación</th>
+							<th>Observación</th>
 							<th style="text-align: center">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
-							<?php foreach ($datos1 as $dato): ?>
+							<?php foreach ($datos as $dato): ?>
 						<tr>
-							<td><?php echo $dato["titulo"]; ?></td>
-							<td><?php echo $dato["nombre_area"]; ?></td>
-							<td><?php echo $dato["fecha"]; ?></td>
-							<td align="center"><a href="#"
-								onclick="javascript: loadModal(<?php echo $dato["id"]; ?>,'<?php $title = str_replace(' ', '/-/', $dato["titulo"]); echo $title; ?>');"><span
-									class="label label-primary">Detalle</span></a></td>
+							<td><?php echo $dato["numero_identificacion"]; ?></td>
+							<td><?php echo $dato["nombres"]; ?> <?php echo $dato["apellidos"]; ?></td>
+							<td><?php echo $dato["valor"]; ?></td>
+							<td><?php echo $dato["observacion"]; ?></td>
+							<td align="center">
+								<form method="post" id="frmAccion">
+									<input name="id" id="id" value="<?php echo $dato["id"]; ?>" type="hidden">
+									<input name="etapa" id="etapa" value="<?php echo $etapa; ?>" type="hidden">
+									<a href="#"
+									onclick="javascript: loadPage();"><span
+										class="label label-primary">Evaluar</span></a>
+								</form>
+							</td>
 						</tr>
 								<?php endforeach;?>
 							</tbody>
@@ -93,10 +101,25 @@
 	src="<?php echo PATH_CSS . '/../plugins/validator/bootstrapValidator.min.js';?>"></script>
 <script src="<?php echo PATH_CSS . '/../js/apps.js';?>"></script>
 <script type="text/javascript">
-function loadModal(id,title){
-	$('.modal-body').load('index.php?action=loadForm&id=' + id + '&title=' + title,function(result){
-	    $('#confirm-submit').modal({show:true});
-	});
+function loadPage(id,opcion){
+	var opcion  = $("#etapa").val();
+	if(opcion == 1){
+		var accion = "index.php?action=meritos"
+		$("#frmAccion").attr('action', accion);
+		$("#frmAccion").submit();
+	} else {
+		if(opcion==3){
+			var accion = "../Evaluacion/index.php"
+			$("#frmAccion").attr('action', accion);
+			$("#frmAccion").submit();
+		} else {
+			var id = $("#id").val();
+			$('.modal-body').load('index.php?action=loadFormEvaluacion&id=' + id + '&opcion=' + opcion,function(result){
+			    $('#confirm-submit').modal({show:true});
+			});
+		}
+		
+	}
 }
 
 $(document).ready(function(){
@@ -108,6 +131,35 @@ $(document).ready(function(){
 	            });            
 	        });
 	   });
+});
+
+$(document).ready(function() {
+    $('#frmBuscar').bootstrapValidator({
+    	message: 'This value is not valid',
+		feedbackIcons: {
+			valid: 'glyphicon glyphicon-ok',
+			invalid: 'glyphicon glyphicon-remove',
+			validating: 'glyphicon glyphicon-refresh'
+		},
+		fields: {
+			
+			etapa_id: {
+				validators: {
+					notEmpty: {
+						message: 'Seleccione una etapa.'
+					}
+				}
+			},
+			vacante_id: {
+				validators: {
+					notEmpty: {
+						message: 'Seleccione una vacante.'
+					}
+				}
+			}
+		}
+	});
+
 });
 </script>
 <style>

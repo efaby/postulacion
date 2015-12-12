@@ -1443,7 +1443,7 @@ DataTable.defaults = {
 		 *      } );
 		 *    } );
 		 */
-		"sEmptyTable": "No data available in table",
+		"sEmptyTable": "No se encontraron items a presentar.",
 	
 	
 		/**
