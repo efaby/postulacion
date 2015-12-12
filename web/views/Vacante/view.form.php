@@ -132,9 +132,7 @@
 
 <script src="<?php echo PATH_CSS . '/../plugins/datepicker/bootstrap-datepicker.js';?>"></script>
 
-
 <script>
-
 $(document).ready(function() {
 	$('#frmVacante').bootstrapValidator({
 		    	message: 'This value is not valid',

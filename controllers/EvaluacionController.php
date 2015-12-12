@@ -1,5 +1,4 @@
 <?php
-require_once (PATH_PAGINATOR . "/paginator.php");
 require_once (PATH_MODELS . "/EvaluacionModel.php");
 /**
  * Controlador de Usuarios
@@ -7,67 +6,76 @@ require_once (PATH_MODELS . "/EvaluacionModel.php");
 class EvaluacionController {
 	public function display() {
 		$_SESSION['session'] = 2;
-		$evaluacion =  Array ( 'id' => '' ,'curso' => '','nombre_docente' => '','fecha' => '','asignatura' => '','tema' => '','nombre_observador' => '', 'periodo_academico' => '', 'fecha_fin_postulacion' => '', 'fecha_inicio_calificacion' => '','fecha_fin_calificacion' => '','fecha_inicio_test' => '', 'fecha_fin_test' => '', 'fecha_inicio_clase' => '','fecha_fin_clase' => '', 'fecha_inicio_entrevista' => '');
+		$model = new EvaluacionModel();
+		$evaluacion =  Array ( 'id' => '' ,'curso' => '','nombre_docente' => '','fecha' => '','asignatura' => '','tema' => '','nombre_observador' => '', 'periodo_academico' => '','fortalezas' =>'', 'debilidades' =>'', 'observaciones' =>'');
+		$preguntas = $model->getPreguntas();
 		$message = "";
 		require_once "view.listado.php";
 	}
 	
-	public function insertData(){
-		$_SESSION['session'] = 2;
-		$evaluacion =  Array ( 'id' => '' ,'curso' => '','nombre_docente' => '','numero_vacantes' => '','experiencia_requerida' => '','fecha_inicio' => '','fecha_fin' => '', 'fecha_inicio_postulacion' => '', 'fecha_fin_postulacion' => '', 'fecha_inicio_calificacion' => '','fecha_fin_calificacion' => '','fecha_inicio_test' => '', 'fecha_fin_test' => '', 'fecha_inicio_clase' => '','fecha_fin_clase' => '', 'fecha_inicio_entrevista' => '','fecha_fin_entrevista' => '', 'caracteristicas' => '', 'habilidades' => '');
-		$message = "";
-		require_once "view.form.php";
-	}
-	
-	public function editData(){
-		$model = new EvaluacionModel();
-		$evaluacion = $model->getVacante();
-		$message = "";
-		require_once "view.form.php";
-	}
-	
-	public function loadForm() {
-		$model = new EvaluacionModel ();
-		$evaluacion = $model->getEvaluacion ();
-		$message = "";
-		require_once "view.form.php";
-	}
-
 	public function saveData() {
-		$vacante ['id'] = $_POST ['id'];
-		$vacante ['nombre_area'] = $_POST ['nombre_area'];
-		$vacante ['titulo'] = $_POST ['titulo'];
-		$vacante ['numero_vacantes'] = $_POST ['numero_vacantes'];
-		$vacante ['experiencia_requerida'] = $_POST ['experiencia_requerida'];
-		$vacante ['fecha_inicio'] = $_POST ['fecha_inicio'];
-		$vacante ['fecha_fin'] = $_POST ['fecha_fin'];
-		$vacante ['fecha_inicio_postulacion'] = $_POST ['fecha_inicio_postulacion'];
-		$vacante ['fecha_fin_postulacion'] = $_POST ['fecha_fin_postulacion'];
-		$vacante ['fecha_inicio_calificacion'] = $_POST ['fecha_inicio_calificacion'];
-		$vacante ['fecha_fin_calificacion'] = $_POST ['fecha_fin_calificacion'];
-		$vacante ['fecha_inicio_test'] = $_POST ['fecha_inicio_test'];
-		$vacante ['fecha_fin_test'] = $_POST ['fecha_fin_test'];
-		$vacante ['fecha_inicio_clase'] = $_POST ['fecha_inicio_clase'];
-		$vacante ['fecha_fin_clase'] = $_POST ['fecha_fin_clase'];
-		$vacante ['fecha_inicio_entrevista'] = $_POST ['fecha_inicio_entrevista'];
-		$vacante ['fecha_fin_entrevista'] = $_POST ['fecha_fin_entrevista'];
-		$vacante ['caracteristicas'] = $_POST ['caracteristicas'];
-		$vacante ['habilidades'] = $_POST ['habilidades'];
+		
+		$contador = $_POST ['contador'];
+		$total = 0;
+		$porcentaje = round(10/$contador, 2);
+		$porcentaje1 = round($porcentaje /3, 2);
+		$porcentaje2 = round($porcentaje1*2,2);
+		for ($value = 1; $value <= $contador; $value++)
+		{	
+			if ($_POST ['respuesta'.$value] == 1)
+			{
+				$total= $total+$porcentaje1;
+				$respuesta['valor'] = $porcentaje1;
+			}
+			if ($_POST ['respuesta'.$value] == 2)
+			{
+				$total= $total+$porcentaje2;
+				$respuesta['valor'] = $porcentaje2;
+			}
+			if ($_POST ['respuesta'.$value] == 3)
+			{
+				$total= $total+$porcentaje1;
+				$respuesta['valor'] = $porcentaje;
+			}
+			$respuesta['pregunta_id'] =  $_POST['pregunta'.$value];			
+		}
+		
+		$evaluacion['valor'] = $total;
+		$evaluacion['observaciones'] = $_POST['observaciones'];
+		$evaluacion['fecha_evaluacion'] = $_POST['fecha_evaluacion'];
+		$evaluacion['etapa_id'] = 3;
+		$evaluacion['postulacion_id'] = 6;//Cambiar
+		//$evaluacion['id_usuario'] = $_SESSION['SESSION_USER']['id']; 
+		$evaluacion['id_usuario'] = 4;//Cambiar
+		$evaluacion['activo'] = 1;
+		if ($total >=9)
+		{
+			$evaluacion['aprobado'] = 1;
+		}
+		else
+		{
+			$evaluacion['aprobado'] = 0;
+		}
+		
+		$desempenio['curso'] = $_POST['curso'];
+		$desempenio['fecha_evaluacion'] = $_POST['fecha_evaluacion'];
+		$desempenio ['asignatura'] = $_POST['asignatura'];
+		$desempenio ['tema'] = $_POST['tema'];
+		$desempenio ['periodo_academico'] = $_POST['periodo_academico'];
+		$desempenio ['evaluacion_id'] = 0;
+		$desempenio ['fortalezas'] = $_POST['fortalezas'];
+		
+		$desempenio ['debilidades'] =$_POST['debilidades'];
+		$desempenio ['observaciones'] = $_POST['observaciones'];
+		
+		$objeto [0] = $evaluacion;
+		$objeto [1] = $desempenio;
+		$objeto [2] = $respuesta;
+		
 		$model = new EvaluacionModel ();
 		try {
-			$datos = $model->saveEvaluacion ( $vacante );
+			$datos = $model->saveEvaluacion ( $objeto );
 			$_SESSION ['message'] = "Datos almacenados correctamente.";
-		} catch ( Exception $e ) {
-			$_SESSION ['message'] = $e->getMessage ();
-		}
-		header ( "Location: index.php" );
-	}
-	
-	public function deleteData() {
-		$model = new EvaluacionModel();
-		try {
-			$datos = $model->deleteEvaluacion ();
-			$_SESSION ['message'] = "Datos eliminados correctamente.";
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}

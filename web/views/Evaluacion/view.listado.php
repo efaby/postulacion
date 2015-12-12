@@ -22,21 +22,21 @@
 						<div class="form-group">
 							<label class="control-label">Nombre del Docente</label>
 							<input type='text'
-								name='Nombre del Docente' class='form-control'
+								name='nombre_docente' class='form-control'
 								value="<?php echo $evaluacion['nombre_docente']; ?>">
 						</div>
 						
 						<div class="form-group">
 							<label class="control-label">Fecha</label>
 							<div class="input-group input-daterange">
-					    		<input id="fecha" name="fecha" type="text" class="form-control" value="<?php echo $evaluacion['fecha']; ?>">					    		
+					    		<input id="fecha_evaluacion" name="fecha_evaluacion" type="text" class="form-control" value="<?php echo $evaluacion['fecha']; ?>">					    		
 							</div>	
 						</div>
 						
 						<div class="form-group">
 							<label class="control-label">Asignatura</label>
 							<input type='text'
-								name='experiencia_requerida' class='form-control'
+								name='asignatura' class='form-control'
 								value="<?php echo $evaluacion['asignatura']; ?>">
 						</div>
 						
@@ -61,72 +61,116 @@
 								name='periodo_academico' class='form-control'
 								value="<?php echo $evaluacion['periodo_academico']; ?>">	
 						</div>	
-						<div class="alert alert-warning alert-bold-border fade in alert-dismissable">
-						  	<p><strong>OBJETIVO</strong></p>
-						  	Reflexionar sobre el desarrollo del desempeño docente con el fin de mejorar la práctica en el aula. 
-					 	  	</p>
-					 	  	<br>
-					 	  	<p><strong>INSTRUCCIONES</strong></p>
-					 	  	<li>Lea detenidamente cada enunciado del cuestionario y conteste con honestidad en el casillero a la alternativa correspondiente.</li>
-					 	  	<li>Utilice la siguiente tabla de valoración.</li>
-					 	  	<li>Marque con un (X) la alternativa correspondiente.</li>
-						</div>
-						<div class="form-group">
-							<label class="control-label">INSTRUCCIONES</label>
-							<br>
-							<label class="control-label"></label>	
-						</div>
-						<div class="form-group">
-							<label class="control-label">Fecha de Inicio y Fin de Calificación de Méritos</label>
-							<div class="input-group input-daterange">
-					    		<input type="text" class="form-control" name="fecha_inicio_calificacion" id="fecha_inicio_calificacion" value="<?php echo $vacante['fecha_inicio_calificacion'];?>">
-					    		<span class="input-group-addon">to</span>
-					   			 <input type="text" class="form-control" name="fecha_fin_calificacion" id="fecha_fin_calificacion" value="<?php echo $vacante['fecha_fin_calificacion'];?>">
-							</div>		
-						</div>	
 						
 						<div class="form-group">
-							<label class="control-label">Fecha de Inicio y Fin de Examen de Conocimiento</label>
-							<div class="input-group input-daterange">
-					    		<input type="text" class="form-control" name="fecha_inicio_test" id="fecha_inicio_test" value="<?php echo $vacante['fecha_inicio_test'];?>">
-					    		<span class="input-group-addon">to</span>
-					   			 <input type="text" class="form-control" name="fecha_fin_test" id="fecha_fin_test" value="<?php echo $vacante['fecha_inicio_test'];?>">
-							</div>		
-						</div>	
-						
+							<div class="panel panel-info">
+							  <div class="panel-heading">
+								<h3 class="panel-title">OBJETIVO</h3>
+							  </div>
+							  <div class="panel-body">
+								  	<label class="control-label">Reflexionar sobre el desarrollo del desempeño docente con el fin de mejorar la práctica en el aula.</label> 
+							 	  	<br>
+							 	  	<p><strong>INSTRUCCIONES</strong></p>
+							 	  	<label class="control-label">
+							 	  	<ul>
+						 			  	<li>Lea detenidamente cada enunciado del cuestionario y conteste con honestidad en el casillero a la alternativa correspondiente.</li>
+						 	  			<li>Utilice la siguiente tabla de valoración.</li>
+						 	  			<li>Marque con un (X) la alternativa correspondiente.</li>
+						 			</ul>
+					 	  			</label>					 	  	
+							</div>
+							</div>
+						</div>		
 						<div class="form-group">
-							<label class="control-label">Fecha de Inicio y Fin de Clase Demostrativa</label>
-							<div class="input-group input-daterange">
-					    		<input type="text" class="form-control" name="fecha_inicio_clase" id="fecha_inicio_clase" value="<?php echo $vacante['fecha_inicio_clase'];?>">
-					    		<span class="input-group-addon">to</span>
-					   			 <input type="text" class="form-control" name="fecha_fin_clase" id="fecha_fin_clase" value="<?php echo $vacante['fecha_fin_clase'];?>">
-							</div>		
-						</div>	
-						
+								<?php $estado=""; $id=1;?>
+								<?php foreach ($preguntas as $pregunta): ?>
+									<input type="hidden" name="pregunta<?php echo $id; ?>" value="<?php echo $pregunta["id"]; ?>">
+									<?php if ($estado != $pregunta['categoria_id']):?>
+										<?php if ($estado !=""):?>
+											</tbody>
+											</table>
+										</div>
+										</div>						
+										<?php endif;?>
+										<div class="the-box full no-border">
+											<div class="table-responsive">
+											<table class="table table-th-block table-info">
+												<thead>
+											<tr>
+												<th rowspan="2" style="width: 85%; vertical-align: middle;"><?php echo $pregunta["nombre_categoria"]; ?></th>
+												<th colspan="3" style="text-align:center">VALORACIÓN</th>
+											</tr>
+											<tr>
+												<th  style=" width:5%; text-align:center">1</th><th style=" width:5%; text-align:center">2</th><th style=" width:5%; text-align:center">3</th>
+											</tr>
+										</thead>
+										<tbody>
+										<tr><td><?php echo $pregunta["nombre_pregunta"];?></td>
+											<td  style="text-align: center;">
+												<label>
+													<input type="radio" name="respuesta<?php echo $id;?>" value="1" required data-bv-notempty-message="El campo es requerido" />
+												</label>												
+											</td>
+											<td  style="text-align: center;">
+												<label>
+													<input type="radio" name="respuesta<?php echo $id;?>" value="2" />
+												</label>													
+											</td>
+											<td  style="text-align: center;">
+												<label>
+													<input type="radio" name="respuesta<?php echo $id;?>" value="3" />
+												</label>
+											</td>
+										</tr>
+										<?php $estado = $pregunta['categoria_id'];  ?>
+										<?php else:?>
+										<tr>
+											<td><?php echo $pregunta["nombre_pregunta"];?></td>
+											<td style="text-align: center;">
+												<label>
+													<input type="radio" name="respuesta<?php echo $id;?>" value="1" required data-bv-notempty-message="El campo es requiredo" />
+												</label>												
+											</td>
+											<td  style="text-align: center;">							
+												<label>
+													<input type="radio" name="respuesta<?php echo $id;?>" value="2" />
+												</label>												
+											</td>
+											<td  style="text-align: center;">
+												<label>
+													<input type="radio" name="respuesta<?php echo $id;?>" value="3" />
+												</label>												
+											</td>
+										</tr>	
+										<?php endif;?>		
+										<?php $id++;?>																
+								<?php endforeach;?>			
+								</tbody>
+								</table>			
+								</div>
+								</div>		
+						</div>						
 						<div class="form-group">
-							<label class="control-label">Fecha de Inicio y Fin de Entrevista</label>
-							<div class="input-group input-daterange">
-					    		<input type="text" class="form-control" name="fecha_inicio_entrevista" id="fecha_inicio_entrevista" value="<?php echo $vacante['fecha_inicio_entrevista'];?>">
-					    		<span class="input-group-addon">to</span>
-					   			 <input type="text" class="form-control" name="fecha_fin_entrevista" id="fecha_fin_entrevista" value="<?php echo $vacante['fecha_fin_entrevista'];?>">
-							</div>		
-						</div>	
-						
-						<div class="form-group">
-							<label class="control-label">Características</label> <input type='text'
-								name='caracteristicas' class='form-control'
-								value="<?php echo $vacante['caracteristicas']; ?>">
+							<label class="control-label">Fortalezas</label> <input type='text'
+								name='fortalezas' class='form-control'
+								value="<?php echo $evaluacion['fortalezas']; ?>">
 						</div>
 											
 						<div class="form-group">
-							<label class="control-label">Habilidades</label> <input type='text'
-								name='habilidades' class='form-control'
-								value="<?php echo $vacante['habilidades']; ?>">
+							<label class="control-label">Debilidades</label> <input type='text'
+								name='debilidades' class='form-control'
+								value="<?php echo $evaluacion['debilidades']; ?>">
 						</div>
-					
-											
+
+						<div class="form-group">
+							<label class="control-label">Observaciones</label> <input type='text'
+								name='observaciones' class='form-control'
+								value="<?php echo $evaluacion['observaciones']; ?>">
+						</div>
+															
 						<div class="form-group">
 						<input type='hidden' name='id' class='form-control' value="<?php echo $vacante['id']; ?>">
+						<input type='hidden' name='contador' class='form-control' value="<?php echo $id-1;?>">
 							<button type="submit" class="btn btn-success">Guardar</button>
 						</div>					
 					</form>
@@ -154,7 +198,7 @@
 <script>
 
 $(document).ready(function() {
-	$('#frmVacante').bootstrapValidator({
+	$('#frmEvaluacion').bootstrapValidator({
 		    	message: 'This value is not valid',
 				feedbackIcons: {
 					valid: 'glyphicon glyphicon-ok',
@@ -162,140 +206,74 @@ $(document).ready(function() {
 					validating: 'glyphicon glyphicon-refresh'						
 				},
 				fields: {
-					nombre_area: {
-						message: 'El nombre del área no es válido',
+					curso: {
+						message: 'El nombre del curso no es válido',
 						validators: {
 							notEmpty: {
-								message: 'El nombre del área no puede ser vacío.'
+								message: 'El nombre del curso no puede ser vacío.'
 							},					
 							regexp: {
 								regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9-_ \.]+$/,
-								message: 'Ingrese un nombre del área no es válido.'
+								message: 'Ingrese un nombre del curso no es válido.'
 							}
 						}
 					},
-					titulo: {
+					nombre_docente: {
 						validators: {
 							notEmpty: {
-								message: 'El título no puede ser vacía.'
+								message: 'El nombre del docente no puede ser vacía.'
 							},					
 							regexp: {
 								regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9_ ,-\.]+$/,
-								message: 'Ingrese un título válido.'
+								message: 'Ingrese el nombre del docente válido.'
 							}
 						}
 					},
-					numero_vacantes: {
-						validators: {
-							notEmpty: {
-								message: 'El número de vacantes no puede ser vacía'							
-						},
-						regexp: {
-							regexp: /^[0-9]+$/,
-							message: 'Ingrese un número de vacantes válido.'
-						}
-						}
-					},	
-
-					experiencia_requerida: {
-						validators: {
-							notEmpty: {
-								message: 'Los años de experiencia no puede ser vacía'							
-						},
-						regexp: {
-							regexp: /^[0-9]+$/,
-							message: 'Ingrese los años de experiencia válidos.'
-						}
-						}
-					},
-					 
-			        fecha_inicio: {
+					 fecha_evaluacion: {
 						 validators: {
 							 notEmpty: {
-								 message: 'La fecha de inicio de concurso es requerida y no puede ser vacia'
+								 message: 'La fecha de evaluacion es requerida y no puede ser vacia'
 							 },
 							 date:{	 
 								    format: 'YYYY-MM-DD',
-				                    message: 'La fecha de inicio del concurso no es válida.'				                    
+				                    message: 'La fecha de evaluacion del concurso no es válida.'				                    
 							 }							 
 						 }
 					 },
-					 
-			        fecha_fin: {
-			        	 validators: {
-							 notEmpty: {
-								 message: 'La fecha de fin de concurso es requerida y no puede ser vacia'
-							 },
-							 date: {
-								 format: 'YYYY-MM-DD',
-				                 message: 'La fecha de fin del concurso no es válida.'
-							 }							 
-						 }
-			        },
-
-			        fecha_inicio_postulacion: {
-						 validators: {
-							 notEmpty: {
-								 message: 'La fecha de inicio de concurso es requerida y no puede ser vacía'
-							 },
-							
-							 date: {
-								 format: 'YYYY-MM-DD',
-				                 message: 'La fecha de fin del concurso no es válida.'
-							 }													
-						 }
-					 },
-					 
-			        fecha_fin_postulacion: {
-			        	 validators: {
-							 notEmpty: {
-								 message: 'La fecha de fin de postulación es requerida y no puede ser vacía'
-							 },
-							 date: {
-								 format: 'YYYY-MM-DD',
-				                 message: 'La fecha de fin del concurso no es válida.'
-							 }	
-						 }
-			        },
-
-			        fecha_inicio_calificacion: {
-						 validators: {
-							 notEmpty: {
-								 message: 'La fecha de inicio de calificación es requerida y no puede ser vacía'
-							 },
-							 date:{	 
-								 	format: 'YYYY-MM-DD',
-				                    message: 'La fecha de inicio del calificación no es válida.'
-				                    
-							 }							 
-						 }
-					 },
-					 
-			        fecha_fin_calificacion: {
-			        	 validators: {
-							 notEmpty: {
-								 message: 'La fecha de fin de calificación es requerida y no puede ser vacía'
-							 },
-							 date: {
-								 format: 'YYYY-MM-DD',
-				                 message: 'La fecha de fin de calificación no es válida.'
-							 }
-							 
-						 }
-			        },
-			        
-			        caracteristicas: {
-			        	validators: {
+					asignatura: {
+						validators: {
 							notEmpty: {
-								message: 'Las características no pueden ser vacía'							
+								message: 'La asignatura no puede ser vacía'							
 						},
 						regexp: {
 							regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9_ ,-\.]+$/,
-							message: 'Ingrese características válidas.'
-							}
-			        	}
-			        },
-			        habilidades: {
+							message: 'Ingrese una asignatura válido.'
+						}
+						}
+					},	
+					tema: {
+						validators: {
+							notEmpty: {
+								message: 'El tema no puede ser vacío'							
+						},
+						regexp: {
+							regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9_ ,-\.]+$/,
+							message: 'Ingrese un tema válidos.'
+						}
+						}
+					},
+					nombre_observador: {
+						validators: {
+							notEmpty: {
+								message: 'El nombre del observador no puede ser vacío'							
+						},
+						regexp: {
+							regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9_ ,-\.]+$/,
+							message: 'Ingrese un nombre de observador válidos.'
+						}
+						}
+					},
+					periodo_academico: {
 			        	validators: {
 							notEmpty: {
 								message: 'Las habilidades no pueden ser vacía'							
@@ -306,6 +284,39 @@ $(document).ready(function() {
 							}
 			        	}
 					},
+					fortalezas: {
+			        	validators: {
+							notEmpty: {
+								message: 'Las fortalezas no pueden ser vacías'							
+						},
+						regexp: {
+							regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9_ ,-\.]+$/,
+							message: 'Ingrese fortalezas válidas.'
+							}
+			        	}
+					},
+					debilidades: {
+			        	validators: {
+							notEmpty: {
+								message: 'Las debilidades no pueden ser vacías'							
+						},
+						regexp: {
+							regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9_ ,-\.]+$/,
+							message: 'Ingrese debilidades válidas.'
+							}
+			        	}
+					},
+					observaciones: {
+			        	validators: {
+							notEmpty: {
+								message: 'Las observaciones no pueden ser vacías'							
+						},
+						regexp: {
+							regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9_ ,-\.]+$/,
+							message: 'Ingrese observaciones válidas.'
+							}
+			        	}
+					}
 			  	}
 			});
 });		
@@ -313,10 +324,17 @@ $(document).ready(function() {
 </script>
 <link rel="stylesheet" href="<?php echo PATH_CSS . '/../css/bootstrapValidator.min.css';?>">
 <link rel="stylesheet" href="<?php echo PATH_CSS . '/../css/bootstrap-datetimepicker.min.css';?>">
+<link
+	href="<?php echo PATH_CSS . '/../plugins/datatable/css/bootstrap.datatable.min.css';?>"
+	rel="stylesheet">
 
 <script src="<?php echo PATH_CSS . '/../js/bootstrapValidator.min.js';?>"></script>
 <script src="<?php echo PATH_CSS . '/../js/moment.min.js';?>"></script>
 <script src="<?php echo PATH_CSS . '/../js/bootstrap-datetimepicker.min.js';?>"></script>  
-<script src="<?php echo PATH_CSS . '/../js/validacionfecha.js';?>"></script>        
+<script src="<?php echo PATH_CSS . '/../js/validacionfecha.js';?>"></script>
+<script
+	src="<?php echo PATH_CSS . '/../plugins/datatable/js/bootstrap.datatable.js';?>"></script>
+<script
+	src="<?php echo PATH_CSS . '/../plugins/datatable/js/jquery.dataTables.min.js';?>"></script>        
 </body>
 </html>

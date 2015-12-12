@@ -9,7 +9,7 @@ require_once(PATH_MODELS."/model.php");
 class EvaluacionModel {
 
 	/**
-	 * Obtiene Vacantes
+	 * Obtiene Evaluaciones
 	 */
 	public function getEvaluacionList(){
 		$model = new model();		
@@ -33,21 +33,20 @@ class EvaluacionModel {
 		return $resultArray;
 	}
 	
-	public function saveEvaluacion($vacante)
+	public function saveEvaluacion($objeto)
 	{
-		if($vacante['id'] > 0){
-			$sql = "update vacante set nombre_area =  '".$vacante['nombre_area']."', titulo = '".$vacante['titulo']."', numero_vacantes= ".$vacante['numero_vacantes'].", experiencia_requerida=".$vacante['experiencia_requerida'].", fecha_inicio = '".$vacante['fecha_inicio']."', fecha_fin = '".$vacante['fecha_fin']."', fecha_inicio_postulacion = '".$vacante['fecha_inicio_postulacion']."', fecha_fin_postulacion = '".$vacante['fecha_fin_postulacion']."', fecha_inicio_calificacion = '".$vacante['fecha_inicio_calificacion']."', fecha_fin_calificacion = '".$vacante['fecha_fin_calificacion']."', fecha_inicio_test = '".$vacante['fecha_inicio_test']."', fecha_fin_test = '".$vacante['fecha_fin_test']."', fecha_inicio_clase = '".$vacante['fecha_inicio_clase']."', fecha_fin_clase = '".$vacante['fecha_fin_clase']."', fecha_inicio_entrevista = '".$vacante['fecha_inicio_entrevista']."', fecha_fin_entrevista = '".$vacante['fecha_fin_entrevista']."', caracteristicas = '".$vacante['caracteristicas']."', habilidades = '".$vacante['habilidades']."' where id = ".$vacante['id'];
-		} else {
-			$sql = "insert into vacante(nombre_area, titulo, numero_vacantes, experiencia_requerida, fecha_inicio, fecha_fin, fecha_inicio_postulacion, fecha_fin_postulacion, fecha_inicio_calificacion, fecha_fin_calificacion, fecha_inicio_test, fecha_fin_test, fecha_inicio_clase, fecha_fin_clase, fecha_inicio_entrevista, fecha_fin_entrevista, caracteristicas, habilidades) values ('".$vacante['nombre_area']."','".$vacante['titulo']."','".$vacante['numero_vacantes']."','".$vacante['experiencia_requerida']."','".$vacante['fecha_inicio']."','".$vacante['fecha_fin']."','".$vacante['fecha_inicio_postulacion']."','".$vacante['fecha_fin_postulacion']."','".$vacante['fecha_inicio_calificacion']."','".$vacante['fecha_fin_calificacion']."','".$vacante['fecha_inicio_test']."','".$vacante['fecha_fin_test']."','".$vacante['fecha_inicio_clase']."','".$vacante['fecha_fin_clase']."','".$vacante['fecha_inicio_entrevista']."','".$vacante['fecha_fin_entrevista']."','".$vacante['caracteristicas']."','".$vacante['habilidades']."')";
-		}
-		$model =  new model();
+		$model = new model();
+		$sql = "update evaluacion set activo = 0 where postulacion_id = ".$objeto[0]["postulacion_id"];
 		$result = $model->runSql($sql);
+		$evaluacion_id = $model->saveData($objeto[0], 'evaluacion');
+		//$objeto[1]["evaluacion_id"] = $evaluacion_id;	
+		
 	}
-
-	public function deleteEvaluacion(){
-		$vacante = $_GET['id'];
-		$sql = "delete from vacante where id = ".$vacante;
-		$model =  new model();
+	
+	public function getPreguntas(){
+		$model = new model();
+		$sql = "SELECT categoria.id as categoria_id, categoria.nombre as nombre_categoria, pregunta.id, pregunta.nombre as nombre_pregunta FROM pregunta inner join categoria on pregunta.categoria_id = categoria.id order by categoria.id";
 		$result = $model->runSql($sql);
-	}	
+		return $model->getRows($result);
+	}
 }

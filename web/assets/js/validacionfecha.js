@@ -375,3 +375,14 @@ $(function () {
     bindDateRangeValidationEntrevista($("#frmVacante"), 'fecha_inicio_entrevista', 'fecha_fin_entrevista','fecha_fin_clase', 'fecha_fin');
 });
 
+$(function () {
+    var sd = new Date(), ed
+  
+    $('#fecha_evaluacion').datetimepicker({ 
+      pickTime: false, 
+      format: "YYYY-MM-DD", 
+      defaultDate: sd,
+      
+    });
+});
+
