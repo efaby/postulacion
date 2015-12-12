@@ -51,12 +51,14 @@ class PostulacionModel {
 					inner join usuario as u on p.postulante_id =  u.id ";
 		$where = " and p.id not in (select postulacion_id from evaluacion where etapa_id = ".$etapa.")";
 		if($etapa > 1){	
+			$etapa = $etapa - 1;
 			$sql1 = " select p.id, u.nombres, u.apellidos, u.numero_identificacion, e.valor, e.observacion from vacante as v ";
-			$sql .= " inner join evaluacion as e on (e.postulacion_id = p.id and e.activo = 1 and e.aprobado = 1)";
+			$sql .= " inner join evaluacion as e on (e.postulacion_id = p.id and e.activo = 1 and e.aprobado = 1 and etapa_id = ".$etapa.")";
 			$where = "";				
 		}		
 		$sql .= " where v.id = ".$vacante. $where;
 		$model = new model();
+		
 		$result = $model->runSql($sql1.$sql);
 		return $model->getRows($result);
 	}

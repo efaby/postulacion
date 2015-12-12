@@ -109,4 +109,11 @@ class PostulacionController {
 		}
 		header ( "Location: index.php?action=loadPostulante" );
 	}
+	
+	public function loadFormEvaluacion(){
+		$opcion = $_GET["opcion"];
+		$postulacion = $_GET["id"];
+		
+		require_once "view.formEvaluacion.php";
+	}
 }

@@ -81,7 +81,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<a class="close" data-dismiss="modal">×</a>
-				<h3>Etapas de Postulación</h3>
+				<h3></h3>
 			</div>
 			<div class="modal-body"></div>
 		</div>
@@ -109,11 +109,17 @@ function loadPage(id,opcion){
 		$("#frmAccion").submit();
 	} else {
 		if(opcion==3){
-			var accion = "../Evaluacion/index.php"
+			var accion = "../Evaluacion/index.php";
 			$("#frmAccion").attr('action', accion);
 			$("#frmAccion").submit();
 		} else {
 			var id = $("#id").val();
+			var title = "Evaluación Entrevista";
+			if(opcion==2){
+				title = "Evaluación Conocimientos";
+			}
+			$(".modal-header h3").html(title);
+			
 			$('.modal-body').load('index.php?action=loadFormEvaluacion&id=' + id + '&opcion=' + opcion,function(result){
 			    $('#confirm-submit').modal({show:true});
 			});

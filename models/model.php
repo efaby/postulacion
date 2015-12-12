@@ -78,6 +78,7 @@ class model
 		} else {
 			$sql = 'Update '.$table. ' set '.$values.' where id = '.$id;
 		}
+
 		return $this->runSql($sql,true);
 	}
 	
