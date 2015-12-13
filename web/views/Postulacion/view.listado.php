@@ -12,12 +12,7 @@
 		<?php endif;?>
 		
 			<div class="the-box">
-				<p>
-					<button class="btn btn-large btn-info" id="modalOpen">
-						<i class="glyphicon glyphicon-plus"></i> &nbsp; Add Records
-					</button>
-				</p>
-
+				
 				<table class="table table-striped table-hover"
 					id="datatable-example">
 					<thead class="the-box dark full">
@@ -38,7 +33,7 @@
 							<td><?php echo $dato["fecha"]; ?></td>														
 							<td align="center">							
 							<a href="#"
-								onclick="javascript: loadModal(<?php echo $dato["id"]; ?>,'<?php $title = str_replace(' ', '/-/', $dato["titulo"]); echo $title; ?>');"><span class="label label-primary">Detalle</span></a> </td>
+								onclick="javascript: loadModal(<?php echo $dato["id"]; ?>,'<?php $title = str_replace(' ', '/-/', $dato["titulo"]); echo $title; ?>');" class="btn btn-info btn-xs">Detalle</a> </td>
 						</tr>
 								<?php endforeach;?>
 							</tbody>

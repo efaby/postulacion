@@ -17,13 +17,11 @@ class RegistroController {
 		$usuario ['id'] = $_POST ['id'];
 		$usuario ['numero_identificacion'] = $usuario ['username'] = $_POST ['numero_identificacion'];
 		$usuario ['nombres'] = $_POST ['nombres'];
-		$usuario ['apellidos'] = $_POST ['apellidos'];
-		$usuario ['genero'] = $_POST ['genero'];
-		$usuario ['tipo_usuario_id'] = 3;
-		$usuario ['capacidad_especial_id'] = $_POST ['capacidad_especial_id'];
+		$usuario ['apellidos'] = $_POST ['apellidos'];		
+		$usuario ['tipo_usuario_id'] = 3;		
 		$usuario ['password'] = $_POST ['password'];
 		$usuario ['email'] = $_POST ['email'];
-		$usuario ['estado_civil_id'] = $_POST ['estado_civil_id'];
+		$usuario ['activo'] = 0;
 		
 		$model = new RegistroModel ();
 		try {

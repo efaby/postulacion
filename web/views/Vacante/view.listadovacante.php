@@ -12,12 +12,7 @@
 		<?php endif;?>
 		
 			<div class="the-box">
-				<p>
-					<button class="btn btn-large btn-info" id="modalOpen">
-						<i class="glyphicon glyphicon-plus"></i> &nbsp; Add Records
-					</button>
-				</p>
-
+				
 				<table class="table table-striped table-hover"
 					id="datatable-example">
 					<thead class="the-box dark full">
@@ -42,7 +37,7 @@
 							<td style="text-align: center"><?php $fechas = explode('-', $dato["fecha_inicio_postulacion"]); echo $fechas[2] ." - ". $meses[$fechas[1] - 1] ." - " .$fechas[0]; ?> / <?php $fechas = explode('-', $dato["fecha_fin_postulacion"]); echo $fechas[2] ." - ". $meses[$fechas[1] - 1] ." - " .$fechas[0]; ?></td>														
 							<td align="center">							
 							<a href="#"
-								onclick="javascript: loadModal(<?php echo $dato["id"]; ?>);"><span class="label label-primary">Aplicar</span></a> </td>
+								onclick="javascript: loadModal(<?php echo $dato["id"]; ?>);" class="btn btn-info btn-xs">Aplicar</a> </td>
 						</tr>
 								<?php endforeach;?>
 							</tbody>

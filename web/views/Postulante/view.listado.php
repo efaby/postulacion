@@ -63,8 +63,9 @@
 												value="<?php echo $usuario['url_cedula'];?>"> <input
 												type="hidden" name="opcion" value="2">
 											<?php if($usuario['url_cedula']!=''):?>
+											<br>
 												<a
-												href="index.php?action=downloadFile&nameFile=<?php echo $usuario['url_cedula'];?>">Descargar</a>
+												href="index.php?action=downloadFile&nameFile=<?php echo $usuario['url_cedula'];?>" class="btn btn-info btn-xs">Descargar</a>
 											<?php endif;?>
 											</form>
 									</div>
@@ -79,7 +80,8 @@
 												value="<?php echo $usuario['url_papeleta'];?>"> <input
 												type="hidden" name="opcion" value="3">
 												<?php if($usuario['url_papeleta']!=''):?>
-													<a
+												<br>
+													<a class="btn btn-info btn-xs"
 												href="index.php?action=downloadFile&nameFile=<?php echo $usuario['url_papeleta'];?>">Descargar</a>
 												<?php endif;?>
 											</form>
@@ -95,7 +97,8 @@
 												value="<?php echo $usuario['url_hoja'];?>"> <input
 												type="hidden" name="opcion" value="4">
 												<?php if($usuario['url_hoja']!=''):?>
-													<a
+												<br>
+													<a class="btn btn-info btn-xs"
 												href="index.php?action=downloadFile&nameFile=<?php echo $usuario['url_hoja'];?>">Descargar</a>
 												<?php endif;?>	
 											</form>
@@ -278,7 +281,7 @@
 												<td><?php echo $dato["registro_senecyt"]; ?></td>
 												<td><?php echo $dato["pais"]; ?></td>
 												<td><a
-													href="index.php?action=downloadFile&nameFile=<?php echo $dato["url"];?>">Descargar</a></td>
+													href="index.php?action=downloadFile&nameFile=<?php echo $dato["url"];?>" class="btn btn-info btn-xs">Descargar</a></td>
 												<td align="center"><a href="#"
 													onclick="javascript: loadModal(<?php echo $dato["id"]; ?>,'Registro Título',1);"><i
 														class="glyphicon glyphicon-edit"></i></a> &nbsp;&nbsp; <a
@@ -325,7 +328,7 @@
 												<td><?php echo $dato["horas"]; ?></td>
 												<td><?php echo $dato["anio"]; ?></td>
 												<td><a
-													href="index.php?action=downloadFile&nameFile=<?php echo $dato["url"];?>">Descargar</a></td>
+													href="index.php?action=downloadFile&nameFile=<?php echo $dato["url"];?>" class="btn btn-info btn-xs">Descargar</a></td>
 												<td align="center"><a href="#"
 													onclick="javascript: loadModal(<?php echo $dato["id"]; ?>,'Registro Curso',2);"><i
 														class="glyphicon glyphicon-edit"></i></a> &nbsp;&nbsp; <a
@@ -374,7 +377,7 @@
 												<td><?php echo $dato["cargo"]; ?></td>
 												<td><?php echo $dato["ciudad"]; ?></td>
 												<td><a
-													href="index.php?action=downloadFile&nameFile=<?php echo $dato["url"];?>">Descargar</a></td>
+													href="index.php?action=downloadFile&nameFile=<?php echo $dato["url"];?>" class="btn btn-info btn-xs">Descargar</a></td>
 												<td align="center"><a href="#"
 													onclick="javascript: loadModal(<?php echo $dato["id"]; ?>,'Registro Historial Laboral',3);"><i
 														class="glyphicon glyphicon-edit"></i></a> &nbsp;&nbsp; <a

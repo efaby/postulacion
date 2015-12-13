@@ -61,9 +61,8 @@
 								<form method="post" id="frmAccion">
 									<input name="id" id="id" value="<?php echo $dato["id"]; ?>" type="hidden">
 									<input name="etapa" id="etapa" value="<?php echo $etapa; ?>" type="hidden">
-									<a href="#"
-									onclick="javascript: loadPage();"><span
-										class="label label-primary">Evaluar</span></a>
+									<a href="#" class="btn btn-info btn-xs"
+									onclick="javascript: loadPage();">Evaluar</a>
 								</form>
 							</td>
 						</tr>

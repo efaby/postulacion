@@ -2651,7 +2651,7 @@
     $.fn.fileinputLocales.en = {
         fileSingle: 'file',
         filePlural: 'files',
-        browseLabel: 'Browse &hellip;',
+        browseLabel: 'Seleccionar &hellip;',
         removeLabel: 'Borrar',
         removeTitle: 'Borra el Archivo selecionado',
         cancelLabel: 'Cancel',

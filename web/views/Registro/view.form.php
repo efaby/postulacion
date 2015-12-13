@@ -123,41 +123,11 @@
 		</div>
 	</div>
 
-	<div class="form-group col-sm-12 rows">
-		<div class="form-group col-sm-4">
-			<label class="control-label">Género</label>
-			<select class='form-control' name="genero">
-				<option value="" >Seleccione</option>
-				<option value="f" >Femenino</option>
-				<option value="m" >Masculino</option>
-			</select>
-	
-		</div>
-		<div class="form-group  col-sm-4">
-			<label class="control-label">Estado Civil</label>
-			<select class='form-control' name="estado_civil_id">
-				<option value="" >Seleccione</option>
-			<?php foreach ($estados as $dato) { ?>
-				<option value="<?php echo $dato['id'];?>"><?php echo $dato['nombre'];?></option>
-			<?php }?>
-			</select>	
-		</div>
-		<div class="form-group  col-sm-4">
-			<label class="control-label">Capacidad Especial</label>
-			<select class='form-control' name="capacidad_especial_id">
-				<option value="" >Seleccione</option>
-			<?php foreach ($capacidades as $dato) { ?>
-				<option value="<?php echo $dato['id'];?>"><?php echo $dato['nombre'];?></option>
-			<?php }?>
-			</select>
-	
-		</div>
-		
-	</div>
 	
 	<div class="form-group rowBottom" >
 	<input type='hidden' name='id' class='form-control' value="0">
 		<button type="submit" class="btn btn-success">Registrarme</button>
+		<a href="../../index.php" class="btn btn-info">Regresar</a>
 	</div>
 
 </form>
