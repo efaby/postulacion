@@ -250,7 +250,7 @@
 									<h4>Registros de Títulos</h4>
 									<p>
 										<button class="btn btn-large btn-info" id="modalOpen">
-											<i class="glyphicon glyphicon-plus"></i> &nbsp; Add Records
+											<i class="glyphicon glyphicon-plus"></i> &nbsp; Añadir
 										</button>
 									</p>
 
@@ -300,7 +300,7 @@
 									<h4>Registros de Cursos</h4>
 									<p>
 										<button class="btn btn-large btn-info" id="modalOpen1">
-											<i class="glyphicon glyphicon-plus"></i> &nbsp; Add Records
+											<i class="glyphicon glyphicon-plus"></i> &nbsp; Añadir
 										</button>
 
 									</p>
@@ -347,7 +347,7 @@
 									<h4>Registros de Historial Laboral</h4>
 									<p>
 										<button class="btn btn-large btn-info" id="modalOpen2">
-											<i class="glyphicon glyphicon-plus"></i> &nbsp; Add Records
+											<i class="glyphicon glyphicon-plus"></i> &nbsp; Añadir
 										</button>
 
 									</p>
