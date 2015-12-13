@@ -39,8 +39,15 @@ class EvaluacionModel {
 		$sql = "update evaluacion set activo = 0 where postulacion_id = ".$objeto[0]["postulacion_id"];
 		$result = $model->runSql($sql);
 		$evaluacion_id = $model->saveData($objeto[0], 'evaluacion');
-		//$objeto[1]["evaluacion_id"] = $evaluacion_id;	
-		
+		$objeto[1]["evaluacion_id"] = $evaluacion_id;	
+		$respuesta["desempenio_id"] =  $model->saveData($objeto[1], 'desempenio');
+		$respuesta["id"] = 0;
+		foreach ($objeto[2] as $item){
+			$respuesta["valor"] = $item["valor"]; 
+			$respuesta["pregunta_id"] = $item["pregunta_id"];
+			$valor = $model->saveData($respuesta, 'respuesta');
+		}	
+		return $evaluacion_id;
 	}
 	
 	public function getPreguntas(){
@@ -49,4 +56,21 @@ class EvaluacionModel {
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
 	}
+	
+	public function getPostulante($id){
+		$model = new model();
+		$sql = " select postulante_id from postulacion where id = ".$id;
+		$result = $model->runSql($sql);
+		$resultArray =  $model->getRows($result);
+		return $resultArray[0]["postulante_id"];
+	}
+	
+	public function getUsuario($id){
+		$model = new model();
+		$sql = " select nombres, apellidos from usuario where id = ".$id;
+		$result = $model->runSql($sql);
+		$resultArray =  $model->getRows($result);
+		return $resultArray[0];
+	}
+	
 }

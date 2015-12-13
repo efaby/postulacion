@@ -60,6 +60,8 @@ class PostulacionController {
 			break;
 			case 4: $prefix = "_entrevista";
 			break;
+			case 5: $prefix = "_entrevista";
+			break;
 		}
 		return $prefix;
 	}
@@ -113,7 +115,13 @@ class PostulacionController {
 	public function loadFormEvaluacion(){
 		$opcion = $_GET["opcion"];
 		$postulacion = $_GET["id"];
+		if($opcion == 5){
+			$model = new PostulacionModel();
+			$evaluaciones = $model->getEvaluaciones($postulacion);
+			require_once "view.formEvaluaciones.php";
+		} else {
+			require_once "view.formEvaluacion.php";
+		}
 		
-		require_once "view.formEvaluacion.php";
 	}
 }

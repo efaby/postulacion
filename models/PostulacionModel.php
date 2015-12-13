@@ -22,8 +22,12 @@ class PostulacionModel {
 	
 	public function getEvaluaciones(){
 		$id = $_GET['id'];
+		return $this->loadEvaluaciones($id);
+	}
+	
+	private function loadEvaluaciones($id){
 		$model = new model();
-		$sql = "select et.nombre, e.valor, e.fecha, e.observacion  from evaluacion as e 
+		$sql = "select et.nombre, e.valor, e.fecha, e.observacion, e.url  from evaluacion as e
 				inner join etapa et on e.etapa_id = et.id
 				where postulacion_id = ".$id;
 		$result = $model->runSql($sql);
@@ -107,5 +111,9 @@ class PostulacionModel {
 		$sql = "update evaluacion set activo = 0 where postulacion_id = ".$objeto["postulacion_id"];
 		$result = $model->runSql($sql);
 		return $model->saveData($objeto, 'evaluacion');
+	}
+	
+	public function getEvaluacionesListado($id){
+		return $this->loadEvaluaciones($id);
 	}
 }

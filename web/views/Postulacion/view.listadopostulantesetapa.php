@@ -118,6 +118,10 @@ function loadPage(id,opcion){
 			if(opcion==2){
 				title = "Evaluación Conocimientos";
 			}
+			if(opcion==5){
+				title = "Designación de Ganador";
+			}
+			
 			$(".modal-header h3").html(title);
 			
 			$('.modal-body').load('index.php?action=loadFormEvaluacion&id=' + id + '&opcion=' + opcion,function(result){

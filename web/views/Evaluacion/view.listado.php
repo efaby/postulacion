@@ -1,4 +1,4 @@
-<<?php $title = "Evaluación al Desempeño Docente";?>
+<?php $title = "Evaluación al Desempeño Docente";?>
 <?php include_once PATH_TEMPLATE.'/header.php';?>
 <div class="section">
 	<div class="content">
@@ -13,56 +13,49 @@
 		
 			<div class="the-box">
 					<form id="frmEvaluacion" name="frmEvaluacion" method="post" action="index.php?action=saveData">
-						<div class="form-group">
+						<div class="form-group col-sm-6">
+							<label class="control-label">Nombre del Docente</label>
+							<?php echo $postulante["nombres"]. " ". $postulante["apellidos"]?>
+						</div>
+						
+						<div class="form-group col-sm-6">
+							<label class="control-label">Nombre del Observador</label>
+							<?php echo $usuario["nombres"]. " ". $usuario["apellidos"]?>							
+						</div>	
+						<div class="form-group col-sm-6">
 							<label class="control-label">Grado/Curso</label> <input type='text'
 								name='curso' class='form-control'
-								value="<?php echo $evaluacion['curso']; ?>">
-						</div>
-					
-						<div class="form-group">
-							<label class="control-label">Nombre del Docente</label>
-							<input type='text'
-								name='nombre_docente' class='form-control'
-								value="<?php echo $evaluacion['nombre_docente']; ?>">
-						</div>
+								value="">
+						</div>					
 						
-						<div class="form-group">
+						<div class="form-group col-sm-6">
 							<label class="control-label">Fecha</label>
 							<div class="input-group input-daterange">
-					    		<input id="fecha_evaluacion" name="fecha_evaluacion" type="text" class="form-control" value="<?php echo $evaluacion['fecha']; ?>">					    		
+					    		<input id="fecha_evaluacion" name="fecha_evaluacion" type="text" class="form-control" value="">					    		
 							</div>	
 						</div>
-						
-						<div class="form-group">
-							<label class="control-label">Asignatura</label>
-							<input type='text'
-								name='asignatura' class='form-control'
-								value="<?php echo $evaluacion['asignatura']; ?>">
-						</div>
-						
-						
-						<div class="form-group">
+						<div class="form-group col-sm-12">
 							<label class="control-label">Tema</label>
 							<input type='text'
 								name='tema' class='form-control'
-								value="<?php echo $evaluacion['tema']; ?>">
+								value="">
 						</div>
 						
-						<div class="form-group">
-							<label class="control-label">Nombre del Observador</label>
+						<div class="form-group col-sm-6">
+							<label class="control-label">Asignatura</label>
 							<input type='text'
-								name='nombre_observador' class='form-control'
-								value="<?php echo $evaluacion['nombre_observador']; ?>">							
-						</div>	
+								name='asignatura' class='form-control'
+								value="">
+						</div>					
 						
-						<div class="form-group">
+						<div class="form-group col-sm-6">
 							<label class="control-label">Período Académico</label>
 							<input type='text'
 								name='periodo_academico' class='form-control'
-								value="<?php echo $evaluacion['periodo_academico']; ?>">	
+								value="">	
 						</div>	
 						
-						<div class="form-group">
+						<div class="form-group col-sm-12">
 							<div class="panel panel-info">
 							  <div class="panel-heading">
 								<h3 class="panel-title">OBJETIVO</h3>
@@ -81,7 +74,7 @@
 							</div>
 							</div>
 						</div>		
-						<div class="form-group">
+						<div class="form-group col-sm-12">
 								<?php $estado=""; $id=1;?>
 								<?php foreach ($preguntas as $pregunta): ?>
 									<input type="hidden" name="pregunta<?php echo $id; ?>" value="<?php echo $pregunta["id"]; ?>">
@@ -150,26 +143,25 @@
 								</div>
 								</div>		
 						</div>						
-						<div class="form-group">
-							<label class="control-label">Fortalezas</label> <input type='text'
-								name='fortalezas' class='form-control'
-								value="<?php echo $evaluacion['fortalezas']; ?>">
+						<div class="form-group col-sm-12">
+							<label class="control-label">Fortalezas</label> 
+							
+							
+							<textarea name='fortalezas' class='form-control'> </textarea>
 						</div>
 											
-						<div class="form-group">
-							<label class="control-label">Debilidades</label> <input type='text'
-								name='debilidades' class='form-control'
-								value="<?php echo $evaluacion['debilidades']; ?>">
+						<div class="form-group col-sm-12">
+							<label class="control-label">Debilidades</label> 
+							<textarea name='debilidades' class='form-control'></textarea>
 						</div>
 
-						<div class="form-group">
-							<label class="control-label">Observaciones</label> <input type='text'
-								name='observaciones' class='form-control'
-								value="<?php echo $evaluacion['observaciones']; ?>">
+						<div class="form-group col-sm-12">
+							<label class="control-label">Observaciones</label> 
+							<textarea name='observaciones' class='form-control'></textarea>
 						</div>
 															
-						<div class="form-group">
-						<input type='hidden' name='id' class='form-control' value="<?php echo $vacante['id']; ?>">
+						<div class="form-group" style="padding-left: 15px;">
+						<input type='hidden' name='postulacion_id' class='form-control' value="<?php echo $postulacion_id; ?>">
 						<input type='hidden' name='contador' class='form-control' value="<?php echo $id-1;?>">
 							<button type="submit" class="btn btn-success">Guardar</button>
 						</div>					
