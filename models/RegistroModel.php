@@ -23,17 +23,10 @@ class RegistroModel {
 	}
 
 	
-	public function getCapacidadEspecial(){
-		$model = new model();
-		$sql = "select * from capacidad_especial";
-		$result = $model->runSql($sql);
-		return $model->getRows($result);
-	}
-	
-	public function getEstadoCivil(){
-		$model = new model();
-		$sql = "select * from estado_civil";
-		$result = $model->runSql($sql);
-		return $model->getRows($result);
+	public function activarCuenta($user){
+		$model =  new model();
+		$sql = "Update usuario set activo = 1 where username = ".$user;
+		$result = $model->runSql($sql);		
+		return null;
 	}
 }
