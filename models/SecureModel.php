@@ -19,7 +19,7 @@ class SecureModel {
 	
 	public function validationUser($login, $password){
 		$model = new model();
-		$sql = "select id, nombres, apellidos, tipo_usuario_id
+		$sql = "select id, nombres, apellidos, tipo_usuario_id, activo
 				from usuario
 				where username= '".$login."' and password = '".md5($password)."'";
 		

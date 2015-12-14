@@ -22,12 +22,17 @@ class SecureController {
 		$response['band'] = 0;
 		if($result)
 		{
-			session_regenerate_id();
-			$result['urls'] = $model->getUrlsAccess($result["tipo_usuario_id"]);
-			$_SESSION['SESSION_USER'] = $result;			
-			session_write_close();
-			$urlWeb = $this->getPrefixUrl();
-			$response['data'] = $urlWeb."views/Secure/index.php?action=welcome";			
+			if($result["activo"]){
+				session_regenerate_id();
+				$result['urls'] = $model->getUrlsAccess($result["tipo_usuario_id"]);
+				$_SESSION['SESSION_USER'] = $result;
+				session_write_close();
+				$urlWeb = $this->getPrefixUrl();
+				$response['data'] = $urlWeb."views/Secure/index.php?action=welcome";
+			}else {
+				$response['data'] = 'Usuario no Activo.';
+				$response['band'] = 1;
+			}					
 		} else {
 				$response['data'] = 'Credenciales Inválidas.';
 				$response['band'] = 1;
@@ -66,36 +71,7 @@ class SecureController {
 		$paginator = new paginator("listForm", $totalItems, $offset, LIMIT_PAGE);
 		$datos = $model->getUsersList($offset, LIMIT_PAGE);
 		require_once "view.listado.php";
-	}
-	
-	public function insertData(){
-		$user =  Array ( 'id' => '' ,'identity_card' => '','names' => '','lastnames' => '','name_user' => '');
-		$model = new SecureModel();
-		$userType = $model->getCatalog("user_type");
-		$cities = $model->getCatalog("city");
-		require_once "view.insertar.php";
-	}
-	
-	public function editData(){
-		$model = new SecureModel();
-		$user = $model->getUser();
-		$model = new model();
-		$userType = $model->getCatalog("user_type");
-		$cities = $model->getCatalog("city");
-		require_once "view.insertar.php";
-	}
-	
-	public function saveData(){
-		$model = new SecureModel();
-		$datos = $model->saveUser();
-		header('Location: index.php');
-	}
-	
-	public function deleteData(){
-		$model = new SecureModel();
-		$datos = $model->deleteUser();
-		header('Location: index.php');
-	}
+	}	
 	
 	private function getPrefixUrl(){
 		$url = $_SERVER['REQUEST_URI'];
@@ -106,18 +82,7 @@ class SecureController {
 		return $urlWeb;
 	}
 	
-	public function editActive(){
-		$model = new SecureModel();
-		try{
-			$datos = $model->editActive();		
-			$_SESSION['message'] = "Se ha cambiado el estado satisfactoriamente.";
-		}
-		catch (Exception $e){
-			$_SESSION['message'] = $e->getMessage();
-		}
-		header('Location: index.php?action=displayList');
-	}
-	
+		
 	public function changePasswordData(){
 		$passwd["p1"] = $_POST['password'];
 		$passwd["p2"] = $_POST['passwordNew'];
@@ -218,65 +183,4 @@ class SecureController {
 		header("Location: index.php?action=resetPassword&tc=".$token);
 	}
 	
-	private function sendMail($user,$token){
-		$email_to  = $user["email"]; // atención a la coma
-		$email_subject = 'Reseteo de Password.';
-		$email_from = EMAIL;
-		// mensaje
-		$message = '<table>
-					    <tr>
-					      <td>Estimado '.$user["names"].',</td>
-					    </tr>
-					    <tr>
-					      <td> Para resetear su contrase&ntilde;a por favor ingrese <a href="http://dominio/web/views/Secure/index.php?action=resetPassword&tc='.$token.'">aquí</a>
-					      	<br><br>
-					      	La Administraci&oacute;n.
-					      </td>
-					    </tr>
-					  </table>';
-	
-		// Para enviar un correo HTML, debe establecerse la cabecera Content-type
-		$headers  = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-	
-		$headers .= 'From: Bolsa de Empleo Dominio <'.$email_from.">\r\n".
-				'Reply-To: '.$email_from."\r\n" .
-				'X-Mailer: PHP/' . phpversion();
-		@mail($email_to, $email_subject, $message, $headers);
-	}
-	
-	public function download(){
-	
-		if (!isset($_GET['file']) || empty($_GET['file'])) {
-			exit();
-		}
-		$root = PATH_FILES;
-		$file = basename($_GET['file']);
-		$path = $root.$file;
-		$type = '';
-	
-		if (is_file($path)) {
-			$size = filesize($path);
-			if (function_exists('mime_content_type')) {
-				$type = mime_content_type($path);
-			} else if (function_exists('finfo_file')) {
-				$info = finfo_open(FILEINFO_MIME);
-				$type = finfo_file($info, $path);
-				finfo_close($info);
-			}
-			if ($type == '') {
-				$type = "application/force-download";
-			}
-			
-			header("Content-Type: $type");
-			header("Content-Disposition: attachment; filename=$file");
-			header("Content-Transfer-Encoding: binary");
-			header("Content-Length: " . $size);
-			print($file);
-			exit();
-			readfile($path);
-		} else {
-			die("El archivo no existe.");
-		}
-	}
 }

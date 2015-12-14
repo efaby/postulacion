@@ -28,7 +28,7 @@ class Email{
 		$this->sendMail($email, "Registro en Sistema de Postulación Docente", $message);
 	}
 	
-	public function sendNotificacionRegistro($name,$postulacion,$email, $token){
+	public function sendNotificacionPostulacion($name,$postulacion,$email, $token){
 		$message = '<table>
 					    <tr>
 					      <td>Estimado '.$name.',</td>

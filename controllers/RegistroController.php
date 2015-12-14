@@ -1,5 +1,6 @@
 <?php
 require_once (PATH_MODELS . "/RegistroModel.php");
+require_once (PATH_HELPERS. "/Email.php");
 /**
  * Controlador de Usuarios
  */
@@ -38,7 +39,7 @@ class RegistroController {
 	public function activarCuenta(){
 		$encode = $_GET["tc"];
 		$user_id = base64_decode($encode);
-		if(strlen($user_id)>10){
+		if(strlen($user_id)>=10){
 			$model = new RegistroModel();
 			$user = $model->activarCuenta($user_id);
 			$activo = 1;

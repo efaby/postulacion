@@ -14,7 +14,8 @@
 	define('PATH_TEMPLATE', "../../template");
 	define('PATH_FILES', PATH_ROOT."/web/files/");
 	define('PATH_FILES_IMAGE', PATH_ROOT."/web/assets/images/users/");
-	define('PATH_HELPERS', PATH_ROOT."/helpers");		
-	define('PUBLIC_URLS', serialize(array('/index.php','index.php?action=validationUser','Registro/index.php','Registro/index.php?action=saveData','Secure/index.php?action=closeSession','Secure/index.php?action=recoverPassword','Secure/index.php?action=recoverPass','Secure/index.php?action=resetPassword','Secure/index.php?action=resetPass', 'Register/index.php?action=loadCity', 'Register/index.php?action=saveData', 'Secure/index.php?action=download','.php')));
+	define('PATH_HELPERS', PATH_ROOT."/helpers");	
+	define('EMAIL', "no-reply@merito.online");
+	define('PUBLIC_URLS', serialize(array('/index.php','index.php?action=validationUser','Registro/index.php','Registro/index.php?action=saveData','Registro/index.php?action=activarCuenta','Secure/index.php?action=closeSession','Secure/index.php?action=recoverPassword','Secure/index.php?action=recoverPass','Secure/index.php?action=resetPassword','Secure/index.php?action=resetPass', 'Register/index.php?action=loadCity', 'Register/index.php?action=saveData','.php')));
 	
 ?>
