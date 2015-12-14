@@ -29,6 +29,7 @@ class RegistroController {
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
+		// enviar email
 		require_once "view.index.php";
 	}
 
