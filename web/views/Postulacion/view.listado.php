@@ -19,7 +19,7 @@
 						<tr>
 							
 							<th>Vacante</th>
-							<th>Area</th>
+							<th>Área</th>
 							<th>Fecha Aplicación</th>
 							<th style="text-align: center">Acciones</th>
 						</tr>

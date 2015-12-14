@@ -8,7 +8,7 @@
 				<th>Fecha</th>
 				<th>Calificación</th>
 				<th>Observaciones</th>
-				<th>Accion</th>
+				<th>Acción</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -37,7 +37,7 @@
 <form action="index.php?action=saveEvaluacion" method="post" id="frmEvaluacion" enctype="multipart/form-data">
 
 				<div class="form-group">
-					<label class="control-label">Designar Ganador de la Postulacion</label> 
+					<label class="control-label">Designar Ganador de la Postulación</label> 
 					<select class='form-control' name="aprobado" id="aprobado" style="width: 220px;">
 				<option value="" >Seleccione</option>
 				<option value="1"  >Si</option>

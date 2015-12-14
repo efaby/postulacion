@@ -69,7 +69,7 @@ $(document).ready(function() {
 				message: 'El Número de Identificación no es válido',
 				validators: {
 							notEmpty: {
-								message: 'la califiación no puede ser vacía.'
+								message: 'La Calificación no puede ser vacía.'
 							},					
 							regexp: {
 								regexp: /^[0-9\.]+$/,
@@ -78,7 +78,7 @@ $(document).ready(function() {
 						}
 					},			
 			observaciones: {
-						message: 'La observación no es válida',
+						message: 'La Observación no es válida',
 						validators: {												
 									regexp: {
 										regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 \.]+$/,

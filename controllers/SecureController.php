@@ -128,7 +128,7 @@ class SecureController {
 			$model = new SecureModel();
 			try {
 				$model->changePassword($passwd["p2"],$user);
-				$_SESSION['message'] = "Su contraseña ha sido cambiada éxitosamente.";
+				$_SESSION['message'] = "Su contraseña ha sido cambiada exitosamente.";
 			}
 			catch (Exception $e){
 				$_SESSION['message'] = $e->getMessage();
@@ -172,7 +172,7 @@ class SecureController {
 		if($user != null){
 			$token = base64_encode($user_id);
 			$this->sendMail($user, $token);
-			$_SESSION['message'] = "Por favor revice su Email. Se ha enviado un link para resetear su contraseña.";
+			$_SESSION['message'] = "Por favor revise su Email. Se ha enviado un link para resetear su contraseña.";
 		} else {
 			$_SESSION['message'] = "El usuario no existe.";
 		}
@@ -228,7 +228,7 @@ class SecureController {
 					      <td>Estimado '.$user["names"].',</td>
 					    </tr>
 					    <tr>
-					      <td> Para resetear su contrase&ntilde;a por favor ingrese <a href="http://dominio/web/views/Secure/index.php?action=resetPassword&tc='.$token.'">aqui</a>
+					      <td> Para resetear su contrase&ntilde;a por favor ingrese <a href="http://dominio/web/views/Secure/index.php?action=resetPassword&tc='.$token.'">aquí</a>
 					      	<br><br>
 					      	La Administraci&oacute;n.
 					      </td>

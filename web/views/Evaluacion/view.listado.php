@@ -224,11 +224,11 @@ $(document).ready(function() {
 					 fecha_evaluacion: {
 						 validators: {
 							 notEmpty: {
-								 message: 'La fecha de evaluacion es requerida y no puede ser vacia'
+								 message: 'La fecha de evaluación es requerida y no puede ser vacía'
 							 },
 							 date:{	 
 								    format: 'YYYY-MM-DD',
-				                    message: 'La fecha de evaluacion del concurso no es válida.'				                    
+				                    message: 'La fecha de evaluación del concurso no es válida.'				                    
 							 }							 
 						 }
 					 },

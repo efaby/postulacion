@@ -79,7 +79,7 @@
 <div class="container">
 
 <div class="title-home">
-	Su registro ha sido procesado con exito. Por fabor inicie sesión en el sitema para que complete sus datso y pueda postular por alguna vacante.
+	Su registro ha sido procesado con éxito. Por favor inicie sesión en el sistema para que complete sus datos y pueda postular por alguna vacante.
 	<p>
 	<br>
 	<a href="../../index.php" class="btn btn-info btn-learn-more">Iniciar Sesión</a></p>

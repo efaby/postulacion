@@ -4,6 +4,6 @@
 <title>Acceso Denegado</title> 
 </head> 
 <body> 
-El documento: <b><?=$_SERVER['REQUEST_URI'];?></b> no ha sidoencontrado en nuestro servidor.<br>
+El documento: <b><?=$_SERVER['REQUEST_URI'];?></b> no ha sido encontrado en nuestro servidor.<br>
 </body> 
 </html> 

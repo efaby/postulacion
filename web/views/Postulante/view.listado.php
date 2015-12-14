@@ -20,7 +20,7 @@
 									Información Personal</a></li>
 							<li class="<?php echo ($opcion==1)?'active':'';?>"><a
 								href="#wizard-1-step2" data-toggle="tab"><i
-									class="fa fa-graduation-cap"></i> Instruccion Formal</a></li>
+									class="fa fa-graduation-cap"></i> Instrucción Formal</a></li>
 							<li class="<?php echo ($opcion==2)?'active':'';?>"><a
 								href="#wizard-1-step3" data-toggle="tab"><i
 									class="fa fa-briefcase"></i> Capacitación</a></li>
@@ -189,7 +189,7 @@
 										</div>
 									<div class="form-group col-sm-12 rows">
 										<div class="form-group col-sm-6">
-											<label class="control-label">Telefono</label> <input
+											<label class="control-label">Teléfono</label> <input
 												type='text' name='telefono' class='form-control'
 												value="<?php echo $usuario['telefono']; ?>">
 
@@ -216,7 +216,7 @@
 										</div>
 										<div class="form-group  col-sm-6">
 										
-											<label class="control-label">Descripcion Discapacidad</label> 
+											<label class="control-label">Descripción Discapacidad</label> 
 											<input type='text'
 												name='descripcion_discapacidad' class='form-control'
 												value="<?php echo $usuario['descripcion_discapacidad']; ?>">
@@ -225,7 +225,7 @@
 										</div>
 										<div class="form-group col-sm-12 rows">
 										<div class="form-group col-sm-6">
-											<label class="control-label">Religion</label> <input
+											<label class="control-label">Religión</label> <input
 												type='text' name='religion' class='form-control'
 												value="<?php echo $usuario['religion']; ?>">
 
@@ -361,7 +361,7 @@
 											<tr>
 												<th style="text-align: center">ID</th>
 												<th>Institución</th>
-												<th>Area</th>
+												<th>Área</th>
 												<th>Cargo</th>
 												<th>Ciudad</th>
 												<th>Archivo</th>
@@ -564,7 +564,7 @@ $(document).ready(function() {
 			},	
 			
 			email: {
-				message: 'El eEmail no es válido',
+				message: 'El Email no es válido',
 				validators: {
 					notEmpty: {
 						message: 'El Email no puede ser vacío'

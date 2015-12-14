@@ -22,7 +22,7 @@
 							<th>Area</th>
 							<th style="text-align: center">Número Vacantes</th>
 							<th style="text-align: center">Experiencia Años</th>
-							<th style="text-align: center">Fecha Postulacion</th>
+							<th style="text-align: center">Fecha Postulación</th>
 							<th style="text-align: center">Acciones</th>
 						</tr>
 					</thead>

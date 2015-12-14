@@ -1,6 +1,6 @@
 
 <div class="footer" id="footer_page">
-© Unidad Educativa "Santa Mariana de Jesús" 2015
+<center>© Unidad Educativa "Santa Mariana de Jesús"  2015</center>
 <script src="<?php echo PATH_CSS . '/../js/jquery.min.js';?>"></script>
 		<script src="<?php echo PATH_CSS . '/../js/bootstrap.min.js';?>"></script>
 		<script src="<?php echo PATH_CSS . '/../plugins/retina/retina.min.js';?>"></script>

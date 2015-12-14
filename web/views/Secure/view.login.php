@@ -108,7 +108,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-5">
-					Copyright &copy; 2014 <a href="#fakelink">Your company</a>
+					Copyright &copy; 2015 <a href="#fakelink">Santa Mariana de Jesús</a>
 				</div>
 				<!-- /.col-sm-5 -->
 				<div class="col-sm-7 text-right">

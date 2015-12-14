@@ -28,11 +28,11 @@
 					<?php echo $usuario["apellidos"]; ?>
 				</div>
 				<div class="form-group  col-sm-6">
-								<label class="control-label">Direccion:</label>&nbsp;&nbsp; 
+								<label class="control-label">Dirección:</label>&nbsp;&nbsp; 
 					<?php echo $usuario["direccion"]; ?>
 				</div>
 				<div class="form-group  col-sm-6">
-						<label class="control-label">Telefono:</label>&nbsp;&nbsp; 
+						<label class="control-label">Teléfono:</label>&nbsp;&nbsp; 
 				<?php echo $usuario["telefono"]; ?>
 				</div>
 				<div class="form-group  col-sm-6">
@@ -54,7 +54,7 @@
 					<tr>
 					<td colspan="2">
 						<div class="form-group  col-sm-3">
-								<label class="control-label">Genero:</label>&nbsp;&nbsp; 
+								<label class="control-label">Género:</label>&nbsp;&nbsp; 
 						<?php echo ($usuario["genero"]=='m')?"Masculino":"Femenino"; ?>
 					</div>
 					<div class="form-group  col-sm-3">
@@ -90,7 +90,7 @@
 					<h4 class="small-title">Títulos</h4>
 					<table class="table table-th-block">
 					<thead>
-						<tr><th style="width: 30px;">No</th><th>Nombre</th><th>Institución</th><th>Registro Senescyt</th><th>Categoría</th><th>Nivel Educación</th><th style="width: 90px;">Accion</th></tr>
+						<tr><th style="width: 30px;">No</th><th>Nombre</th><th>Institución</th><th>Registro Senescyt</th><th>Categoría</th><th>Nivel Educación</th><th style="width: 90px;">Acción</th></tr>
 						</thead>
 						<tbody>
 						<?php $i = 1;?>
@@ -110,7 +110,7 @@
 						<h4 class="small-title">Cursos</h4>
 					<table class="table table-th-block">
 					<thead>
-						<tr><th style="width: 30px;">No</th><th>Nombre</th><th>Horas</th><th>Año</th><th style="width: 90px;">Accion</th></tr>
+						<tr><th style="width: 30px;">No</th><th>Nombre</th><th>Horas</th><th>Año</th><th style="width: 90px;">Acción</th></tr>
 						</thead>
 						<tbody>
 						<?php $i = 1;?>
@@ -128,7 +128,7 @@
 						<h4 class="small-title">Historial Laboral</h4>
 					<table class="table table-th-block">
 					<thead>
-						<tr><th style="width: 30px;">No</th><th>Institución</th><th>Área</th><th>Cargo</th><th>Relación Docencia</th><th>Contacto</th><th style="width: 90px;">Accion</th></tr>
+						<tr><th style="width: 30px;">No</th><th>Institución</th><th>Área</th><th>Cargo</th><th>Relación Docencia</th><th>Contacto</th><th style="width: 90px;">Acción</th></tr>
 						</thead>
 						<tbody>
 						<?php $i = 1;?>
@@ -207,7 +207,7 @@ $(document).ready(function() {
 				message: 'El Número de Identificación no es válido',
 				validators: {
 							notEmpty: {
-								message: 'la califiación no puede ser vacía.'
+								message: 'La Calificación no puede ser vacía.'
 							},					
 							regexp: {
 								regexp: /^[0-9\.]+$/,
@@ -216,11 +216,11 @@ $(document).ready(function() {
 						}
 					},			
 			observaciones: {
-						message: 'La observación no es válida',
+						message: 'La Observación no es válida',
 						validators: {												
 									regexp: {
 										regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 \.]+$/,
-										message: 'Ingrese una observación válida.'
+										message: 'Ingrese una Observación válida.'
 									}
 								}
 							},	

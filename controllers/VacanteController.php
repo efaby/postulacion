@@ -95,7 +95,7 @@ class VacanteController {
 		try {
 			$datos = $model->savePostulacion();
 			// enviar correo electronico
-			$_SESSION ['message'] = "Su postualcion ha ejecutado con éxito.";
+			$_SESSION ['message'] = "Su postulación ha ejecutado con éxito.";
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}

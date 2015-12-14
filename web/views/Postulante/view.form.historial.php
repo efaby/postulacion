@@ -8,7 +8,7 @@
 	</div>
 	<div class="form-group col-sm-12 rows">
 		<div class="form-group col-sm-4">
-			<label class="control-label">Area</label> <input type='text'
+			<label class="control-label">Área</label> <input type='text'
 				name='area' class='form-control'
 				value="<?php echo $historial['area']; ?>">
 	
@@ -31,7 +31,7 @@
 	</div>
 	<div class="form-group col-sm-12 rows">
 		<div class="form-group col-sm-6">
-			<label class="control-label">Telefono</label>
+			<label class="control-label">Teléfono</label>
 			<input type='text'
 				name='telefono' class='form-control'
 				value="<?php echo $historial['telefono']; ?>">
@@ -48,7 +48,7 @@
 	</div>
 	<div class="form-group col-sm-12 rows">
 		<div class="form-group  col-sm-4">
-			<label class="control-label">Pais</label>
+			<label class="control-label">País</label>
 			<select class='form-control' name="pais_id" id="pais_id">
 				<option value="" >Seleccione</option>
 			<?php foreach ($paises as $dato) { ?>
@@ -134,14 +134,14 @@ $(document).ready(function() {
 								}
 							},
 			cargo: {
-						message: 'El Nombre del cargo no es válido',
+						message: 'El Nombre del Cargo no es válido',
 						validators: {
 								notEmpty: {
 								message: 'El Nombre del Nombre del Cargo no puede ser vacío.'
 							},					
 							regexp: {
 									regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
-									message: 'Ingrese un Nombre del Nombre del Cargo válido.'
+									message: 'Ingrese un Nombre del Cargo válido.'
 								}
 							}
 						},

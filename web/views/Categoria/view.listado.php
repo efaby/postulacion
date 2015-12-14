@@ -14,7 +14,7 @@
 			<div class="the-box">
 				<p>
 					<button class="btn btn-large btn-info" id="modalOpen">
-						<i class="glyphicon glyphicon-plus"></i> &nbsp; Add Records
+						<i class="glyphicon glyphicon-plus"></i> &nbsp; Añadir
 					</button>
 				</p>
 
