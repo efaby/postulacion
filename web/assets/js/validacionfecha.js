@@ -84,14 +84,14 @@ $(function () {
     $('#fecha_inicio').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
-      defaultDate: sd, 
+    //  defaultDate: sd, 
      // maxDate: ed 
     });
   
     $('#fecha_fin').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
-      defaultDate: ed, 
+     // defaultDate: ed, 
      // minDate: sd 
     });
 
@@ -192,14 +192,14 @@ $(function () {
     $('#fecha_inicio_postulacion').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
-      defaultDate: sd, 
+     // defaultDate: sd, 
       //maxDate: ed 
     });
   
     $('#fecha_fin_postulacion').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
-      defaultDate: ed, 
+      //defaultDate: ed, 
       //minDate: sd 
     });
 
@@ -234,15 +234,15 @@ $(function () {
     $('#fecha_inicio_calificacion').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
-      defaultDate: sd, 
-      maxDate: ed 
+      //defaultDate: sd, 
+      //maxDate: ed 
     });
   
     $('#fecha_fin_calificacion').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
-      defaultDate: ed, 
-      minDate: sd 
+      //defaultDate: ed, 
+      //minDate: sd 
     });
 
     //passing 1.jquery form object, 2.start date dom Id, 3.end date dom Id
@@ -278,14 +278,14 @@ $(function () {
     $('#fecha_inicio_test').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
-      defaultDate: sd, 
+     // defaultDate: sd, 
      // maxDate: ed 
     });
   
     $('#fecha_fin_test').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
-      defaultDate: ed, 
+      //defaultDate: ed, 
       //minDate: sd 
     });
 
@@ -319,14 +319,14 @@ $(function () {
     $('#fecha_inicio_clase').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
-      defaultDate: sd, 
+     // defaultDate: sd, 
       //maxDate: ed 
     });
   
     $('#fecha_fin_clase').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
-      defaultDate: ed, 
+      //defaultDate: ed, 
       //minDate: sd 
     });
 
@@ -360,14 +360,14 @@ $(function () {
     $('#fecha_inicio_entrevista').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
-      defaultDate: sd, 
+      //defaultDate: sd, 
       //maxDate: ed 
     });
   
     $('#fecha_fin_entrevista').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
-      defaultDate: ed, 
+      //defaultDate: ed, 
       //minDate: sd 
     });
 
