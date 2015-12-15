@@ -43,7 +43,7 @@ class PostulacionModel {
 
 		$model = new model();	
 		$sql = "select v.id, v.titulo  from vacante as v				
-				where now() between fecha_inicio".$sufix." and fecha_fin".$sufix;		
+				where CURDATE() between fecha_inicio".$sufix." and fecha_fin".$sufix;		
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
 	}

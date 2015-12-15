@@ -55,7 +55,7 @@ class VacanteModel {
 	
 	public function getVacantesList($opcion){
 		$model = new model();
-		$sql = "select * from vacante where now() between fecha_inicio".$opcion." and fecha_fin".$opcion . " and
+		$sql = "select * from vacante where CURDATE() between fecha_inicio".$opcion." and fecha_fin".$opcion . " and
 				id not in (select vacante_id from postulacion where postulante_id = ".$_SESSION['SESSION_USER']['id'].")";
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
@@ -63,7 +63,7 @@ class VacanteModel {
 	
 	public function savePostulacion(){
 		$vacante = $_POST['id'];
-		$sql = "Insert into postulacion (fecha, postulante_id, vacante_id) values (now(),".$_SESSION['SESSION_USER']['id'].", ".$vacante.")";
+		$sql = "Insert into postulacion (fecha, postulante_id, vacante_id) values (CURDATE(),".$_SESSION['SESSION_USER']['id'].", ".$vacante.")";
 		$model =  new model();
 		$result = $model->runSql($sql);
 	}
