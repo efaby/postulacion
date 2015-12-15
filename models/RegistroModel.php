@@ -29,4 +29,17 @@ class RegistroModel {
 		$result = $model->runSql($sql);		
 		return null;
 	}
+	
+	public function verificarUsuario($usuario){
+		$model =  new model();
+		$sql = "Select * from usuario where numero_identificacion = ".$usuario;
+		$result = $model->runSql($sql);
+		$resultArray = $model->getRows($result);
+
+		if(count($resultArray)>0){
+			return false;
+		} else {
+			return true;
+		}
+	}
 }

@@ -9,6 +9,7 @@ class RegistroController {
 	public function display() {
 		$model = new RegistroModel ();
 		$message = "";
+		$usuario = array('numero_identificacion' => '','nombres'=>'','apellidos'=>'','email'=>'');
 		require_once "view.form.php";
 	}
 	
@@ -20,20 +21,26 @@ class RegistroController {
 		$usuario ['tipo_usuario_id'] = 3;		
 		$usuario ['password'] = $_POST ['password'];
 		$usuario ['email'] = $_POST ['email'];
-		$usuario ['activo'] = 0;
-		
+		$usuario ['activo'] = 0;		
 		$model = new RegistroModel ();
-		try {
-			$datos = $model->saveUsuario ( $usuario );
-		} catch ( Exception $e ) {
-			$_SESSION ['message'] = $e->getMessage ();
+		if($model->verificarUsuario($usuario ['numero_identificacion'])){
+			try {
+				$datos = $model->saveUsuario ( $usuario );
+			} catch ( Exception $e ) {
+				$_SESSION ['message'] = $e->getMessage ();
+			}
+			// enviar email
+			$token = base64_encode($usuario ['numero_identificacion']);
+			$email = new Email();
+			$email->sendNotificacionRegistro($usuario ['nombres'],$usuario ['email'] , $token);
+			$activo = 0;
+			require_once "view.index.php";
+			exit();
+		} else {
+			$_SESSION ['message'] = "Ya éxiste un usuario con el Número de Identificacion ingresado. Por favor revise sus datos.";
+			require_once "view.form.php";
 		}
-		// enviar email
-		$token = base64_encode($usuario ['numero_identificacion']);
-		$email = new Email();
-		$email->sendNotificacionRegistro($usuario ['nombres'],$usuario ['email'] , $token);
-		$activo = 0;
-		require_once "view.index.php";
+		
 	}
 	
 	public function activarCuenta(){

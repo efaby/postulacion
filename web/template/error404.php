@@ -1,25 +1,12 @@
-<?php 
-define("PATH_ROOT", $_SERVER['DOCUMENT_ROOT']."/bolsa");
-require_once(PATH_ROOT . "/config/config.inc");
-?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<link rel="shortcut icon" href="<?php echo $urlWeb; ?>images/favicon.ico">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Error 404</title>
-<link rel="stylesheet" type="text/css" href="<?php echo PATH_CSS . '/style.css'; ?>" media="screen" />
-</head>
-<body>
-<?php include_once 'header.php';?>
-<section>
+<?php define("PATH_ROOT", $_SERVER['DOCUMENT_ROOT']."/postulacion"); ?>
+<?php require_once(PATH_ROOT . "/config/config.inc"); ?>
+<?php $title = "Pagina no Encontrada";?>
+<?php include_once PATH_ROOT.'/web/template/header.public.php';?>
 <div class="content">
-<h2>Página no Encontrada</h2>
 <div style="text-align: center; width: 980px; margin: 20px;">
 <img src="<?php echo PATH_IMAGES. "/404.png"; ?>" >
 </div>
 </div>
-</section>
-<?php include_once 'footer.php';?>
+<?php include_once PATH_ROOT.'/web/template/footer.php';?>
 </body>
 </html>

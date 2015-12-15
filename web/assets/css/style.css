@@ -4409,7 +4409,7 @@ DROPDOWN
 	border-radius: 3px;
 }
 
-.dropdown-menu.with-triangle{top: 90%;}
+.dropdown-menu.with-triangle{top: 200%;}
 .dropdown-menu.with-triangle:before {
 	position: absolute;
 	top: -7px;
@@ -4459,7 +4459,7 @@ DROPDOWN
 .dropdown-menu.primary > li > a:hover,
 .dropdown-menu.primary > li > a:focus {
 	color: #fff;
-	background-color: #48CFAD;
+	background-color: #3bafda;
 }
 .dropdown-menu.primary > .active > a,
 .dropdown-menu.primary > .active > a:hover,
@@ -6246,3 +6246,16 @@ iframe {
 	width: 680px;
 	color: #fff;
 }
+
+.avatar {
+    height: 40px;
+    margin-bottom: -11px;
+    margin-right: 10px;
+    margin-top: -13px;
+    position: relative;
+    width: 40px;
+}
+
+.navbar-right .dropdown-menu.with-triangle::before, .pull-right .dropdown-menu.with-triangle::before, .dropdown-menu.pull-right.with-triangle::before {
+    left: auto;
+    right: 12px;

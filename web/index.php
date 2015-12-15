@@ -24,6 +24,8 @@ if(isset($_GET['action'])){
 	}	
 }
 
+
+
 if (isset($_SESSION['SESSION_USER'])){
 
 	if((!in_array($url, $_SESSION['SESSION_USER']['urls']))){
@@ -47,6 +49,7 @@ if (isset($_SESSION['SESSION_USER'])){
 if(!isset($app)){
 	$app = 'Secure';
 }	
+
 require_once(PATH_CONTROLLERS."/".$app."Controller.php");
 $controllerName = $app."Controller";
 $controller = new $controllerName();

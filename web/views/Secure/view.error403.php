@@ -1,5 +1,5 @@
 <?php $title = "Permiso Denegado";?>
-<?php include_once PATH_TEMPLATE.'/header.php';?>
+<?php include_once PATH_TEMPLATE.'/header.public.php';?>
 <div class="section">
 <div class="content">
 <div class="container">

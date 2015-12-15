@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,14 +48,28 @@
 					<a href="index.html"><img src="<?php echo PATH_CSS . '../img/logo.png';?>" alt="Logo"></a>
 				</div><!-- /.logo -->
 				<!-- End logo -->
-				
+				<?php if(isset($_SESSION['SESSION_USER'])):?>
+				<!-- Begin user session nav -->
+						<ul class="nav-user navbar-right" style="float: right; margin-top: 25px;">
+							<li class="dropdown"  style="list-style-type: none;">
+							  <a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
+								<img src="<?php echo PATH_CSS . '/../img/avatar/avatar.jpg'; ?>" class="avatar img-circle" alt="Avatar">
+								
+							  </a>
+							  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
+								<li><a href="lock-screen.html">Cambiar Contraseña</a></li>
+								<li><a href="../Secure/index.php?action=closeSession">Cerrar Sesión</a></li>
+							  </ul>
+							</li>
+						</ul>
+						<!-- End user session nav -->
 				
 				<!-- Begin nav menu -->
 				<ul class="menus">
 					<li class="parent">
 						<a href="../Secure/index.php?action=welcome">Inicio</a>						
 					</li>
-					<?php if(isset($_SESSION['SESSION_USER'])):?>
+					
 					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==3):?>
 						<li class="parent"><a href="../Postulante/index.php">Hoja de Vida</a></li>
 					<?php endif;?>
@@ -74,10 +88,12 @@
 					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==1):?>
 						<li class="parent"><a href="../Usuario/index.php">Usuarios</a></li>
 					<?php endif;?>
-					<?php endif;?>
-					<li class="parent"><a href="../Secure/index.php?action=closeSession">Salir</a></li>
-					
+								
 				</ul>
+				
+				<?php endif;?>		
+				
+				
 				<!-- End nav menu -->
 			</div><!-- /.container -->
 		</div><!-- /.top-navbar -->
