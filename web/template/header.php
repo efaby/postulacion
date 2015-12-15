@@ -57,7 +57,7 @@
 								
 							  </a>
 							  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
-								<li><a href="lock-screen.html">Cambiar Contraseña</a></li>
+								<li><a href="../Secure/index.php?action=changePassword">Cambiar Contraseña</a></li>
 								<li><a href="../Secure/index.php?action=closeSession">Cerrar Sesión</a></li>
 							  </ul>
 							</li>

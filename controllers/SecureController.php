@@ -84,9 +84,9 @@ class SecureController {
 	
 		
 	public function changePasswordData(){
-		$passwd["p1"] = $_POST['password'];
-		$passwd["p2"] = $_POST['passwordNew'];
-		$passwd["p3"] = $_POST['repeatPasswordNew'];
+		$passwd["p1"] = $_POST['passwordAnterior'];
+		$passwd["p2"] = $_POST['password'];
+		$passwd["p3"] = $_POST['password1'];
 		$user = $_SESSION['SESSION_USER']['id'];
 		$message = $this->validate($passwd,$user);		
 		if($message == ''){

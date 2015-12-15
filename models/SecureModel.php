@@ -108,14 +108,14 @@ class SecureModel {
 	
 	public function verifyPass($pass, $user){
 		$model =  new model();
-		$sql = "select id from user where id = ".$user." and password = md5('".$pass."')";
+		$sql = "select id from usuario where id = ".$user." and password = md5('".$pass."')";
 		$result = $model->runSql($sql);
 		$resultArray = $model->getRows($result);
 		return count($resultArray);
 	}
 	
 	public function changePassword($passwd,$user){
-		$sql = "update user set password = md5('".$passwd."') where id = ".$user;
+		$sql = "update usuario set password = md5('".$passwd."') where id = ".$user;
 		$model =  new model();
 		$result = $model->runSql($sql);
 	}

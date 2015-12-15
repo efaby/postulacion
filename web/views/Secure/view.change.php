@@ -1,59 +1,130 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="es">
-<head>
-<link rel="shortcut icon" href="<?php echo PATH_IMAGES; ?>/favicon.ico">
-<meta charset="UTF-8" />
-<title>Reestablecer Contraseña</title>
-<link rel="stylesheet" type="text/css" href="<?php echo PATH_CSS . '/style.css'; ?>" media="screen" />
-<script type="text/javascript" src="<?php echo PATH_JS.'/jquery.js'; ?>"></script>
-<script type="text/javascript" src="<?php echo PATH_JS.'/jquery.validate.min.js'; ?>"></script>
-<script type="text/javascript" src="<?php echo PATH_JS.'/password.js'; ?>"></script>
-</head>
-<body>
+<?php $title = "Cambiar contraseña";?>
 <?php include_once PATH_TEMPLATE.'/header.php';?>
-<section>
-<div class="content">
-	<h2>Reestablecer Contraseña</h2>
-	<?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
-<div class="message">
-	<?php echo $_SESSION['message'];$_SESSION['message'] = ''?>
-</div>
-<?php endif;?>
-	<form method="post" action="index.php?action=changePasswordData" id="passwordForm" name="passwordForm">
-		<table border="0" align="center" cellpadding="2" cellspacing="0" class="table" style="width: 100%;">
-			<tr>
-				<td width="200" valign="top">
-					<b>Contraseña Actual:</b>
-				</td>
-				<td width="220">
-					<input id="password" name="password" type="password" />
-				</td>
-	    	</tr>
-	    	<tr>
-				<td width="200" valign="top">
-					<b>Nueva Contraseña:</b>
-				</td>
-				<td width="220">
-					<input id="passwordNew" name="passwordNew" type="password" />
-				</td>
-	    	</tr>
-	    	<tr>
-				<td width="190" valign="top">
-					<b>Repetir Nueva Contraseña:</b>
-				</td>
-				<td width="188">
-					<input id="repeatPasswordNew" name="repeatPasswordNew" type="password" />
-				</td>
-	    	</tr>
-			<tr>
-	    		<td colspan="2" align="center" style="height: 30px;">
-	      			<input type="submit" name="Cambiar Contraseña" value="Cambiar Contraseña" class="buttom-inside" style="width: auto;" />	      	
-	      		</td>
-	    	</tr>
-		</table>
+<div class="section">
+	<div class="content">
+		<div class="container">
+		<?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
+		<div class="alert alert-success fade in alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert"
+					aria-hidden="true">&times;</button>
+								  <?php echo $_SESSION['message'];$_SESSION['message'] = ''?>
+								</div>
+		<?php endif;?>
+		
+			<div class="the-box">
+			
+	<form method="post" action="index.php?action=changePasswordData" id="frmUsuario" name="frmUsuario">
+		
+		
+		<div class="form-group col-sm-12 rows">
+		<div class="form-group col-sm-4">
+			<label class="control-label">Contraseña Actual</label>
+			<input type="password"
+				name='passwordAnterior' class='form-control'
+				value="">	
+		</div>
+		<div class="form-group col-sm-4">
+			<label class="control-label">Nueva Contraseña</label>
+			<input type="password"
+				name='password' class='form-control'
+				value="">
+	
+		</div>
+		<div class="form-group col-sm-4">
+			<label class="control-label">Repetir Contraseña</label>
+			<input type="password"
+				name='password1' class='form-control'
+				value="">	
+		</div>
+	</div>
+		
+		<div class="form-group rowBottom" >
+		<button type="submit" class="btn btn-info">Cambiar Contraseña</button>
+	</div>
+		
 	</form>
 	</div>
-	</section>
+	</div>
+	</div>
+	</div>
+	
+	
 <?php include_once PATH_TEMPLATE.'/footer.php';?>
+<script
+	src="<?php echo PATH_CSS . '/../plugins/validator/bootstrapValidator.min.js';?>"></script>
+<script src="<?php echo PATH_CSS . '/../js/apps.js';?>"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $('#frmUsuario').bootstrapValidator({
+    	message: 'This value is not valid',
+		feedbackIcons: {
+			valid: 'glyphicon glyphicon-ok',
+			invalid: 'glyphicon glyphicon-remove',
+			validating: 'glyphicon glyphicon-refresh'
+		},
+		fields: {			
+			passwordAnterior: {
+				message: 'La Contraseña Anterior no es válida',
+				validators: {
+					notEmpty: {
+						message: 'La Contraseña Anterior no puede ser vacía.'
+					},					
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9-_ \.]+$/,
+						message: 'Ingrese una Contraseña Anterior válida.'
+					}
+				}
+			},
+			password: {
+				message: 'La Contraseña no es válida',
+				validators: {
+					notEmpty: {
+						message: 'La Contraseña no puede ser vacía.'
+					},					
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9-_ \.]+$/,
+						message: 'Ingrese una Contraseña válida.'
+					}
+				}
+			},
+			password1: {
+				validators: {
+					notEmpty: {
+						message: 'La contraseña no puede ser vacia.'
+					},
+					identical: {
+						field: 'password',
+						message: 'La contraseña debe ser la misma'
+					}
+				}
+			},
+			email: {
+				message: 'El eEmail no es válido',
+				validators: {
+					notEmpty: {
+						message: 'El Email no puede ser vacío'
+					},
+					emailAddress: {
+						message: 'Ingrese un Email válido.'
+					}
+				}
+			}	
+		}
+	});
+
+});
+</script>
+<style>
+.col-sm-6, .col-sm-4 {
+	padding-left: 0px;
+}
+.rows{
+	padding-right: 0px;
+	}
+	.rowBottom{
+		padding-left: 15px;
+	}
+</style>
 </body>
 </html>
