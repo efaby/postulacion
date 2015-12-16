@@ -3,7 +3,13 @@ define("PATH_ROOT", $_SERVER['DOCUMENT_ROOT']."/postulacion");
 require_once(PATH_ROOT . "/config/config.inc");
 $redirect = "display";
 session_start();
+/*
+ define("PATH_ROOT", __DIR__."/..");
 
+require_once(PATH_ROOT . "/config/config.inc");
+$redirect = "display";
+session_start();
+*/
 $patron = "web/";
 $limit = 4;
 if(mb_stristr($_SERVER["SCRIPT_NAME"],"/views/")){
