@@ -1,4 +1,4 @@
-<?php $title = "Postulaciones";?>
+<?php $title = "Evaluar Postulaciones";?>
 <?php include_once PATH_TEMPLATE.'/header.php';?>
 <div class="section">
 	<div class="content">
@@ -13,15 +13,6 @@
 			<div class="the-box">
 				<div class="form-group col-sm-12 rows">
 				<form action="index.php?action=loadPostulante" method="post" id="frmBuscar">
-					<div class="form-group  col-sm-4 rows">
-						<label class="control-label">Etapa : </label> <select
-							class='form-control' name="etapa_id" id="etapa_id">
-							<option value="">Seleccione</option>
-								<?php foreach ($etapas as $dato) { ?>
-									<option value="<?php echo $dato['id'];?>" <?php if($etapa==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-									<?php }?>
-								</select>
-					</div>
 					<div class="form-group  col-sm-4">
 						<label class="control-label">Vacantes: </label> <select
 							class='form-control' name="vacante_id" id="vacante_id">
@@ -32,6 +23,16 @@
 								</select>							
 							</select>
 					</div>
+					<div class="form-group  col-sm-4 rows">
+						<label class="control-label">Etapa : </label> <select
+							class='form-control' name="etapa_id" id="etapa_id">
+							<option value="">Seleccione</option>
+								<?php foreach ($etapas as $dato) { ?>
+									<option value="<?php echo $dato['id'];?>" <?php if($etapa==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+									<?php }?>
+								</select>
+					</div>
+					
 					<div class="form-group  col-sm-4">					
 						<button type="submit" class="btn btn-success" style="margin-top: 25px;"><i
 									class="fa fa-search"></i> Buscar</button>
@@ -61,6 +62,7 @@
 								<form method="post" id="frmAccion">
 									<input name="id" id="id" value="<?php echo $dato["id"]; ?>" type="hidden">
 									<input name="etapa" id="etapa" value="<?php echo $etapa; ?>" type="hidden">
+									<input  name="vacante" id="vacante" value="<?php echo $vacante; ?>" type="hidden"> 
 									<a href="#" class="btn btn-info btn-xs"
 									onclick="javascript: loadPage();">Evaluar</a>
 								</form>
@@ -130,17 +132,6 @@ function loadPage(id,opcion){
 		
 	}
 }
-
-$(document).ready(function(){
-	   $("#etapa_id").change(function () {
-	           $("#etapa_id option:selected").each(function () {
-	            opcion=$(this).val();
-	            $.post("index.php?action=loadVacante", { opcion: opcion }, function(data){
-	            $("#vacante_id").html(data);
-	            });            
-	        });
-	   });
-});
 
 $(document).ready(function() {
     $('#frmBuscar').bootstrapValidator({

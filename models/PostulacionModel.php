@@ -39,16 +39,15 @@ class PostulacionModel {
 		return $model->getCatalog("etapa");
 	}
 	
-	public function getVacantes($sufix){
+	public function getVacantes(){
 
 		$model = new model();	
-		$sql = "select v.id, v.titulo  from vacante as v				
-				where CURDATE() between fecha_inicio".$sufix." and fecha_fin".$sufix;		
+		$sql = "select v.id, v.titulo  from vacante as v";		
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
 	}
 	
-	public function getPostulantes($etapa, $vacante){
+	public function getPostulantes($etapa, $vacante, $sufix){
 		
 		$sql1 = " select p.id, u.nombres, u.apellidos, u.numero_identificacion, '' as valor, '' as observacion from vacante as v ";
 		$sql = "	inner join postulacion as p on p.vacante_id =  v.id
@@ -60,7 +59,7 @@ class PostulacionModel {
 			$sql .= " inner join evaluacion as e on (e.postulacion_id = p.id and e.activo = 1 and e.aprobado = 1 and etapa_id = ".$etapa.")";
 			$where = "";				
 		}		
-		$sql .= " where v.id = ".$vacante. $where;
+		$sql .= " where v.id = ".$vacante. $where. " and CURDATE() between v.fecha_inicio".$sufix." and v.fecha_fin".$sufix;
 		$model = new model();
 		
 		$result = $model->runSql($sql1.$sql);

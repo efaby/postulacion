@@ -1,4 +1,5 @@
-<?php define("PATH_ROOT", $_SERVER['DOCUMENT_ROOT']."/postulacion"); ?>
+<?php // define("PATH_ROOT", $_SERVER['DOCUMENT_ROOT']."/postulacion"); ?>
+<?php define("PATH_ROOT", __DIR__."/..");?>
 <?php require_once(PATH_ROOT . "/config/config.inc"); ?>
 <?php $title = "Pagina no Encontrada";?>
 <?php include_once PATH_ROOT.'/web/template/header.public.php';?>

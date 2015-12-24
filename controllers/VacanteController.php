@@ -95,11 +95,11 @@ class VacanteController {
 		try {
 			$datos = $model->savePostulacion();
 			// enviar correo electronico
-			$_SESSION ['message'] = "Su postulación ha ejecutado con éxito.";
+			$_SESSION ['message'] = "Su postulación ha realizado con éxito.";
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
-		header ( "Location: index.php?action=vacantes" );
+		header ( "Location: ../Postulacion/index.php" );
 	}
 	
 }

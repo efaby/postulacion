@@ -26,28 +26,14 @@ class PostulacionController {
 		$vacante = isset($_POST ['vacante_id'])?$_POST ['vacante_id']:0;
 		$model = new PostulacionModel ();
 		$etapas = $model->getEtapas();
-		$vacantes =  $datos = array();		
-		
+		$vacantes = $model->getVacantes();		
+		$datos =  array();
 		if($etapa>0){
-			$sufix = $this->getOpcion($etapa);
-			$vacantes = $model->getVacantes($sufix);
-			$datos = $model->getPostulantes($etapa,$vacante);
+			$prefix = $this->getOpcion($etapa);
+			$datos = $model->getPostulantes($etapa,$vacante,$prefix);
 		}		
 		$message = "";
 		require_once "view.listadopostulantesetapa.php";
-	}
-	
-	public function loadVacante(){
-		$opcion = $_POST ['opcion'];
-		$prefix = $this->getOpcion($opcion);
-		$model = new PostulacionModel ();
-		$vacantes = $model->getVacantes($prefix);
-		$html ='<option value="" >Seleccione</option>';
-		foreach ($vacantes as $dato) {
-			$html .='<option value="'.$dato["id"].'" >'.$dato["titulo"].'</option>';
-		}
-		$html .='</select>';
-		echo $html;
 	}
 	
 	private function getOpcion($opcion){
@@ -72,6 +58,8 @@ class PostulacionController {
 
 	public function meritos(){
 		$postulacion  = $_POST["id"];
+		$etapa  = $_POST["etapa"];
+		$vacante  = $_POST["vacante"];
 		$model = new PostulacionModel();
 		$usuario = $model->getPostulante();
 		$cursos = $model->getCursos($usuario["id"]);

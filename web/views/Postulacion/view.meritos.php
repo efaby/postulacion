@@ -172,9 +172,16 @@
 		<input type='hidden' name='postulacion_id' class='form-control' value="<?php echo $postulacion; ?>">
 		<input type='hidden' name='etapa_id' class='form-control' value="1">
 		<button type="submit" class="btn btn-success">Guardar</button>
+		
 	</div>
 				</form>
+				
 				</div>
+				<form action="index.php?action=loadPostulante" method="post">
+			<input name="etapa_id" id="etapa_id" value="<?php echo $etapa; ?>" type="hidden">
+			<input  name="vacante_id" id="vacante_id" value="<?php echo $vacante; ?>" type="hidden"> 
+			<button type="submit" class="btn btn-info">Regresar</button>
+		</form>
 			</div>
 		</div>
 	</div>

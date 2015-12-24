@@ -106,18 +106,12 @@
 
 	<div class="footer">
 		<div class="container">
-			<div class="row">
-				<div class="col-sm-5">
+			<div class="row" >
+				<div class="col-sm-12" style="text-align: center;">
 					Copyright &copy; 2015 <a href="#fakelink">Santa Mariana de Jesús</a>
 				</div>
 				<!-- /.col-sm-5 -->
-				<div class="col-sm-7 text-right">
-					<ul class="list-inline">
-						<li><a href="#fakelink">Terms and condition</a></li>
-						<li><a href="#fakelink">Privacy policy</a></li>
-						<li><a href="#fakelink">FAQ</a></li>
-					</ul>
-				</div>
+				
 				<!-- /.col-sm-7 -->
 			</div>
 			<!-- /.row -->
