@@ -5,7 +5,7 @@
 			<tr>
 				<th style="width: 30px;">No</th>
 				<th style="width: 110px;">Nombre Etapa</th>
-				<th>Fecha</th>
+				<th>Fecha de Etapa</th>
 				<th>Calificación</th>
 				<th>Observaciones</th>
 			</tr>
@@ -21,7 +21,14 @@
 				<td><?php echo $dato["observacion"]; ?></td>
 				<?php $contador++;?>
 			</tr>
-			<?php endforeach;?>
+			<?php endforeach;?>		
+			<?php if ($contador == 6):?>
+			<tr>
+				<td colspan="5">
+					<div class="alert alert-success fade in alert-dismissable">Usted ha sido ganador del concurso, por favor comuníquese con la institución.</div>
+				</td>
+			</tr>
+			<?php endif;?>
 		</tbody>
 	</table>
 </div>

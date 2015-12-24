@@ -22,7 +22,8 @@
 							<th>Area</th>
 							<th style="text-align: center">Número Vacantes</th>
 							<th style="text-align: center">Experiencia Años</th>
-							<th style="text-align: center">Fecha Postulación</th>
+							<th style="text-align: center">Fecha Inicio Postulación</th>
+							<th style="text-align: center">Fecha Fin Postulación</th>
 							<th style="text-align: center">Acciones</th>
 						</tr>
 					</thead>
@@ -34,7 +35,8 @@
 							<td><?php echo $dato["nombre_area"]; ?></td>						
 							<td style="text-align: center"><?php echo $dato["numero_vacantes"]; ?></td>	
 							<td style="text-align: center"><?php echo $dato["experiencia_requerida"]; ?></td>	
-							<td style="text-align: center"><?php $fechas = explode('-', $dato["fecha_inicio_postulacion"]); echo $fechas[2] ." - ". $meses[$fechas[1] - 1] ." - " .$fechas[0]; ?> / <?php $fechas = explode('-', $dato["fecha_fin_postulacion"]); echo $fechas[2] ." - ". $meses[$fechas[1] - 1] ." - " .$fechas[0]; ?></td>														
+							<td style="text-align: center"><?php $fechas = explode('-', $dato["fecha_inicio_postulacion"]); echo $fechas[2] ." - ". $meses[$fechas[1] - 1] ." - " .$fechas[0]; ?></td>
+							<td style="text-align: center"><?php $fechas = explode('-', $dato["fecha_fin_postulacion"]); echo $fechas[2] ." - ". $meses[$fechas[1] - 1] ." - " .$fechas[0]; ?></td>														
 							<td align="center">							
 							<a href="#"
 								onclick="javascript: loadModal(<?php echo $dato["id"]; ?>);" class="btn btn-info btn-xs">Aplicar</a> </td>

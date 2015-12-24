@@ -1,4 +1,4 @@
-<?php $title = "Postulaciones";?>
+<?php $title = "Mis Postulaciones";?>
 <?php include_once PATH_TEMPLATE.'/header.php';?>
 <div class="section">
 	<div class="content">

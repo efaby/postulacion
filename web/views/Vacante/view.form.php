@@ -110,6 +110,7 @@
 						<div class="form-group">
 						<input type='hidden' name='id' class='form-control' value="<?php echo $vacante['id']; ?>">
 							<button type="submit" class="btn btn-success">Guardar</button>
+							<a href="../Vacante/index.php" class="btn btn-info">Regresar</a>
 						</div>					
 					</form>
 			</div>
