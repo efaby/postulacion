@@ -10,7 +10,11 @@
 								  <?php echo $_SESSION['message'];$_SESSION['message'] = ''?>
 								</div>
 		<?php endif;?>	
+		
 			<div class="the-box">
+			<div class="col-sm-12 rows" style="text-align: right;">
+				<a href="#" class="btn btn-primary btn-xs" onclick="javascript: imprimir();">Imprimir</a>								
+			</div>
 				<div class="form-group col-sm-12 rows">
 				<form action="index.php?action=loadPostulante" method="post" id="frmBuscar">
 					<div class="form-group  col-sm-4">
@@ -39,7 +43,7 @@
 					</div>
 					</form>
 				</div>
-
+				
 				<table class="table table-striped table-hover"
 					id="datatable-example">
 					<thead class="the-box dark full">
@@ -58,19 +62,20 @@
 							<td><?php echo $dato["nombres"]; ?> <?php echo $dato["apellidos"]; ?></td>
 							<td><?php echo $dato["valor"]; ?></td>
 							<td><?php echo $dato["observacion"]; ?></td>
-							<td align="center">
-								<form method="post" id="frmAccion">
-									<input name="id" id="id" value="<?php echo $dato["id"]; ?>" type="hidden">
-									<input name="etapa" id="etapa" value="<?php echo $etapa; ?>" type="hidden">
-									<input  name="vacante" id="vacante" value="<?php echo $vacante; ?>" type="hidden"> 
-									<a href="#" class="btn btn-info btn-xs"
-									onclick="javascript: loadPage();">Evaluar</a>
-								</form>
+							<td align="center">								
+								<a href="#" class="btn btn-info btn-xs <?php echo (($dato["activo"]==0)||($dato["activar"]==0))?"disabled":"";?>"
+									onclick="javascript: loadPage(<?php echo $dato["id"]; ?>);">Evaluar</a>								
 							</td>
 						</tr>
 								<?php endforeach;?>
 							</tbody>
 				</table>
+				<form method="post" id="frmAccion">
+					<input name="id" id="id" value="" type="hidden">
+					<input name="etapa" id="etapa" value="<?php echo $etapa; ?>" type="hidden">
+					<input  name="vacante" id="vacante" value="<?php echo $vacante; ?>" type="hidden">
+				</form> 
+				
 			</div>
 		</div>
 	</div>
@@ -102,10 +107,23 @@
 	src="<?php echo PATH_CSS . '/../plugins/validator/bootstrapValidator.min.js';?>"></script>
 <script src="<?php echo PATH_CSS . '/../js/apps.js';?>"></script>
 <script type="text/javascript">
-function loadPage(id,opcion){
+function imprimir(){
+	var posicion_x; 
+	var posicion_y; 
+	var ancho = 800;
+	var alto = 450;
+	posicion_x=(screen.width/2)-(ancho/2); 
+	posicion_y=(screen.height/2)-(alto/2); 
+	var accion = "index.php?action=loadImprimir&etapa_id=" + $("#etapa_id").val() + "&vacante_id=" + $("#vacante_id").val();
+	var opciones="toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,width="+ancho+",height="+alto+",left="+posicion_x+",top="+posicion_y;
+	window.open(accion,"",opciones);
+}
+function loadPage(id){
 	var opcion  = $("#etapa").val();
+	$("#id").val(id);
 	if(opcion == 1){
 		var accion = "index.php?action=meritos"
+		
 		$("#frmAccion").attr('action', accion);
 		$("#frmAccion").submit();
 	} else {
@@ -114,7 +132,7 @@ function loadPage(id,opcion){
 			$("#frmAccion").attr('action', accion);
 			$("#frmAccion").submit();
 		} else {
-			var id = $("#id").val();
+			
 			var title = "Evaluación Entrevista";
 			if(opcion==2){
 				title = "Evaluación Conocimientos";

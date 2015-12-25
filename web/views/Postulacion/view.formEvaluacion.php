@@ -1,5 +1,12 @@
-<h4 class="small-title"><?php echo $title; ?></h4>
 <div class="table-responsive">
+		<div class="form-group  col-sm-6">
+			<label class="control-label">Identificación:</label>&nbsp;&nbsp; 
+			<?php echo $usuario["numero_identificacion"]; ?>
+		</div>
+		<div class="form-group  col-sm-6">
+			<label class="control-label">Nombre:</label>&nbsp;&nbsp; 
+			<?php echo $usuario["nombres"]." ".$usuario["apellidos"]; ?>
+		</div>
 	<table class="table table-th-block table-hover">
 		<thead>
 			<tr>

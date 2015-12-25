@@ -31,7 +31,8 @@ class PostulacionController {
 		if($etapa>0){
 			$prefix = $this->getOpcion($etapa);
 			$datos = $model->getPostulantes($etapa,$vacante,$prefix);
-		}		
+		}
+			
 		$message = "";
 		require_once "view.listadopostulantesetapa.php";
 	}
@@ -103,13 +104,27 @@ class PostulacionController {
 	public function loadFormEvaluacion(){
 		$opcion = $_GET["opcion"];
 		$postulacion = $_GET["id"];
+		$model = new PostulacionModel();
+		$evaluaciones = $model->getEvaluaciones($postulacion);
+		$usuario = $model->getPostulanteByPostulancion($postulacion);
 		if($opcion == 5){
-			$model = new PostulacionModel();
-			$evaluaciones = $model->getEvaluaciones($postulacion);
+			
 			require_once "view.formEvaluaciones.php";
 		} else {
 			require_once "view.formEvaluacion.php";
 		}
 		
+	}
+	
+	public function loadImprimir(){
+		$etapa = isset($_GET['etapa_id'])?$_GET ['etapa_id']:0;
+		$vacante = isset($_GET ['vacante_id'])?$_GET ['vacante_id']:0;
+		$model = new PostulacionModel ();
+		$datos =  array();
+		if($etapa>0){
+			$prefix = $this->getOpcion($etapa);
+			$datos = $model->getPostulantes($etapa,$vacante,$prefix);
+		}
+		require_once "view.imprimir.php";
 	}
 }

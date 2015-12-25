@@ -49,19 +49,21 @@ class PostulacionModel {
 	
 	public function getPostulantes($etapa, $vacante, $sufix){
 		
-		$sql1 = " select p.id, u.nombres, u.apellidos, u.numero_identificacion, '' as valor, '' as observacion from vacante as v ";
+		$sql1 = " select p.id, u.nombres, u.apellidos, u.numero_identificacion, '' as valor, '' as observacion, if((select count(postulacion_id) from evaluacion where postulacion_id =p.id)>0,0,1) as activo 
+				, if((select count(v1.id) from vacante as v1 where v1.id = v.id and CURDATE() between v1.fecha_inicio".$sufix." and v1.fecha_fin".$sufix. ")>0,1,0) as activar  
+				from vacante as v ";
 		$sql = "	inner join postulacion as p on p.vacante_id =  v.id
 					inner join usuario as u on p.postulante_id =  u.id ";
-		$where = " and p.id not in (select postulacion_id from evaluacion where etapa_id = ".$etapa.")";
+		$where = " ";
 		if($etapa > 1){	
 			$etapa = $etapa - 1;
-			$sql1 = " select p.id, u.nombres, u.apellidos, u.numero_identificacion, e.valor, e.observacion from vacante as v ";
-			$sql .= " inner join evaluacion as e on (e.postulacion_id = p.id and e.activo = 1 and e.aprobado = 1 and etapa_id = ".$etapa.")";
+			$sql1 = " select p.id, u.nombres, u.apellidos, u.numero_identificacion, e.valor, e.observacion, e.activo, if((select count(v1.id) from vacante as v1 where v1.id = v.id and CURDATE() between v1.fecha_inicio".$sufix." and v1.fecha_fin".$sufix. ")>0,1,0) as activar  
+					 from vacante as v ";
+			$sql .= " inner join evaluacion as e on (e.postulacion_id = p.id and e.aprobado = 1 and etapa_id = ".$etapa.")";
 			$where = "";				
 		}		
-		$sql .= " where v.id = ".$vacante. $where. " and CURDATE() between v.fecha_inicio".$sufix." and v.fecha_fin".$sufix;
-		$model = new model();
-		
+		$sql .= " where v.id = ".$vacante. $where;
+		$model = new model();		
 		$result = $model->runSql($sql1.$sql);
 		return $model->getRows($result);
 	}
@@ -114,5 +116,15 @@ class PostulacionModel {
 	
 	public function getEvaluacionesListado($id){
 		return $this->loadEvaluaciones($id);
+	}
+	
+	public function getPostulanteByPostulancion($id){
+		$sql = "Select u.nombres, u.apellidos, u.numero_identificacion from usuario as u
+				inner join postulacion as p on p.postulante_id = u.id				
+				where p.id = ".$id;
+		$model = new model();
+		$result = $model->runSql($sql);
+		$resultArray = $model->getRows($result);
+		return $resultArray[0];
 	}
 }
