@@ -1,10 +1,25 @@
+<script type="text/javascript">
+function imprimir(){
+	var ficha = document.getElementById("imprimir");
+	  var ventimp = window.open(' ', 'popimpr');
+	  ventimp.document.write( ficha.innerHTML );
+	  ventimp.document.close();
+	  ventimp.print( );
+	  ventimp.close();
+}
+</script>
+
+<div class="col-sm-12 hidden-print" style="text-align: right;">
+	<a href="javascript:imprimir()"> <span class="glyphicon glyphicon-print"></span>&nbsp;Imprimir</a>								
+</div>	
+<div id="imprimir">
 <h4 class="small-title"><?php echo $title; ?></h4>
-<div class="table-responsive">
+<div class="table-responsive" >
 	<table class="table table-th-block table-hover">
 		<thead>
 			<tr>
-				<th style="width: 30px;">No</th>
-				<th style="width: 110px;">Nombre Etapa</th>
+				<th style="width: 5%;">No</th>
+				<th style="width: 30%;">Nombre Etapa</th>
 				<th>Fecha de Etapa</th>
 				<th>Calificación</th>
 				<th>Observaciones</th>
@@ -33,3 +48,4 @@
 	</table>
 </div>
 <!-- /.table-responsive -->
+</div>
