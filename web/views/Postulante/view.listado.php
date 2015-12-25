@@ -464,10 +464,6 @@
 </style>
 <script>
 
-$("#url_cedula").fileinput({showCaption: false,elErrorContainer: '#file-errors-cedula',allowedFileExtensions: ["jpg", "png", "pdf"]});
-$("#url_papeleta").fileinput({showCaption: false,elErrorContainer: '#file-errors-papeleta',allowedFileExtensions: ["jpg", "png", "pdf"]});
-$("#url_hoja").fileinput({showCaption: false,elErrorContainer: '#file-errors-hoja',allowedFileExtensions: ["jpg", "png", "pdf"]});
-
 var btnCust = '<button  type="submit" class="btn btn-default " title="Guardar" >' +
 '<i class="glyphicon glyphicon-floppy-disk"></i>' +
 '</button>'; 
@@ -478,14 +474,19 @@ $("#url_foto").fileinput({
     showCaption: false,
     browseLabel: '',
     removeLabel: '',
+    showRemove: false,
     browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
     removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-    removeTitle: 'Cancel or reset changes',
+    removeTitle: 'Cancelar o Resetear Imagen',
     elErrorContainer: '#kv-avatar-errors',
     defaultPreviewContent: '<img src="<?php echo PATH_IMAGES_USER . $usuario['url_foto_view']; ?>" alt="Your Avatar" style="width:160px">',
     layoutTemplates: {main2: '{preview} {remove} {browse} ' +  btnCust},
     allowedFileExtensions: ["jpg", "png", "gif"]
 });
+
+$("#url_cedula").fileinput({showCaption: false,elErrorContainer: '#file-errors-cedula',allowedFileExtensions: ["jpg", "png", "gif"], initialPreview:'<img src="<?php echo PATH_FILES_USER . $usuario['url_cedula'];?>" style="width:160px">', showRemove: false});
+$("#url_papeleta").fileinput({showCaption: false,elErrorContainer: '#file-errors-papeleta',allowedFileExtensions: ["jpg", "png", "gif"],initialPreview:'<img src="<?php echo PATH_FILES_USER . $usuario['url_papeleta'];?>" style="width:160px">'});
+$("#url_hoja").fileinput({showCaption: false,elErrorContainer: '#file-errors-hoja',allowedFileExtensions: ["jpg", "png", "gif"],initialPreview:'<img src="<?php echo PATH_FILES_USER . $usuario['url_hoja'];?>" style="width:160px">'});
 
 $(function () {
   

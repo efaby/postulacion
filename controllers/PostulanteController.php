@@ -10,6 +10,9 @@ class PostulanteController {
 		$model = new PostulanteModel ();
 		$usuario = $model->getUsuario($_SESSION['SESSION_USER']['id']);
 		$usuario['url_foto_view'] = ($usuario['url_foto']=='')?'default_avatar_male.jpg':$usuario['url_foto'];
+		$usuario['url_cedula'] = ($usuario['url_cedula']=='')?'avatar/default_avatar_file.gif':$usuario['url_cedula'];
+		$usuario['url_papeleta'] = ($usuario['url_papeleta']=='')?'avatar/default_avatar_file.gif':$usuario['url_papeleta'];
+		$usuario['url_hoja'] = ($usuario['url_hoja']=='')?'avatar/default_avatar_file.gif':$usuario['url_hoja'];
 		$cursos = $model->getCursos($_SESSION['SESSION_USER']['id']);
 		$titulos = $model->getTitulos($_SESSION['SESSION_USER']['id']);
 		$historiales = $model->getHistoriales($_SESSION['SESSION_USER']['id']);
