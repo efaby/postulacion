@@ -13,6 +13,7 @@ function imprimir(){
 	<a href="javascript:imprimir()"> <span class="glyphicon glyphicon-print"></span>&nbsp;Imprimir</a>								
 </div>	
 <div id="imprimir">
+<link href="<?php echo PATH_CSS . '/bootstrap.min.css';?>" rel="stylesheet">
 <h4 class="small-title"><?php echo $title; ?></h4>
 <div class="table-responsive" >
 	<table class="table table-th-block table-hover">
