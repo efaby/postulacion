@@ -83,6 +83,12 @@
 						<li class="parent"><a href="../Vacante/index.php">Vacantes</a></li>
 					<?php endif;?>
 					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==2):?>
+						<li class="parent"><a href="../Categoria/index.php">Catergorías</a></li>
+					<?php endif;?>
+					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==2):?>
+						<li class="parent"><a href="../Pregunta/index.php">Preguntas</a></li>
+					<?php endif;?>
+					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==2):?>
 						<li class="parent"><a href="../Postulacion/index.php?action=loadPostulante">Evaluar Postulaciones</a></li>
 					<?php endif;?>
 					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==1):?>
