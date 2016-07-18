@@ -21,7 +21,7 @@
 							<th>Vacante</th>
 							<th>Área</th>
 							<th>Fecha Aplicación</th>
-							<th style="text-align: center">Acciones</th>
+							<th style="text-align: center">Seguimiento</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -45,7 +45,7 @@
 
 <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width: 800px;">
+	<div class="modal-dialog" style="width: 700px;">
 		<div class="modal-content">
 			<div class="modal-header">
 				<a class="close" data-dismiss="modal">×</a>
@@ -76,6 +76,21 @@ function loadModal(id,title){
 }
 
 </script>
+<style>
+<!--
+@media print {
+    
+    body.modal-open {
+        visibility: hidden;
+    }
+
+    body.modal-open .modal .modal-header,
+    body.modal-open .modal .modal-body {
+        visibility: visible; /* make visible modal body and header */
+    }
+}
+-->
+</style>
 
 </body>
 </html>

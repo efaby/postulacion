@@ -45,7 +45,7 @@
 			
 				<!-- Begin logo -->
 				<div class="logo">
-					<a href="index.html"><img src="<?php echo PATH_CSS . '../img/logo.png';?>" alt="Logo"></a>
+					<a href="index.php"><img src="<?php echo PATH_CSS . '/../img/logo_SM.png';?>" alt="Logo"></a>
 				</div><!-- /.logo -->
 				<!-- End logo -->
 				<?php if(isset($_SESSION['SESSION_USER'])):?>
@@ -80,16 +80,22 @@
 						<li class="parent"><a href="../Postulacion/index.php">Mis Postulaciones</a></li>
 					<?php endif;?>
 					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==2):?>
+						<li class="parent"><a href="../Area/index.php">Área</a></li>
+					<?php endif;?>
+					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==2):?>
 						<li class="parent"><a href="../Vacante/index.php">Vacantes</a></li>
 					<?php endif;?>
 					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==2):?>
-						<li class="parent"><a href="../Categoria/index.php">Catergorías</a></li>
+						<li class="parent"><a href="../Categoria/index.php">Categorías</a></li>
 					<?php endif;?>
 					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==2):?>
 						<li class="parent"><a href="../Pregunta/index.php">Preguntas</a></li>
 					<?php endif;?>
 					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==2):?>
 						<li class="parent"><a href="../Postulacion/index.php?action=loadPostulante">Evaluar Postulaciones</a></li>
+					<?php endif;?>
+					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==2):?>
+						<li class="parent"><a href="../Reporte/index.php">Reportes</a></li>
 					<?php endif;?>
 					<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==1):?>
 						<li class="parent"><a href="../Usuario/index.php">Usuarios</a></li>

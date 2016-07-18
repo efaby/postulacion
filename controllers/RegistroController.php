@@ -49,6 +49,7 @@ class RegistroController {
 		if(strlen($user_id)>=10){
 			$model = new RegistroModel();
 			$user = $model->activarCuenta($user_id);
+			$usuario = $model->obtenerUsuario($user_id);
 			$activo = 1;
 			require_once "view.index.php";
 		} else {

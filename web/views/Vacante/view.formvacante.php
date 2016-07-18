@@ -1,7 +1,7 @@
 <h4 class="small-title"><?php echo $vacante['titulo']; ?></h4>
 <div class="table-responsive">
 	<div class="form-group col-sm-12">
-		<label class="control-label">Área: </label> <?php echo $vacante['nombre_area']; ?>
+		<label class="control-label">Área: </label> <?php echo $vacante['area']; ?>
 	</div>
 		<div class="form-group col-sm-6">
 		<label class="control-label">Fecha de Inicio de Postulación: </label> <?php $fechas = explode('-', $vacante["fecha_inicio_postulacion"]); echo $fechas[2] ." - ". $meses[$fechas[1] - 1] ." - " .$fechas[0]; ?>

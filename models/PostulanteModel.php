@@ -15,7 +15,10 @@ class PostulanteModel {
 	public function getUsuario($usuario)
 	{
 		$model =  new model();		
-		$sql = "select * from usuario where id = ".$usuario; // poner inner joins
+		$sql = "select u.*, p.pais_id as pais_id , p.id as provincia_id from usuario as u 
+				left join ciudad as c on u.ciudad_id = c.id
+				left join provincia as p on c.provincia_id = p.id				
+				where u.id = ".$usuario; 
 		$result = $model->runSql($sql);
 		$resultArray = $model->getRows($result);
 		$resultArray = $resultArray[0];			
@@ -114,8 +117,8 @@ class PostulanteModel {
 	
 	public function getHistoriales($id){
 		$model = new model();
-		$sql = "select h.id, h.institucion, h.url, h.area, h.cargo, c.nombre as ciudad
-				from historial as h inner join ciudad as c on h.ciudad_id = c.id
+		$sql = "select h.id, h.institucion, h.url, h.area, h.cargo, c.nombre as ciudad, h.ciudad as nombre_ciudad
+				from historial as h left join ciudad as c on h.ciudad_id = c.id
 				where postulante_id = ".$id;
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
@@ -127,8 +130,8 @@ class PostulanteModel {
 		$model =  new model();
 		if($historial > 0){
 			$sql = "select h.*, p.pais_id as pais_id , p.id as provincia_id  from historial as h 
-					inner join ciudad as c on h.ciudad_id = c.id
-					inner join provincia as p on c.provincia_id = p.id
+					left join ciudad as c on h.ciudad_id = c.id
+					left join provincia as p on c.provincia_id = p.id
 					where h.id = ".$historial; 
 			$result = $model->runSql($sql);
 			$resultArray = $model->getRows($result);
@@ -172,6 +175,16 @@ class PostulanteModel {
 		$sql = "select url from $table where id = ".$item;
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
+	}
+	
+	public function getPais($pais_id){
+		$model = new model();
+		$sql = "select * from pais where id = ".$pais_id;
+		$result = $model->runSql($sql);
+		$resultArray = $model->getRows($result);
+		$resultArray = $resultArray[0];			
+		return $resultArray;
+		
 	}
 	
 	

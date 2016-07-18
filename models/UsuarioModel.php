@@ -15,7 +15,7 @@ class UsuarioModel {
 	 */
 	public function getUsuarioList(){
 		$model = new model();		
-		$sql = "select u.id, u.numero_identificacion, u.nombres, u.apellidos, u.email, t.nombre as tipo_usuario from usuario as u inner join tipo_usuario as t on  u.tipo_usuario_id = t.id";		
+		$sql = "select u.id, u.numero_identificacion, u.nombres, u.apellidos, u.email, t.nombre as tipo_usuario from usuario as u inner join tipo_usuario as t on  u.tipo_usuario_id = t.id where eliminado = 0";		
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
 	}	
@@ -29,24 +29,26 @@ class UsuarioModel {
 			$result = $model->runSql($sql);
 			$resultArray = $model->getRows($result);
 			$resultArray = $resultArray[0];
-			
+			$resultArray['password'] = $resultArray['password1'] = $this->patron;
 		} else {
 			$resultArray = Array ( 'id' => '' ,'numero_identificacion' => '','nombres' => '','apellidos' => '','email' => '','genero' => '','password' => '', 'tipo_usuario_id' => '0','capacidad_especial_id' => '0', 'estado_civil_id' => '0','password1' => '');	
 		}
-		$resultArray['password'] = $resultArray['password1'] = $this->patron;
+		
 		return $resultArray;
 	}
 	
 	public function saveUsuario($usuario)
 	{		
-		$password =  md5($usuario['password']);
+		if($usuario['password1'] != $this->patron){
+			$usuario['password'] =  md5($usuario['password']);
+		}
 		$model = new model();
 		return $model->saveData($usuario, 'usuario');	
 	}
 
 	public function deleteUsuario(){
 		$Usuario = $_GET['id'];
-		$sql = "delete from usuario where id = ".$Usuario;
+		$sql = "update usuario set eliminado = 1 where id = ".$Usuario;
 		$model =  new model();
 		$result = $model->runSql($sql);
 	}
@@ -71,4 +73,14 @@ class UsuarioModel {
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
 	}
+	
+	public function getUsuarioByCedula($cedula)
+	{
+		$model =  new model();		
+		$sql = "select * from usuario where numero_identificacion = ".$cedula;
+		$result = $model->runSql($sql);
+		$resultArray = $model->getRows($result);
+		return $resultArray[0];
+	}
+	
 }

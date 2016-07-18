@@ -69,7 +69,7 @@ $(document).ready(function() {
 								message: 'El Número de Horas no puede ser vacío.'
 							},					
 							regexp: {
-								regexp: /^[0-9- ]+$/,
+								regexp: /^[0-9]+$/,
 								message: 'Ingrese el Número de Horas válido.'
 							}
 						}

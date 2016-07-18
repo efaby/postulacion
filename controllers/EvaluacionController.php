@@ -1,5 +1,8 @@
 <?php
 require_once (PATH_MODELS . "/EvaluacionModel.php");
+require_once (PATH_MODELS . "/PostulacionModel.php");
+require_once (PATH_HELPERS. "/Email.php");
+
 /**
  * Controlador de Usuarios
  */
@@ -7,6 +10,7 @@ class EvaluacionController {
 	public function display() {
 		$model = new EvaluacionModel();
 		$postulacion_id = $_POST["id"];
+		$vacante = $_POST["vacante"];
 		$postulante = $model->getUsuario($model->getPostulante($postulacion_id));
 		$usuario = $model->getUsuario($_SESSION['SESSION_USER']['id']);
 		$preguntas = $model->getPreguntas();
@@ -40,24 +44,27 @@ class EvaluacionController {
 				$respuesta['valor'] = $porcentaje;
 			}
 			$respuesta['pregunta_id'] =  $_POST['pregunta'.$value];		
+			$respuesta['opcion'] = $_POST ['respuesta'.$value];
 			$respuestas[] = $respuesta;	
 		}
 		
 		$evaluacion['valor'] = $total;
 		$evaluacion['observacion'] = $_POST['observaciones'];
 		$evaluacion['fecha'] = $_POST['fecha_evaluacion'];
-		$evaluacion['etapa_id'] = 3;
-		$evaluacion['postulacion_id'] = $_POST['postulacion_id'];
+		$evaluacion['etapa_id'] = $etapa_id = 3;
+		$evaluacion['postulacion_id'] = $postulacion_id = $_POST['postulacion_id'];
 		$evaluacion['id_usuario'] = $_SESSION['SESSION_USER']['id']; 
 		$evaluacion['activo'] = 1;
 		$evaluacion["id"] = 0;
-		if ($total >=9)
+		$modelPostulacion = new PostulacionModel();
+		$etapa = $modelPostulacion->getEtapaById($etapa_id);
+		if ($total >=$etapa["calificacion_minima"])
 		{
-			$evaluacion['aprobado'] = 1;
+			$evaluacion['aprobado'] = $aprobado = 1;
 		}
 		else
 		{
-			$evaluacion['aprobado'] = 0;
+			$evaluacion['aprobado'] = $aprobado = 0;
 		}
 		
 		$desempenio["id"] = 0;
@@ -76,11 +83,39 @@ class EvaluacionController {
 		
 		$model = new EvaluacionModel ();
 		try {
-			$datos = $model->saveEvaluacion ( $objeto );
+			$datos = $model->saveEvaluacion ( $objeto );		
+			
+			$user = $modelPostulacion->getPostulanteByPostulancion($postulacion_id);
+			$name = $user["nombres"] . " " . $user["apellidos"];
+			$vacante = $modelPostulacion->getPostulacionList($user["id"]);
+			
+			$email = new Email();
+			$email->sendNotificacionPostulacion($name, $vacante[0]["titulo"], $user["email"], $etapa[0]["nombre"], $total, $aprobado);
+			
 			$_SESSION ['message'] = "Datos almacenados correctamente.";
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
 		header ( "Location: ../Postulacion/index.php?action=loadPostulante" );
 	}
+	
+	public function imprimir() {
+		$model = new EvaluacionModel();
+		$postulacion_id = $_POST["id"];
+		$vacante = $_POST["vacante"];
+		$postulante = $model->getUsuario($model->getPostulante($postulacion_id));
+		$usuario = $model->getUsuario($_SESSION['SESSION_USER']['id']);
+		$preguntas = $model->getPreguntas();
+		$desempenio = $model->getDesempenio($postulacion_id);
+		$respuestas = $model->getRespuestas($desempenio["id"]);
+		$opciones = array(0=>'Ninguna', 1=>'Nunca', 2=> "Casi Siempre", 3=> "Siempre");
+		$respuestasArray = array();
+		foreach ($respuestas as $item){
+			$respuestasArray[$item['pregunta_id']] = $opciones[$item['opcion']];
+		}		
+		
+		$message = "";
+		require_once "view.imprimir.php";
+	}
+	
 }

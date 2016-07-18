@@ -44,6 +44,11 @@
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
+		<style type="text/css">
+		.backstretch img {
+		opacity: 0.9;
+		}
+		</style>
 </head>
 
 <body class="tooltips no-padding">
@@ -61,7 +66,7 @@
 
 			<!-- Begin logo -->
 			<div class="logo">
-				<a href="index.html"><img src="../assets/img/logo.png" alt="Logo"></a>
+				<a href="index.php"><img src="assets/img/logo_SM.png" alt="Logo"></a>
 			</div>
 			<!-- /.logo -->
 			<!-- End logo -->
@@ -88,7 +93,7 @@
 					<h3>Presione los siguientes enlaces para acceder al sistema.</h3>
 					<div class="clear"></div>
 					<button
-						class="btn btn-lg btn-warning btn-learn-more btn-border-only"
+						class="btn btn-lg btn-warning btn-learn-more"
 						data-toggle="modal" data-target="#confirm-submit">Iniciar Sesión</button>
 					<a href="<?php echo $urlWeb."views/Registro/index.php";?>"
 						class="btn btn-lg btn-success btn-learn-more">Registrarse</a>
@@ -160,8 +165,8 @@
 	<script src="<?php echo $urlWeb . 'assets/js/apps.js';?>"></script>
 	<script>
 			$("#full-img-slide").backstretch([
-			  "<?php echo $urlWeb . 'assets/img/imagen2.jpg'; ?>",
-			  "<?php echo $urlWeb . 'assets/img/imagen31.jpg'; ?>"
+			  "<?php echo $urlWeb . 'assets/img/rotador/imagen5.jpg'; ?>",
+			  "<?php echo $urlWeb . 'assets/img/rotador/imagen4.jpg'; ?>"
 			  ], {
 				fade: 750,
 				duration: 6000
@@ -220,8 +225,9 @@
 						</div>
 						<button class="btn btn-success" type="submit" id="btnSubmit">
 							<i class="fa fa-sign-in"></i> Iniciar Sesión
-						</button>			
-				
+						</button>	
+						&nbsp;&nbsp;		
+						<a href="views/Secure/index.php?action=recoverPassword" style="font-size: 12px;">Olvide Contraseña..</a>
 					</form>
 				</div>				
 					
@@ -289,5 +295,6 @@
 						
 						});		
 						</script>	
+						
 </body>
 </html>

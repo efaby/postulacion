@@ -80,10 +80,11 @@ var bindDateRangeValidation = function (f, s, e) {
 //Fecha Concurso
 $(function () {
     var sd = new Date(), ed = new Date();
-  
+    sd.setDate(sd.getDate() - 1);
     $('#fecha_inicio').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
+      minDate: sd 
     //  defaultDate: sd, 
      // maxDate: ed 
     });

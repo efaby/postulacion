@@ -32,7 +32,7 @@
 <tr>
 							
 							<td><?php echo $dato["titulo"]; ?></td>
-							<td><?php echo $dato["nombre_area"]; ?></td>						
+							<td><?php echo $dato["area"]; ?></td>						
 							<td style="text-align: center"><?php echo $dato["numero_vacantes"]; ?></td>	
 							<td style="text-align: center"><?php echo $dato["experiencia_requerida"]; ?></td>	
 							<td style="text-align: center"><?php $fechas = explode('-', $dato["fecha_inicio_postulacion"]); echo $fechas[2] ." - ". $meses[$fechas[1] - 1] ." - " .$fechas[0]; ?></td>

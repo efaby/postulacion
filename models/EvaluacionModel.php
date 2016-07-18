@@ -45,6 +45,7 @@ class EvaluacionModel {
 		foreach ($objeto[2] as $item){
 			$respuesta["valor"] = $item["valor"]; 
 			$respuesta["pregunta_id"] = $item["pregunta_id"];
+			$respuesta["opcion"] = $item["opcion"];
 			$valor = $model->saveData($respuesta, 'respuesta');
 		}	
 		return $evaluacion_id;
@@ -71,6 +72,26 @@ class EvaluacionModel {
 		$result = $model->runSql($sql);
 		$resultArray =  $model->getRows($result);
 		return $resultArray[0];
+	}
+	
+	public function getDesempenio($postulacionId){
+		$model = new model();
+		$sql = "SELECT d.* FROM desempenio as d
+				inner join evaluacion as e on d.evaluacion_id = e.id
+				where e.postulacion_id = ".$postulacionId." and etapa_id = 3";
+
+		$result = $model->runSql($sql);
+		$resultArray =  $model->getRows($result);
+		return $resultArray[0];
+	}
+	
+	
+	public function getRespuestas($desempenioId){
+		$model = new model();
+		$sql = "SELECT * FROM respuesta as r				
+				where r.desempenio_id = ".$desempenioId;
+		$result = $model->runSql($sql);
+		return $model->getRows($result);
 	}
 	
 }

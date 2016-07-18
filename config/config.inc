@@ -1,12 +1,12 @@
 <?php 	
 	define('HOSTNAME_DATABASE', 'localhost');
-	define('USERNAME', 'root');
+	/* define('USERNAME', 'root');
 	define('PASSWORD', 'sistemas');
-	define('DATABASE', 'postulacion_docente'); 
+	define('DATABASE', 'postulacion_docente'); */
 	
-	/*define('USERNAME', 'm1to148_postula');
+	define('USERNAME', 'm1to148_postula');
 	define('PASSWORD', 'postulante_123');
-	define('DATABASE', 'm1to148_postulante');*/
+	define('DATABASE', 'm1to148_postulante');
 	 
 	define('PATH_MODELS', PATH_ROOT."/models");
 	define('PATH_CONTROLLERS', PATH_ROOT."/controllers");

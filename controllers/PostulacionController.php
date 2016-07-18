@@ -1,6 +1,7 @@
 <?php
 require_once (PATH_MODELS . "/PostulacionModel.php");
 require_once (PATH_HELPERS. "/File.php");
+require_once (PATH_HELPERS. "/Email.php");
 
 /**
  * Controlador de Usuarios
@@ -22,8 +23,15 @@ class PostulacionController {
 	}
 
 	public function loadPostulante() {
-		$etapa = isset($_POST ['etapa_id'])?$_POST ['etapa_id']:0;
-		$vacante = isset($_POST ['vacante_id'])?$_POST ['vacante_id']:0;
+		$band = isset($_POST ['band'])?$_POST ['band']:0;
+		if($band == 1){
+			$etapa = $_SESSION['etapa'] = isset($_POST ['etapa_id'])?$_POST ['etapa_id']:0;
+			$vacante = $_SESSION['vacante'] = isset($_POST ['vacante_id'])?$_POST ['vacante_id']:0;
+		} else {
+			$etapa = isset($_SESSION['etapa'])?$_SESSION['etapa']:0;
+			$vacante = isset($_SESSION['vacante'])?$_SESSION['vacante']:0;
+		}
+		
 		$model = new PostulacionModel ();
 		$etapas = $model->getEtapas();
 		$vacantes = $model->getVacantes();		
@@ -31,6 +39,7 @@ class PostulacionController {
 		if($etapa>0){
 			$prefix = $this->getOpcion($etapa);
 			$datos = $model->getPostulantes($etapa,$vacante,$prefix);
+	
 		}
 			
 		$message = "";
@@ -78,14 +87,27 @@ class PostulacionController {
 	
 	public function saveEvaluacion(){
 		$objeto["id"] = 0;
-		$objeto["postulacion_id"] = $_POST["postulacion_id"];
-		$objeto["valor"] = $_POST["valor"];
+		$objeto["postulacion_id"] = $postulacion_id = $_POST["postulacion_id"];
+		$objeto["valor"] = $valor = $_POST["valor"];
 		$objeto["observacion"] = $_POST["observaciones"];
-		$objeto["aprobado"] = $_POST["aprobado"];
+                $objeto["aprobado"] = $aprobado = 0;
+                if($valor >= 8){
+                   $objeto["aprobado"] = $aprobado = 1;
+                }
+		//$objeto["aprobado"] = $aprobado = $_POST["aprobado"];
+
 		$objeto["activo"] = 1;
 		$objeto["fecha"] = date('Y-m-d');
 		$objeto["id_usuario"] = $_SESSION['SESSION_USER']['id'];
-		$objeto["etapa_id"] = $_POST["etapa_id"];
+		$objeto["etapa_id"] = $etapa_id = $_POST["etapa_id"];
+		if($etapa_id == 5){
+			$objeto["aprobado"] = $aprobado = $_POST["aprobado"];
+			$objeto["observacion"] = "Designado Ganador!";			
+			if($aprobado != 1){
+				$objeto["observacion"] = "Designado No Ganador!";
+				
+			}			
+		}
 		$objeto ['url'] = '';
 		if(isset($_FILES['url'])&&($_FILES['url']['name']!='')){
 			$upload = new File();
@@ -94,6 +116,15 @@ class PostulacionController {
 		try {
 			$model = new PostulacionModel();
 			$objeto = $model->saveEvaluacion($objeto);
+			
+			$user = $model->getPostulanteByPostulancion($postulacion_id);
+			$name = $user["nombres"] . " " . $user["apellidos"];			
+			$vacante = $model->getVacanteByPostulancion($postulacion_id);	
+
+			$etapa = $model->getEtapaById($etapa_id);			
+			$email = new Email();
+			$email->sendNotificacionPostulacion($name, $vacante["nombre_vacante"], $user["email"], $etapa[0]["nombre"], $valor, $aprobado);
+			
 			$_SESSION ['message'] = "Datos almacenados correctamente.";
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
@@ -104,6 +135,7 @@ class PostulacionController {
 	public function loadFormEvaluacion(){
 		$opcion = $_GET["opcion"];
 		$postulacion = $_GET["id"];
+		$vacante = $_GET["vacante"];
 		$model = new PostulacionModel();
 		$evaluaciones = $model->getEvaluaciones($postulacion);
 		$usuario = $model->getPostulanteByPostulancion($postulacion);

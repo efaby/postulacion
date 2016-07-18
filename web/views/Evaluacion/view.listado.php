@@ -67,8 +67,15 @@
 							 	  	<label class="control-label">
 							 	  	<ul>
 						 			  	<li>Lea detenidamente cada enunciado del cuestionario y conteste con honestidad en el casillero a la alternativa correspondiente.</li>
-						 	  			<li>Utilice la siguiente tabla de valoración.</li>
-						 	  			<li>Marque con un (X) la alternativa correspondiente.</li>
+						 	  			<li>Utilice la siguiente tabla de valoración.</li><br>
+						 	  			<table style="width: 30%; font-weight: normal;" class="table">
+						 	  			<tbody><tr><th>Respuesta</th><th>Valoración</th></tr>
+						 	  			<tr><td>Muy Satisfactorio</td><td align="center">3</td></tr>
+						 	  			<tr><td>Satisfactorio</td><td align="center">2</td></tr>
+						 	  			<tr><td>Poco Satisfactorio</td><td align="center">1</td></tr>
+						 	  			</table>
+						 	  			
+						 	  			<li>Marque con una (X) la alternativa correspondiente.</li>
 						 			</ul>
 					 	  			</label>					 	  	
 							</div>
@@ -94,7 +101,7 @@
 												<th colspan="3" style="text-align:center">VALORACIÓN</th>
 											</tr>
 											<tr>
-												<th  style=" width:5%; text-align:center">1</th><th style=" width:5%; text-align:center">2</th><th style=" width:5%; text-align:center">3</th>
+												<th  style=" width:5%; text-align:center">Poco Satisfactorio</th><th style=" width:5%; text-align:center">Muy Satisfactorio</th><th style=" width:5%; text-align:center">Satisfactorio</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -164,8 +171,17 @@
 						<input type='hidden' name='postulacion_id' class='form-control' value="<?php echo $postulacion_id; ?>">
 						<input type='hidden' name='contador' class='form-control' value="<?php echo $id-1;?>">
 							<button type="submit" class="btn btn-success">Guardar</button>
-						</div>					
+						</div>	
+								
 					</form>
+					<div class="form-group" style="padding-left: 15px;">
+					<form action="../Postulacion/index.php?action=loadPostulante" method="post">
+							<input name="etapa_id" id="etapa_id" value="3" type="hidden">
+							<input  name="vacante_id" id="vacante_id" value="<?php echo $vacante; ?>" type="hidden"> 
+							<button type="submit" class="btn btn-info">Regresar</button>
+							
+							</form>	
+							</div>	
 			</div>
 		</div>
 	</div>

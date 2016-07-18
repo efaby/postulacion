@@ -14,16 +14,42 @@
 			<div class="the-box">
 					<form id="frmVacante" name="frmVacante" method="post" action="index.php?action=saveData">
 						<div class="form-group">
-							<label class="control-label">Nombre del Área</label> <input type='text'
-								name='nombre_area' class='form-control'
-								value="<?php echo $vacante['nombre_area']; ?>">
+						<div style="float: right;   margin-bottom: 10px;    padding-left: 13px;   padding-top: 25px; width: 60%;">
+							<a href="javascript:loadModal(0);"   class="btn btn-primary">Nueva Area</a>
+							</div>
+							<label class="control-label">Nombre del Área</label> 
+							<select class="form-control" name="area_id" style="width: 40%">
+							<option value="" selected="selected" >-- Seleccione --</option>
+								<?php
+									foreach ($areas as $valor)
+									{
+										$select = '';
+										if ($vacante['area_id'] == $valor['id']) 
+											{
+												$select = "selected = 'selected'";
+											}
+										
+										echo"<option value=".$valor['id']." ".$select.">".$valor['nombre']."</option>";
+									}
+								?>
+							</select>
+							
+							
+						</div>
+<div class="form-group">
+							<label class="control-label">Nombre de la Vacante</label>
+							<input type='text'
+								name='nombre_vacante' class='form-control'
+								value="<?php echo $vacante['nombre_vacante']; ?>">
+								
 						</div>
 					
 						<div class="form-group">
-							<label class="control-label">Título</label>
+							<label class="control-label">Titulo de formación del postulante</label>
 							<input type='text'
 								name='titulo' class='form-control'
 								value="<?php echo $vacante['titulo']; ?>">
+								
 						</div>
 						
 						<div class="form-group">
@@ -72,7 +98,7 @@
 							<div class="input-group input-daterange">
 					    		<input type="text" class="form-control" name="fecha_inicio_test" id="fecha_inicio_test" value="<?php echo $vacante['fecha_inicio_test'];?>">
 					    		<span class="input-group-addon">to</span>
-					   			 <input type="text" class="form-control" name="fecha_fin_test" id="fecha_fin_test" value="<?php echo $vacante['fecha_inicio_test'];?>">
+					   			 <input type="text" class="form-control" name="fecha_fin_test" id="fecha_fin_test" value="<?php echo $vacante['fecha_fin_test'];?>">
 							</div>		
 						</div>	
 						
@@ -118,6 +144,25 @@
 	</div>
 </div>
 
+
+
+<div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width: 400px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<a class="close" data-dismiss="modal">×</a>
+				<h3>Área</h3>
+			</div>
+
+			<div class="modal-body"></div>
+
+		</div>
+
+	</div>
+</div>
+
+
 <?php include_once PATH_TEMPLATE.'/footer.php';?>
 <link
 	href="<?php echo PATH_CSS . '/../plugins/datatable/css/bootstrap.datatable.min.css';?>"
@@ -134,6 +179,14 @@
 <script src="<?php echo PATH_CSS . '/../plugins/datepicker/bootstrap-datepicker.js';?>"></script>
 
 <script>
+
+function loadModal(id){
+	$('.modal-body').load('../Area/index.php?action=loadForm&id=' + id + '&opcion=1',function(result){
+	    $('#confirm-submit').modal({show:true});
+	});
+}
+
+
 $(document).ready(function() {
 	$('#frmVacante').bootstrapValidator({
 		    	message: 'This value is not valid',
@@ -143,18 +196,13 @@ $(document).ready(function() {
 					validating: 'glyphicon glyphicon-refresh'						
 				},
 				fields: {
-					nombre_area: {
-						message: 'El nombre del área no es válido',
+					area_id: {
 						validators: {
 							notEmpty: {
-								message: 'El nombre del área no puede ser vacío.'
-							},					
-							regexp: {
-								regexp: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9-_ \.]+$/,
-								message: 'Ingrese un nombre del área no es válido.'
+								message: 'Seleccione un Área'
 							}
 						}
-					},
+					},	
 					titulo: {
 						validators: {
 							notEmpty: {

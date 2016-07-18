@@ -10,7 +10,7 @@
 <body>
 <?php include_once PATH_TEMPLATE.'/header.php';?>
 <section>
-<h2>Bienvenido<?php echo $_SESSION['SESSION_USER']['names'];?></h2>
+<h2>Bienvenido/a <?php echo $_SESSION['SESSION_USER']['names'];?></h2>
 </section>
 <?php include_once PATH_TEMPLATE.'/footer.php';?>
 </body>

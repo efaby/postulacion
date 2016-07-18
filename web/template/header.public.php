@@ -58,7 +58,7 @@
 
 			<!-- Begin logo -->
 			<div class="logo">
-				<a href="index.html"><img src="assets/img/logo.png" alt="Logo"></a>
+				<a href="index.php"><img src="<?php echo PATH_CSS . '/../img/logo_SM.png'; ?>" alt="Logo"></a>
 			</div>
 			<!-- /.logo -->
 			<!-- End logo -->

@@ -24,7 +24,7 @@
 						<tr>
 							<th style="text-align: center">ID</th>
 							<th>Nombre del Área</th>
-							<th>Título</th>
+							<th>Título de Formación</th>
 							<th>Número de Vacantes</th>
 							<th>Años de Experiencia</th>
 							<th>F.Inicio Concurso</th>
@@ -36,7 +36,7 @@
 							<?php foreach ($datos as $dato): ?>
 						<tr>
 							<td align="center"><?php echo $dato["id"]; ?></td>
-							<td><?php echo $dato["nombre_area"]; ?></td>
+							<td><?php echo $dato["area"]; ?></td>
 							<td><?php echo $dato["titulo"]; ?></td>
 							<td><?php echo $dato["numero_vacantes"]; ?></td>
 							<td><?php echo $dato["experiencia_requerida"]; ?></td>

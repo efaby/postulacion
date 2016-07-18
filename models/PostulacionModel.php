@@ -13,8 +13,9 @@ class PostulacionModel {
 	 */
 	public function getPostulacionList($id){
 		$model = new model();		
-		$sql = "select v.nombre_area, v.titulo , p.fecha, p.id from postulacion as p 
+		$sql = "select a.nombre as nombre_area, v.titulo , p.fecha, p.id from postulacion as p 
 				inner join vacante as v on p.vacante_id = v.id
+				left join area as a on v.area_id =  a.id
 				where p.postulante_id = ".$id;
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
@@ -27,7 +28,7 @@ class PostulacionModel {
 	
 	private function loadEvaluaciones($id){
 		$model = new model();
-		$sql = "select et.nombre, e.valor, e.fecha, e.observacion, e.url  from evaluacion as e
+		$sql = "select et.nombre, e.valor, e.fecha, e.observacion, e.url, e.postulacion_id, e.etapa_id  from evaluacion as e
 				inner join etapa et on e.etapa_id = et.id
 				where postulacion_id = ".$id;
 		$result = $model->runSql($sql);
@@ -42,28 +43,28 @@ class PostulacionModel {
 	public function getVacantes(){
 
 		$model = new model();	
-		$sql = "select v.id, v.titulo  from vacante as v";		
+		$sql = "select v.id, v.titulo  from vacante as v where eliminado = 0";		
 		$result = $model->runSql($sql);
 		return $model->getRows($result);
 	}
 	
 	public function getPostulantes($etapa, $vacante, $sufix){
 		
-		$sql1 = " select p.id, u.nombres, u.apellidos, u.numero_identificacion, '' as valor, '' as observacion, if((select count(postulacion_id) from evaluacion where postulacion_id =p.id)>0,0,1) as activo 
-				, if((select count(v1.id) from vacante as v1 where v1.id = v.id and CURDATE() between v1.fecha_inicio".$sufix." and v1.fecha_fin".$sufix. ")>0,1,0) as activar  
+		$sql1 = " select p.id, u.nombres, u.apellidos, u.numero_identificacion, (select (valor) from evaluacion where postulacion_id =p.id and etapa_id = ".$etapa.") as valor, (select (observacion) from evaluacion where postulacion_id =p.id and etapa_id = ".$etapa.") as observacion, if((select count(postulacion_id) from evaluacion where postulacion_id =p.id and etapa_id = ".$etapa.")>0,0,1) as activo 
+				, if((select count(v1.id) from vacante as v1 where v1.id = v.id and CURDATE() between v1.fecha_inicio".$sufix." and v1.fecha_fin".$sufix. ")>0,1,0) as activar, (select (url) from evaluacion where postulacion_id =p.id and etapa_id = ".$etapa.") as url  
 				from vacante as v ";
 		$sql = "	inner join postulacion as p on p.vacante_id =  v.id
 					inner join usuario as u on p.postulante_id =  u.id ";
 		$where = " ";
 		if($etapa > 1){	
 			$etapa = $etapa - 1;
-			$sql1 = " select p.id, u.nombres, u.apellidos, u.numero_identificacion, e.valor, e.observacion, e.activo, if((select count(v1.id) from vacante as v1 where v1.id = v.id and CURDATE() between v1.fecha_inicio".$sufix." and v1.fecha_fin".$sufix. ")>0,1,0) as activar  
-					 from vacante as v ";
 			$sql .= " inner join evaluacion as e on (e.postulacion_id = p.id and e.aprobado = 1 and etapa_id = ".$etapa.")";
 			$where = "";				
 		}		
 		$sql .= " where v.id = ".$vacante. $where;
-		$model = new model();		
+		$model = new model();	
+	//print_r($sql1.$sql);
+//exit();
 		$result = $model->runSql($sql1.$sql);
 		return $model->getRows($result);
 	}
@@ -119,7 +120,7 @@ class PostulacionModel {
 	}
 	
 	public function getPostulanteByPostulancion($id){
-		$sql = "Select u.nombres, u.apellidos, u.numero_identificacion from usuario as u
+		$sql = "Select u.id, u.nombres, u.apellidos, u.numero_identificacion, u.email from usuario as u
 				inner join postulacion as p on p.postulante_id = u.id				
 				where p.id = ".$id;
 		$model = new model();
@@ -127,4 +128,22 @@ class PostulacionModel {
 		$resultArray = $model->getRows($result);
 		return $resultArray[0];
 	}
+	
+	public function getVacanteByPostulancion($id){
+		$sql = "Select v.id, v.nombre_vacante from vacante as v
+				inner join postulacion as p on p.vacante_id = v.id				
+				where p.id = ".$id;
+		$model = new model();
+		$result = $model->runSql($sql);
+		$resultArray = $model->getRows($result);
+		return $resultArray[0];
+	}
+	
+	public function getEtapaById($id){
+		$model = new model();
+		$sql = "select * from etapa where id = ".$id;
+		$result = $model->runSql($sql);
+		return $model->getRows($result);
+	}
+	
 }

@@ -37,7 +37,8 @@
 								</select>
 					</div>
 					
-					<div class="form-group  col-sm-4">					
+					<div class="form-group  col-sm-4">	
+					<input type="hidden" value="1" name="band" id="band">				
 						<button type="submit" class="btn btn-success" style="margin-top: 25px;"><i
 									class="fa fa-search"></i> Buscar</button>
 					</div>
@@ -50,8 +51,9 @@
 						<tr>
 							<th>Cedula Identidad</th>
 							<th>Nombre Postulante</th>
-							<th>Calificación</th>
+							<th>Calificación</th>							
 							<th>Observación</th>
+							<?php echo (($etapa==2)||($etapa==4))?'<th>Archivo</th>':''; ?>
 							<th style="text-align: center">Acciones</th>
 						</tr>
 					</thead>
@@ -60,11 +62,22 @@
 						<tr>
 							<td><?php echo $dato["numero_identificacion"]; ?></td>
 							<td><?php echo $dato["nombres"]; ?> <?php echo $dato["apellidos"]; ?></td>
-							<td><?php echo $dato["valor"]; ?></td>
+							<td><?php echo ($dato["valor"]>0)?$dato["valor"]:0; ?></td>
 							<td><?php echo $dato["observacion"]; ?></td>
+							<?php if(($etapa==2)||($etapa==4)):
+								echo '<td>';
+								if($dato["url"]!=''): 
+									echo '<a href="index.php?action=downloadFile&nameFile='.$dato["url"].'" class="btn btn-info btn-xs">Descargar</a>';
+								endif;
+								echo '</td>'; 
+								endif; ?>
 							<td align="center">								
-								<a href="#" class="btn btn-info btn-xs <?php echo (($dato["activo"]==0)||($dato["activar"]==0))?"disabled":"";?>"
-									onclick="javascript: loadPage(<?php echo $dato["id"]; ?>);">Evaluar</a>								
+								<a href="#" class="btn btn-info btn-xs <?php $activo = $dato["activo"]; if(is_null($dato["activo"])): $activo = 1; endif; echo (($dato["activar"]==0)||($activo==0))?"disabled":"";?>"
+									onclick="javascript: loadPage(<?php echo $dato["id"]; ?>);">Evaluar</a>
+									<?php if(($etapa == 3)&&($dato["valor"]>0)):?>
+										<a href="#" class="btn btn-info btn-xs "
+										onclick="javascript: loadPage1(<?php echo $dato["id"]; ?>);">Ver</a>								
+									<?php endif;?>								
 							</td>
 						</tr>
 								<?php endforeach;?>
@@ -120,6 +133,7 @@ function imprimir(){
 }
 function loadPage(id){
 	var opcion  = $("#etapa").val();
+	var vacante  = $("#vacante").val();
 	$("#id").val(id);
 	if(opcion == 1){
 		var accion = "index.php?action=meritos"
@@ -143,12 +157,19 @@ function loadPage(id){
 			
 			$(".modal-header h3").html(title);
 			
-			$('.modal-body').load('index.php?action=loadFormEvaluacion&id=' + id + '&opcion=' + opcion,function(result){
+			$('.modal-body').load('index.php?action=loadFormEvaluacion&id=' + id + '&opcion=' + opcion + '&vacante=' + vacante,function(result){
 			    $('#confirm-submit').modal({show:true});
 			});
 		}
 		
 	}
+}
+
+function loadPage1(id){
+	$("#id").val(id);
+	var accion = "../Evaluacion/index.php?action=imprimir";
+	$("#frmAccion").attr('action', accion);
+	$("#frmAccion").submit();
 }
 
 $(document).ready(function() {

@@ -21,7 +21,7 @@ class SecureModel {
 		$model = new model();
 		$sql = "select id, nombres, apellidos, tipo_usuario_id, activo
 				from usuario
-				where username= '".$login."' and password = '".md5($password)."'";
+				where username= '".$login."' and password = '".md5($password)."' and eliminado = 0";
 		
 		$result = $model->runSql($sql);
 		$result = $model->getRows($result);
@@ -49,7 +49,7 @@ class SecureModel {
 		} else {
 			$sql = "select count(u.id) as total ";
 		}
-		$sql .= " from user as u inner join user_type as ut on ut.id = u.user_type_id where u.user_type_id <> 3 order by u.user_type_id desc";
+		$sql .= " from user as u inner join user_type as ut on ut.id = u.user_type_id where u.user_type_id <> 3 and eliminado = 0 order by u.user_type_id desc";
 		return $sql;
 	}
 	
@@ -108,7 +108,7 @@ class SecureModel {
 	
 	public function verifyPass($pass, $user){
 		$model =  new model();
-		$sql = "select id from usuario where id = ".$user." and password = md5('".$pass."')";
+		$sql = "select id from usuario where id = ".$user." and password = md5('".$pass."') and eliminado = 0";
 		$result = $model->runSql($sql);
 		$resultArray = $model->getRows($result);
 		return count($resultArray);
@@ -122,7 +122,7 @@ class SecureModel {
 	
 	public function getEmailByCI($user){
 		$model =  new model();
-		$sql = "select * from user where identity_card = ".$user;
+		$sql = "select * from usuario where username = ".$user." and eliminado = 0";
 		$result = $model->runSql($sql);
 		$resultArray = $model->getRows($result);
 		if(count($resultArray)>0){

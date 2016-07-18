@@ -62,7 +62,7 @@
 												class="file-loading"> <input type="hidden" name="fileName"
 												value="<?php echo $usuario['url_cedula'];?>"> <input
 												type="hidden" name="opcion" value="2">
-											<?php if($usuario['url_cedula']!=''):?>
+											<?php if(($usuario['url_cedula']!='')&&(strpos($usuario['url_cedula'],'default_avatar_file.gif')===false)):?>
 											<br>
 												<a
 												href="index.php?action=downloadFile&nameFile=<?php echo $usuario['url_cedula'];?>" class="btn btn-info btn-xs">Descargar</a>
@@ -79,7 +79,7 @@
 												class="file-loading"> <input type="hidden" name="fileName"
 												value="<?php echo $usuario['url_papeleta'];?>"> <input
 												type="hidden" name="opcion" value="3">
-												<?php if($usuario['url_papeleta']!=''):?>
+												<?php if(($usuario['url_papeleta']!='')&&(strpos($usuario['url_papeleta'],'default_avatar_file.gif')===false)):?>
 												<br>
 													<a class="btn btn-info btn-xs"
 												href="index.php?action=downloadFile&nameFile=<?php echo $usuario['url_papeleta'];?>">Descargar</a>
@@ -96,11 +96,11 @@
 												class="file-loading"> <input type="hidden" name="fileName"
 												value="<?php echo $usuario['url_hoja'];?>"> <input
 												type="hidden" name="opcion" value="4">
-												<?php if($usuario['url_hoja']!=''):?>
+												<?php if(($usuario['url_hoja_descargar']!='')&&(strpos($usuario['url_hoja_descargar'],'default_avatar_file.gif')===false)):?>
 												<br>
 													<a class="btn btn-info btn-xs"
-												href="index.php?action=downloadFile&nameFile=<?php echo $usuario['url_hoja'];?>">Descargar</a>
-												<?php endif;?>	
+												href="index.php?action=downloadFile&nameFile=<?php echo $usuario['url_hoja_descargar'];?>">Descargar</a>
+												<?php endif;?>
 											</form>
 									</div>
 
@@ -118,7 +118,12 @@
 												value="<?php echo $usuario['numero_identificacion']; ?>">
 
 										</div>
-										<div class="form-group col-sm-6"></div>
+										<div class="form-group col-sm-6">
+<label class="control-label">Archivos adjuntos</label>
+										<input type='text' name='file_change' id='file_change' class='form-control'
+												value="0" readonly="readonly">
+										
+</div>
 										</div>
 										<div class="form-group col-sm-12 rows">
 										<div class="form-group col-sm-6">
@@ -169,10 +174,43 @@
 										<div class="form-group  col-sm-6">
 										
 											<label class="control-label">Lugar de Nacimiento</label> 
-											<input type='text'
-												name='lugar_nacimiento' class='form-control'
-												value="<?php echo $usuario['lugar_nacimiento']; ?>">
-										</div>
+											<div>
+											
+												<div class="form-group  col-sm-4">
+													<label class="control-label">País</label>
+													<select class='form-control' name="pais_id" id="pais_id">
+														<option value="" >Seleccione</option>
+													<?php foreach ($paises as $dato) { ?>
+														<option value="<?php echo $dato['id'];?>"  <?php if($usuario['pais_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+													<?php }?>
+													</select>
+											
+												</div>
+											
+													<div class="form-group  col-sm-4"> 
+														<label class="control-label">Provincia</label>
+														<select class='form-control' name="provincia_id" id="provincia_id">		
+														<option value="" >Seleccione</option>	
+														<?php foreach ($provincias as $dato) { ?>
+															<option value="<?php echo $dato['id'];?>"  <?php if($usuario['provincia_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+														<?php }?>
+														</select>
+													</div>
+													<div class="form-group  col-sm-4" >
+														<label class="control-label">Ciudad</label>
+														<select class='form-control' name="ciudad_id" id="ciudad_id">
+														<option value="" >Seleccione</option>
+														<?php foreach ($ciudades as $dato) { ?>
+															<option value="<?php echo $dato['id'];?>"  <?php if($usuario['ciudad_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+														<?php }?>
+														</select>
+												
+													</div>
+													</div>
+											</div>
+											
+											
+											
 										<div class="form-group  col-sm-6">
 										
 											<label class="control-label">Fecha de Nacimiento</label> 
@@ -182,7 +220,7 @@
 										</div>
 										</div>
 										<div class="form-group col-sm-12">
-											<label class="control-label">Dirección</label> <input type='text'
+											<label class="control-label">Dirección Actual</label> <input type='text'
 												name='direccion' class='form-control'
 												value="<?php echo $usuario['direccion']; ?>">
 
@@ -375,7 +413,7 @@
 												<td><?php echo $dato["institucion"]; ?></td>
 												<td><?php echo $dato["area"]; ?></td>
 												<td><?php echo $dato["cargo"]; ?></td>
-												<td><?php echo $dato["ciudad"]; ?></td>
+												<td><?php echo ($dato["nombre_ciudad"]!='')?$dato["nombre_ciudad"]:$dato["ciudad"]; ?></td>
 												<td><a
 													href="index.php?action=downloadFile&nameFile=<?php echo $dato["url"];?>" class="btn btn-info btn-xs">Descargar</a></td>
 												<td align="center"><a href="#"
@@ -486,10 +524,32 @@ $("#url_foto").fileinput({
 
 $("#url_cedula").fileinput({showCaption: false,elErrorContainer: '#file-errors-cedula',allowedFileExtensions: ["jpg", "png", "gif"], initialPreview:'<img src="<?php echo PATH_FILES_USER . $usuario['url_cedula'];?>" style="width:160px">', showRemove: false});
 $("#url_papeleta").fileinput({showCaption: false,elErrorContainer: '#file-errors-papeleta',allowedFileExtensions: ["jpg", "png", "gif"],initialPreview:'<img src="<?php echo PATH_FILES_USER . $usuario['url_papeleta'];?>" style="width:160px">'});
-$("#url_hoja").fileinput({showCaption: false,elErrorContainer: '#file-errors-hoja',allowedFileExtensions: ["jpg", "png", "gif"],initialPreview:'<img src="<?php echo PATH_FILES_USER . $usuario['url_hoja'];?>" style="width:160px">'});
+$("#url_hoja").fileinput({showCaption: false,elErrorContainer: '#file-errors-hoja',allowedFileExtensions: ["pdf", "doc", "docx"],initialPreview:'<img src="<?php echo PATH_FILES_USER . $usuario['url_hoja'];?>" style="width:160px">'});
 
 $(function () {
-  
+
+  function selecionFile(item){
+		var valor = $("#file_change").val();		
+		if(valor.indexOf(item)==-1){
+			if(valor == 0){
+				valor = '';
+			}
+			$("#file_change").val(valor + ' ' + item);
+		}	
+	}
+	$("#url_foto").change(function() {
+		selecionFile('Perfil');        
+    });
+    
+	$("#url_cedula").change(function() {
+		selecionFile('Cédula');		
+    });
+	$("#url_papeleta").change(function() {
+		selecionFile('Papeleta de Votación');		
+    });
+	$("#url_hoja").change(function() {
+		selecionFile('Hoja de vida');
+    });
     $('#fecha_nacimiento').datetimepicker({ 
       pickTime: false, 
       format: "YYYY-MM-DD", 
@@ -575,18 +635,27 @@ $(document).ready(function() {
 					}
 				}
 			},
-			lugar_nacimiento: {
-				message: 'El Lugar de Nacimiento no es válido',
-				validators: {	
+			pais_id: {
+				validators: {
 					notEmpty: {
-						message: 'El Lugar de Nacimiento no puede ser vacío.'
-					},				
-					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
-						message: 'Ingrese el Lugar de Nacimiento válido.'
+						message: 'Seleccione un País.'
 					}
 				}
 			},
+			provincia_id: {
+				validators: {
+					notEmpty: {
+						message: 'Seleccione una Provincia'
+					}
+				}
+			},	
+			ciudad_id: {
+				validators: {
+					notEmpty: {
+						message: 'Seleccione una Ciudad'
+					}
+				}
+			},	
 			direccion: {
 				message: 'La Dirección no es válida',
 				validators: {	
@@ -594,7 +663,7 @@ $(document).ready(function() {
 						message: 'La Dirección no puede ser vacía.'
 					},			
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 \.-]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s\_\-\.\&\@\/]+$/,
 						message: 'Ingrese una Direccion válida.'
 					}
 				}
@@ -668,6 +737,19 @@ $(document).ready(function() {
 						}
 					}
 				},
+                                file_change: {
+					message: 'Subir Archivo',
+					validators: {
+						notEmpty: {
+							message: 'debe guardar el archivo.'
+						},	
+						regexp: {
+							regexp: /^[0]+$/,
+							message: 'Debe guardar el(los) archivo(s) que adjuntó dando click en el botón guardar de cada archivo.'
+						}			
+						
+					}
+				},
 		}
 	});
 
@@ -680,6 +762,34 @@ if ($('#datatable-example1').length > 0){
 if ($('#datatable-example2').length > 0){
 	$('#datatable-example2').dataTable();
 }
+
+$(document).ready(function(){
+	   $("#pais_id").change(function () {
+	           $("#pais_id option:selected").each(function () {
+	            opcion=$(this).val();
+	            $.post("index.php?action=loadProvincia", { opcion: opcion }, function(data){
+                       var data = JSON.parse(data);
+	               $("#provincia_id").html(data.data);
+			if(data.band == 1){				
+				$("#ciudad_id").html('<option value="" >Seleccione</option>');
+			} else {
+				$("#ciudad_id").html(data.data);
+			} 
+	            
+	            });            
+	        });
+	   });
+
+	   $("#provincia_id").change(function () {
+	           $("#provincia_id option:selected").each(function () {
+	            opcion=$(this).val();
+	            $.post("index.php?action=loadCiudad", { opcion: opcion }, function(data){
+	            $("#ciudad_id").html(data);
+	            });            
+	        });
+	   })
+	   
+	});
 </script>
 
 

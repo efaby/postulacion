@@ -1,55 +1,96 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="es">
-<head>
-<link rel="shortcut icon" href="<?php echo PATH_IMAGES; ?>/favicon.ico">
-<meta charset="UTF-8" />
-<title>Reestablecer Contraseña</title>
-<link rel="stylesheet" type="text/css" href="<?php echo PATH_CSS . '/style.css'; ?>" media="screen" />
-<script type="text/javascript" src="<?php echo PATH_JS.'/jquery.js'; ?>"></script>
-<script type="text/javascript" src="<?php echo PATH_JS.'/jquery.validate.min.js'; ?>"></script>
-<script type="text/javascript" src="<?php echo PATH_JS.'/password.js'; ?>"></script>
-</head>
-<body>
-<?php include_once PATH_TEMPLATE.'/header.php';?>
-<section>
+<?php $title = "Resetar Contraseña";?>
+<?php include_once PATH_TEMPLATE.'/header.public.php';?>
+<div class="section">
 <div class="content">
-	<h2>Resetar Contraseña</h2>
+<div class="container">
+
+<div class="title-home">
+
+
 	<?php $band = 0; if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
-<div class="message">
+<div class="alert alert-warning fade in alert-dismissable">
 	<?php echo $_SESSION['message'];$_SESSION['message'] = ''; $band = 1;?>
 </div>
 <?php endif;?>
-	<form method="post" action="index.php?action=resetPass" id="passwordForm" name="passwordForm">
-		<table border="0" align="center" cellpadding="2" cellspacing="0" class="table" style="width: 100%;">
-	    	<tr>
-				<td width="200" valign="top">
-					<b>Nueva Contraseña:</b>
-				</td>
-				<td width="220">
-					<input id="passwordNew" name="passwordNew" type="password" />
-				</td>
-	    	</tr>
-	    	<tr>
-				<td width="190" valign="top">
-					<b>Repetir Nueva Contraseña:</b>
-				</td>
-				<td width="188">
-					<input id="repeatPasswordNew" name="repeatPasswordNew" type="password" />
-				</td>
-	    	</tr>
-			<tr>
-	    		<td colspan="2" align="center" style="height: 30px;">
-	    			<input type="hidden" name="identity_card" value="<?php echo $user_id;?>">
-	      			<input type="submit" name="reset" value="Resetear Contraseña" class="buttom-inside" style="width: auto;" />
-	      			<?php if($band == 1):?>
-	      			<a href="../../index.php" class="link-return" >Iniciar Sesión</a>	 
-	      			<?php endif;?>     	
-	      		</td>
-	    	</tr>
-		</table>
+<?php if($band == 1):?>
+<br />
+<a href="../../index.php" class="btn btn-info" >Iniciar Sesión</a>	
+<?php else:?> 
+	      			
+	<form method="post" action="index.php?action=resetPass" id="passwordForm" name="passwordForm" class="bootstrap-validator-form">
+		
+		<div class="form-group col-sm-6 rows">
+			<div class="form-group col-sm-6">
+			<label class="control-label">Nueva Contraseña:</label> 
+			</div>
+			<div class="form-group col-sm-6">
+				<input id="passwordNew" name="passwordNew" type="password" class='form-control'/>
+			</div>
+			<div class="form-group col-sm-6">
+			<label class="control-label">Repetir Nueva Contraseña:</label> 
+			</div>
+			<div class="form-group col-sm-6">
+				<input id="repeatPasswordNew" name="repeatPasswordNew" type="password" class='form-control'/>
+			</div>
+			<div class="form-group col-sm-6">				
+			</div>
+			<div class="form-group col-sm-6">
+				<input type="hidden" name="identity_card" value="<?php echo $user_id;?>">	      		
+	      		<button type="submit" class="btn btn-info">Resetear Contraseña</button> 
+			</div>			
+		</div>	
+		
 	</form>
-	</div>
-	</section>
+	<?php endif;?> 
+</div>
+</div>
+</div>
+</div>
 <?php include_once PATH_TEMPLATE.'/footer.php';?>
+<script
+	src="<?php echo PATH_CSS . '/../plugins/validator/bootstrapValidator.min.js';?>"></script>
+<script src="<?php echo PATH_CSS . '/../js/apps.js';?>"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $('#passwordForm').bootstrapValidator({
+    	message: 'This value is not valid',
+		feedbackIcons: {
+			valid: 'glyphicon glyphicon-ok',
+			invalid: 'glyphicon glyphicon-remove',
+			validating: 'glyphicon glyphicon-refresh'
+		},
+		fields: {			
+			
+			passwordNew: {
+				message: 'La Contraseña no es válida',
+				validators: {
+					notEmpty: {
+						message: 'La Contraseña no puede ser vacía.'
+					},					
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9-_ \.]+$/,
+						message: 'Ingrese una Contraseña válida.'
+					}
+				}
+			},
+			repeatPasswordNew: {
+				validators: {
+					notEmpty: {
+						message: 'La contraseña no puede ser vacia.'
+					},
+					identical: {
+						field: 'passwordNew',
+						message: 'La contraseña debe ser la misma'
+					}
+				}
+			},
+			
+		}
+	});
+
+});
+</script>
 </body>
 </html>

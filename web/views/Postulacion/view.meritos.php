@@ -14,9 +14,9 @@
 					<?php echo $usuario["numero_identificacion"]; ?>
 				</div>
 				<div class="form-group  col-sm-6">
-					<a href="index.php?action=downloadFile&nameFile=<?php echo $usuario["url_cedula"];?>" class="btn btn-info btn-xs">Cédula</a>
-					<a href="index.php?action=downloadFile&nameFile=<?php echo $usuario["url_papeleta"];?>" class="btn btn-info btn-xs">Papeleta Votación</a>
-					<a href="index.php?action=downloadFile&nameFile=<?php echo $usuario["url_hoja"];?>" class="btn btn-info btn-xs">Hoja de Vida</a>
+					<a href="index.php?action=downloadFile&nameFile=<?php echo $usuario["url_cedula"];?>" class="btn btn-info btn-xs <?php echo ($usuario["url_cedula"]=='')?'disabled':''; ?>">Cédula</a>
+					<a href="index.php?action=downloadFile&nameFile=<?php echo $usuario["url_papeleta"];?>" class="btn btn-info btn-xs <?php echo ($usuario["url_papeleta"]=='')?'disabled':''; ?>">Papeleta Votación</a>
+					<a href="index.php?action=downloadFile&nameFile=<?php echo $usuario["url_hoja"];?>" class="btn btn-info btn-xs <?php echo ($usuario["url_hoja"]=='')?'disabled':''; ?>">Hoja de Vida</a>
 				</div>
 				</div>
 				<div class="form-group  col-sm-6">
@@ -152,23 +152,21 @@
 				<div class="the-box rounded">
 				<h3>Evaluación de Méritos</h3>
 				<form action="index.php?action=saveEvaluacion" method="post" id="frmEvaluacion">
-				<div class="form-group col-sm-6">
+<div class="form-group col-sm-12">				
+<div class="form-group col-sm-6" style="padding-left: 0px;">
 					<label class="control-label">Calificación</label> <input type='text'
 						name='valor' id='valor' class='form-control' >			
 				</div>
-				<div class="form-group col-sm-6">
-					<label class="control-label">Pasa a Siguiente Etapa</label> 
-					<select class='form-control' name="aprobado" id="aprobado">
-				<option value="" >Seleccione</option>
-				<option value="1"  >Si</option>
-				<option value="2" >No</option>
-			</select>
+				<div class="col-sm-6" style="padding-top: 30px;">
+                                  Para pasar Siguiente Etapa es necesario tener una evaluación de 8 a 10 puntos. 		
+					
 				</div>
-				<div class="form-group col-sm-12">
+</div>
+				<div class="form-group col-sm-12" >
 					<label class="control-label">Observaciones</label> <textarea name='observaciones' id='observaciones' class='form-control' ></textarea>			
 				</div>
 				
-				<div class="form-group">
+				<div class="form-group ">
 		<input type='hidden' name='postulacion_id' class='form-control' value="<?php echo $postulacion; ?>">
 		<input type='hidden' name='etapa_id' class='form-control' value="1">
 		<button type="submit" class="btn btn-success">Guardar</button>
@@ -217,7 +215,7 @@ $(document).ready(function() {
 								message: 'La Calificación no puede ser vacía.'
 							},					
 							regexp: {
-								regexp: /^[0-9\.]+$/,
+								regexp: /^[1-9]{1}$|^10$/,
 								message: 'Ingrese una Calificación válida.'
 							}
 						}
@@ -232,13 +230,7 @@ $(document).ready(function() {
 								}
 							},	
 						
-			aprobado: {
-				validators: {
-					notEmpty: {
-						message: 'Seleccione si pasa a la siguiente etapa.'
-					}
-				}
-			}
+			
 		}
 	});
 

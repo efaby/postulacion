@@ -1,43 +1,71 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="es">
-<head>
-<link rel="shortcut icon" href="<?php echo PATH_IMAGES; ?>/favicon.ico">
-<meta charset="UTF-8" />
-<title>Reestablecer Contraseña</title>
-<link rel="stylesheet" type="text/css" href="<?php echo PATH_CSS . '/style.css'; ?>" media="screen" />
-<script type="text/javascript" src="<?php echo PATH_JS.'/jquery.js'; ?>"></script>
-<script type="text/javascript" src="<?php echo PATH_JS.'/jquery.validate.min.js'; ?>"></script>
-<script type="text/javascript" src="<?php echo PATH_JS.'/recover.js'; ?>"></script>
-</head>
-<body>
-<?php include_once PATH_TEMPLATE.'/header.php';?>
-<section>
+<?php $title = "Recuperar Contrase&ntilde;a";?>
+<?php include_once PATH_TEMPLATE.'/header.public.php';?>
+<div class="section">
 <div class="content">
-	<h2>Recuperar Contraseña</h2>
+<div class="container">
+
+<div class="title-home">
+
 	<?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
-<div class="message">
+<div class="alert alert-warning fade in alert-dismissable">
 	<?php echo $_SESSION['message'];$_SESSION['message'] = ''?>
+	<br />
 </div>
 <?php endif;?>
-	<form method="post" action="index.php?action=recoverPass" id="recover" name="recover">
-		<table border="0" align="center" cellpadding="2" cellspacing="0" class="table" style="width: 100%;">
-			<tr>
-				<td>
-					<b>Usuario:</b>
-				</td>
-				<td>
-					<input id="identity_card" name="identity_card" type="text" />
-				</td>
-	    	</tr>
-			<tr>
-	    		<td colspan="2" align="center">
-	      			<input type="submit" name="Ingresar" value="Enviar" class="buttom-inside"/>	      	
-	      		</td>
-	    	</tr>
-		</table>
+
+	<form method="post" action="index.php?action=recoverPass" id="recover" name="recover"  class="bootstrap-validator-form">
+		<div class="form-group col-sm-6 rows">
+	<div class="form-group col-sm-4">
+	<label class="control-label">Usuario:</label> 
+	</div>
+	<div class="form-group col-sm-4">
+		<input id="identity_card" name="identity_card" type="text" class='form-control'/>
+	</div>
+	<div class="form-group col-sm-4">	
+	<button type="submit" class="btn btn-info">Enviar</button>    		      	
+	</div>
 	</form>
 </div>
-	</section>
+
+
+</div>
+</div>
+</div>
 <?php include_once PATH_TEMPLATE.'/footer.php';?>
+
+<script
+	src="<?php echo PATH_CSS . '/../plugins/validator/bootstrapValidator.min.js';?>"></script>
+<script src="<?php echo PATH_CSS . '/../js/apps.js';?>"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $('#recover').bootstrapValidator({
+    	message: 'This value is not valid',
+		feedbackIcons: {
+			valid: 'glyphicon glyphicon-ok',
+			invalid: 'glyphicon glyphicon-remove',
+			validating: 'glyphicon glyphicon-refresh'
+		},
+		fields: {			
+			identity_card: {
+				message: 'El Número de Identificación no es válido',
+				validators: {
+							notEmpty: {
+								message: 'El Número de Identificación no puede ser vacío.'
+							},					
+							regexp: {
+								regexp: /^(?:\+)?\d{10,13}$/,
+								message: 'Ingrese un Número de Identificación válido.'
+							}
+						}
+					},
+			
+		}
+	});
+
+});
+</script>
+
 </body>
 </html>

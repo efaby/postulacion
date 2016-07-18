@@ -36,13 +36,14 @@
 				<?php
 					foreach ($categoria as $valor)
 					{
+						$select = "";	
 						if (is_null($pregunta['categoria_id']))
 						{
 							$select = "";							
 						}
 						else
 						{
-							if ($pregunta['categoria_id'] = $valor['id']) 
+							if ($pregunta['categoria_id'] == $valor['id']) 
 							{
 								$select = "selected = 'selected'";
 							}

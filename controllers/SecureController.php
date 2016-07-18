@@ -1,6 +1,6 @@
 <?php
 require_once(PATH_MODELS."/SecureModel.php");
-
+require_once (PATH_HELPERS. "/Email.php");
 /**
  * Controlador de Usuarios
  *
@@ -135,8 +135,9 @@ class SecureController {
 		$model = new SecureModel();
 		$user = $model->getEmailByCI($user_id);
 		if($user != null){
-			$token = base64_encode($user_id);
-			$this->sendMail($user, $token);
+			$token = base64_encode($user_id);			
+			$email = new Email();			
+			$email->sendRecuperacionContrasena($user["nombres"]." ".$user["apellidos"], $user["email"],$token);			
 			$_SESSION['message'] = "Por favor revise su Email. Se ha enviado un link para resetear su contraseña.";
 		} else {
 			$_SESSION['message'] = "El usuario no existe.";

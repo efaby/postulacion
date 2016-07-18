@@ -39,14 +39,14 @@ if (isset($_SESSION['SESSION_USER'])){
 		$redirect = "error403";
 	} else {	
 		if($url == '/index.php'){
-			header("location: /postulacion/web/views/Secure/index.php?action=welcome"); // postulacion
+			header("location: /web/views/Secure/index.php?action=welcome"); // postulacion
 			exit();
 		}
 	}	
 } else {
 
 	if(!in_array($url, $urls)){
-		header("location: /postulacion/web/index.php");
+		header("location: /web/index.php");
 		exit();
 	}
 } 

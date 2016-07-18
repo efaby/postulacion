@@ -49,7 +49,9 @@ class File {
 		}
 		
 		if($_POST['fileName'] != ''){		
-			unlink(PATH_FILES.$_POST['fileName']);			
+                    if(strpos($_POST['fileName'],'default_avatar_file.gif')===false){
+			unlink(PATH_FILES.$_POST['fileName']);		
+                      }	
 		}
 		return $this->uploadFileToServer($prefix, $key, $path);	
 	}

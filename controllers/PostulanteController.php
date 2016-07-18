@@ -8,16 +8,33 @@ require_once (PATH_HELPERS. "/File.php");
 class PostulanteController {
 	public function display() {
 		$model = new PostulanteModel ();
-		$usuario = $model->getUsuario($_SESSION['SESSION_USER']['id']);
+		$usuario = $model->getUsuario($_SESSION['SESSION_USER']['id']);	
+		
 		$usuario['url_foto_view'] = ($usuario['url_foto']=='')?'default_avatar_male.jpg':$usuario['url_foto'];
 		$usuario['url_cedula'] = ($usuario['url_cedula']=='')?'avatar/default_avatar_file.gif':$usuario['url_cedula'];
 		$usuario['url_papeleta'] = ($usuario['url_papeleta']=='')?'avatar/default_avatar_file.gif':$usuario['url_papeleta'];
-		$usuario['url_hoja'] = ($usuario['url_hoja']=='')?'avatar/default_avatar_file.gif':$usuario['url_hoja'];
+		$usuario['url_hoja_descargar'] = ($usuario['url_hoja']=='')?'avatar/default_avatar_file.gif':$usuario['url_hoja'];
+		$usuario['url_hoja'] = 'avatar/default_avatar_file.gif';
 		$cursos = $model->getCursos($_SESSION['SESSION_USER']['id']);
 		$titulos = $model->getTitulos($_SESSION['SESSION_USER']['id']);
 		$historiales = $model->getHistoriales($_SESSION['SESSION_USER']['id']);
 		$estados = $model->getEstados();
 		$capacidades = $model->getCapacidades();
+		$paises = $model->getPaises();
+		
+		if($usuario['ciudad']!= ''){
+			$provincias = $ciudades = array(array('id' =>$usuario['ciudad'], 'nombre' => $usuario['ciudad']));
+			$usuario['pais_id'] = $usuario['ciudad_id'];
+			$usuario['provincia_id'] = $usuario['ciudad'];
+			$usuario['ciudad_id'] = $usuario['ciudad'];
+		} else {			
+			$provincias = ($usuario['pais_id']>0)?$model->getProvincias($usuario['pais_id']):array();
+			$ciudades = ($usuario['provincia_id']>0)?$model->getCiudades($usuario['provincia_id']):array();
+		}
+		
+		
+		
+		
 		$datos = array();
 		$message = "";
 		require_once "view.listado.php";
@@ -37,9 +54,16 @@ class PostulanteController {
 			case 2: $curso = $model->getCurso();
 				require_once "view.form.curso.php";
 				break;
-			case 3: $historial = $model->getHistorial();				
-				$provincias = $model->getProvincias($historial['pais_id']);
-				$ciudades = $model->getCiudades($historial['provincia_id']);
+			case 3: $historial = $model->getHistorial();	
+				if($historial['ciudad']!= ''){
+					$provincias = $ciudades = array(array('id' =>$historial['ciudad'], 'nombre' => $historial['ciudad']));
+					$historial['pais_id'] = $historial['ciudad_id'];
+					$historial['provincia_id'] = $historial['ciudad'];
+					$historial['ciudad_id'] = $historial['ciudad'];
+				} else {			
+					$provincias = $model->getProvincias($historial['pais_id']);
+					$ciudades = $model->getCiudades($historial['provincia_id']);
+				}
 				require_once "view.form.historial.php";
 				break;
 		}
@@ -50,13 +74,21 @@ class PostulanteController {
 		$opcion = $_POST ['opcion'];
 		$model = new PostulanteModel ();
 		$provincias = $model->getProvincias($opcion);
-		$html ='<option value="" >Seleccione</option>';
+		if(count($provincias)>0){
+			$html ='<option value="" >Seleccione</option>';
 			foreach ($provincias as $dato) { 
 				$html .='<option value="'.$dato["id"].'" >'.$dato["nombre"].'</option>';
 					}		
-		$html .='</select>';
+			$html .='</select>';
+			$resultado = array('band'=>1,'data'=>$html);
+		} else {
+			$pais = $model->getPais($opcion);
+			$html ='<option value="'.$pais['nombre'].'" >'.$pais['nombre'].'</option>';
+			$resultado = array('band'=>0,'data'=>$html);
+		}
 		
-		echo $html;
+		
+		echo json_encode($resultado);
 	}
 	
 	public function loadCiudad(){
@@ -106,7 +138,15 @@ class PostulanteController {
 					$objeto ['telefono'] = $_POST ['telefono'];
 					$objeto ['direccion'] = $_POST ['direccion'];
 					$objeto ['relacion_docencia'] = $_POST ['relacion_docencia'];
-					$objeto ['ciudad_id'] = $_POST ['ciudad_id'];
+					if(is_numeric($_POST ['ciudad_id'])){
+						$objeto ['ciudad_id'] = $_POST ['ciudad_id'];
+						$objeto ['ciudad'] = '';
+					} else {
+					
+						$objeto ['ciudad_id'] = $_POST ['pais_id'];
+						$objeto ['ciudad'] = $_POST ['ciudad_id'];
+					}
+					
 					$table = "historial";
 				break;
 		}
@@ -185,7 +225,17 @@ class PostulanteController {
 		$usuario['capacidad_especial_id'] = $_POST ['capacidad_especial_id'];
 		$usuario['estado_civil_id'] = $_POST ['estado_civil_id'];
 		$usuario['email'] = $_POST ['email'];
-		$usuario['lugar_nacimiento'] = $_POST ['lugar_nacimiento'];
+		
+		if(is_numeric($_POST ['ciudad_id'])){
+			$usuario ['ciudad_id'] = $_POST ['ciudad_id'];
+			$usuario ['ciudad'] = '';
+		} else {
+					
+			$usuario ['ciudad_id'] = $_POST ['pais_id'];
+			$usuario ['ciudad'] = $_POST ['ciudad_id'];
+		}
+		
+		//$usuario['ciudad_id'] = $_POST ['ciudad_id'];
 		$usuario['direccion'] = $_POST ['direccion'];
 		$usuario['religion'] = $_POST ['religion'];
 		$usuario['idiomas'] = $_POST ['idiomas'];

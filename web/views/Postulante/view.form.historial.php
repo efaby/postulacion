@@ -8,13 +8,13 @@
 	</div>
 	<div class="form-group col-sm-12 rows">
 		<div class="form-group col-sm-4">
-			<label class="control-label">Área</label> <input type='text'
+			<label class="control-label">Área en la que Laboró</label> <input type='text'
 				name='area' class='form-control'
 				value="<?php echo $historial['area']; ?>">
 	
 		</div>
 		<div class="form-group col-sm-4">
-			<label class="control-label">Cargo</label> <input type='text'
+			<label class="control-label">Cargo que desempeño</label> <input type='text'
 				name='cargo' class='form-control'
 				value="<?php echo $historial['cargo']; ?>">
 	
@@ -49,7 +49,7 @@
 	<div class="form-group col-sm-12 rows">
 		<div class="form-group  col-sm-4">
 			<label class="control-label">País</label>
-			<select class='form-control' name="pais_id" id="pais_id">
+			<select class='form-control' name="pais_id" id="pais_id1">
 				<option value="" >Seleccione</option>
 			<?php foreach ($paises as $dato) { ?>
 				<option value="<?php echo $dato['id'];?>"  <?php if($historial['pais_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
@@ -60,7 +60,7 @@
 	
 			<div class="form-group  col-sm-4"> 
 				<label class="control-label">Provincia</label>
-				<select class='form-control' name="provincia_id" id="provincia_id">		
+				<select class='form-control' name="provincia_id" id="provincia_id1">		
 				<option value="" >Seleccione</option>	
 				<?php foreach ($provincias as $dato) { ?>
 					<option value="<?php echo $dato['id'];?>"  <?php if($historial['provincia_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
@@ -69,7 +69,7 @@
 			</div>
 			<div class="form-group  col-sm-4" >
 				<label class="control-label">Ciudad</label>
-				<select class='form-control' name="ciudad_id" id="ciudad_id">
+				<select class='form-control' name="ciudad_id" id="ciudad_id1">
 				<option value="" >Seleccione</option>
 				<?php foreach ($ciudades as $dato) { ?>
 					<option value="<?php echo $dato['id'];?>"  <?php if($historial['ciudad_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
@@ -155,7 +155,7 @@ $(document).ready(function() {
 			pais_id: {
 				validators: {
 					notEmpty: {
-						message: 'Seleccione un Tipo de País.'
+						message: 'Seleccione un País.'
 					}
 				}
 			},
@@ -181,7 +181,7 @@ $(document).ready(function() {
 						message: 'La Dirección no puede ser vacía.'
 					},					
 					regexp: {
-							regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
+							regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s\_\-\.\&\@\/]+$/,
 							message: 'La Dirección no válida.'
 						}
 					}
@@ -224,20 +224,27 @@ $(document).ready(function() {
 });
 
 $(document).ready(function(){
-	   $("#pais_id").change(function () {
-	           $("#pais_id option:selected").each(function () {
+	   $("#pais_id1").change(function () {
+	           $("#pais_id1 option:selected").each(function () {
 	            opcion=$(this).val();
 	            $.post("index.php?action=loadProvincia", { opcion: opcion }, function(data){
-	            $("#provincia_id").html(data);
+	            var data = JSON.parse(data);
+	            $("#provincia_id1").html(data.data);
+			if(data.band == 1){				
+				$("#ciudad_id1").html('<option value="" >Seleccione</option>');
+			} else {
+				$("#ciudad_id1").html(data.data);
+			}            
+	            
 	            });            
 	        });
 	   });
 
-	   $("#provincia_id").change(function () {
-	           $("#provincia_id option:selected").each(function () {
+	   $("#provincia_id1").change(function () {
+	           $("#provincia_id1 option:selected").each(function () {
 	            opcion=$(this).val();
 	            $.post("index.php?action=loadCiudad", { opcion: opcion }, function(data){
-	            $("#ciudad_id").html(data);
+	            $("#ciudad_id1").html(data);
 	            });            
 	        });
 	   })

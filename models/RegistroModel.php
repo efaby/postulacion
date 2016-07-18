@@ -42,4 +42,14 @@ class RegistroModel {
 			return true;
 		}
 	}
+	
+	public function obtenerUsuario($usuario){
+		$model =  new model();
+		$sql = "Select * from usuario where numero_identificacion = ".$usuario;
+		$result = $model->runSql($sql);
+		$resultArray = $model->getRows($result);
+		
+		return $resultArray[0];
+	}
+	
 }

@@ -36,10 +36,12 @@ class model
 	{
 		$this->open();
 		$result=mysql_query($sql,$this->conexion);
-		$this->close();
+		
 		if($insertID){
-			return mysql_insert_id($this->conexion);
+                       $result = mysql_insert_id($this->conexion);
+
 		}
+                $this->close();
 		return $result;
 	}
 	
